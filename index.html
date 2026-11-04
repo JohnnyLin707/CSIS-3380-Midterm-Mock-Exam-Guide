@@ -62,7 +62,12 @@
   code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:5px;padding:1px 5px;word-break:break-all}
   pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;background:#101826;color:#dbe7ff;border-radius:10px;padding:13px 15px;overflow-x:auto;line-height:1.55;margin:10px 0}
   pre code{background:none;border:none;color:inherit;padding:0}
-  pre .c{color:#7fa3d8} pre .k{color:#f2b134} pre .s{color:#8fd6a5}
+  pre .c{color:#7fa3d8} pre .z{color:#f0a9d0} pre .k{color:#f2b134} pre .s{color:#8fd6a5}
+  .codecard{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 14px rgba(23,32,44,.08)}
+  .codecard .cc-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#101826;color:#cdd9ec;padding:8px 16px;font-size:12.5px;border-bottom:1px solid #24324a}
+  .codecard .cc-head .file{font-family:"SF Mono",Menlo,Consolas,monospace;color:#8fd6a5;font-weight:700}
+  .codecard .cc-head .src{color:#9db8dd;font-size:12px}
+  .codecard pre{border-radius:0}
 
   /* ---------- path links ---------- */
   a.src{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;color:var(--accent);background:#e6f4f2;border:1px solid #bfe3de;border-radius:5px;padding:1px 5px;text-decoration:none;word-break:break-all}
@@ -83,16 +88,20 @@
   /* ---------- footer ---------- */
   footer.page{max-width:1280px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:13px}
 
-  /* ---------- floating tutorial button ---------- */
-  .fab{position:fixed;right:26px;bottom:26px;z-index:99;display:flex;align-items:center;gap:10px;
+  /* ---------- floating tutorial buttons ---------- */
+  .fabs{position:fixed;right:26px;bottom:26px;z-index:99;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .fab{display:flex;align-items:center;gap:10px;
        background:linear-gradient(135deg,#0f2f5f,#0f766e);color:#fff;text-decoration:none;
-       padding:14px 22px;border-radius:999px;font-weight:700;font-size:14.5px;
+       padding:13px 20px;border-radius:999px;font-weight:700;font-size:14px;
        box-shadow:0 10px 26px rgba(15,47,95,.4);border:1px solid rgba(255,255,255,.25);
        transition:transform .15s ease, box-shadow .15s ease}
+  .fab.alt{background:linear-gradient(135deg,#4c1d78,#2563eb);box-shadow:0 10px 26px rgba(76,29,120,.4)}
   .fab:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(15,47,95,.5)}
+  .fab.alt:hover{box-shadow:0 14px 30px rgba(76,29,120,.5)}
   .fab .dot{width:10px;height:10px;border-radius:50%;background:#ffd166;box-shadow:0 0 0 4px rgba(255,209,102,.25);animation:pulse 1.8s infinite}
+  .fab.alt .dot{background:#8fd6a5}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,209,102,.25)}50%{box-shadow:0 0 0 8px rgba(255,209,102,.08)}}
-  @media print{.fab{display:none}}
+  @media print{.fabs{display:none}}
 
   /* ---------- print ---------- */
   @media print{
@@ -118,6 +127,7 @@
     <a href="#s7">7 Review 复习路线</a>
     <a href="#s8">8 Cheat Sheet 代码速查</a>
     <a href="#s9">9 Note 笔记</a>
+    <a href="#s10">10 Quiz Board 模拟考 2</a>
   </nav>
 </header>
 
@@ -674,15 +684,77 @@ function Footer() {
   </div>
 </section>
 
+<!-- ============ SECTION 10 ============ -->
+<section id="s10">
+  <div class="sec-head"><span class="no">10</span><h2>Mock exam project 2 · 第二套模拟考试项目：Quiz Board</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Want a second timed mock? <a class="src" href="quiz-board-start/index.html">quiz-board-start/</a> is a <b>second mock exam project with exactly the same shape</b> as <code>riddle-board-start</code>: a static CDN React app, nine cards from a data file, four components, props, <code>map()</code> + <code>key</code>, a header and a footer with the real date. Only the data changed — from nine riddles to <b>nine Module 4 knowledge questions</b>, so you also revise for the knowledge test while you code.</p>
+      <table>
+        <tr><th>Riddle Board (exam)</th><th>Quiz Board (mock 2)</th></tr>
+        <tr><td><code>riddles.js</code> → <code>riddles.riddles</code></td><td><code>questions.js</code> → <code>questions.questions</code></td></tr>
+        <tr><td><code>App</code>, <code>Header</code>, <code>Riddle</code>, <code>Footer</code></td><td><code>App</code>, <code>Header</code>, <code>QuizCard</code>, <code>Footer</code></td></tr>
+        <tr><td>9 riddle cards, <code>map()</code> + <code>key</code>, real date</td><td>Identical requirements and the same finished CSS</td></tr>
+      </table>
+      <p><b>Three ways in:</b></p>
+      <ul>
+        <li><a class="src" href="Quiz-Board-Tutorial.html">Quiz-Board-Tutorial.html</a> — <b>learning + hands-on</b>: the seven exam-style steps, the finished code and a self-check checklist.</li>
+        <li><a class="src" href="quiz-board-start/index.html">quiz-board-start/index.html</a> — open the empty starter and build it yourself (an empty page at first is normal).</li>
+        <li><a class="src" href="quiz-board-start/mockup.html">quiz-board-start/mockup.html</a> — the plain-HTML design to aim for.</li>
+      </ul>
+      <div class="note">Every code block on the Quiz Board tutorial page has <b>English and Chinese comments together</b> (e.g. <code>// EN: …</code> / <code>// 中文:…</code>), and the starter files' TODOs are bilingual too. No state and no hooks — same Module 4 scope (Section 9).</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>想再做一套限时模拟？<a class="src" href="quiz-board-start/index.html">quiz-board-start/</a> 是与 <code>riddle-board-start</code> <b>完全同构的第二套模拟考试项目</b>:CDN 静态 React 应用、数据文件里的九张卡片、四个组件、props、<code>map()</code> + <code>key</code>、标题栏和显示真实日期的页脚。只有数据换了 —— 从九条谜语换成<b>九道 Module 4 知识自测题</b>,让你写代码的同时顺便复习知识测试。</p>
+      <table>
+        <tr><th>Riddle Board(考试)</th><th>Quiz Board(模拟考 2)</th></tr>
+        <tr><td><code>riddles.js</code> → <code>riddles.riddles</code></td><td><code>questions.js</code> → <code>questions.questions</code></td></tr>
+        <tr><td><code>App</code>、<code>Header</code>、<code>Riddle</code>、<code>Footer</code></td><td><code>App</code>、<code>Header</code>、<code>QuizCard</code>、<code>Footer</code></td></tr>
+        <tr><td>9 张谜语卡、<code>map()</code> + <code>key</code>、真实日期</td><td>要求完全相同,复用同一份已完成的 CSS</td></tr>
+      </table>
+      <p><b>三个入口：</b></p>
+      <ul>
+        <li><a class="src" href="Quiz-Board-Tutorial.html">Quiz-Board-Tutorial.html</a> —— <b>学习 + 实操</b>:与考试同款的七步计划、完整代码和自查清单。</li>
+        <li><a class="src" href="quiz-board-start/index.html">quiz-board-start/index.html</a> —— 打开空白起始项目自己动手做(一开始是空白页,正常)。</li>
+        <li><a class="src" href="quiz-board-start/mockup.html">quiz-board-start/mockup.html</a> —— 纯 HTML 设计稿,看目标长什么样。</li>
+      </ul>
+      <div class="note zh-note">Quiz Board 教学页的<b>每个代码块都有中英文双语注释</b>(如 <code>// EN: …</code> / <code>// 中文:…</code>),起始文件的 TODO 注释也是双语。没有 state、没有 hooks —— 与第 9 节一致，仍属 Module 4 范围。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">两个项目的对应关系 · how the two projects map</span>
+      <span class="src">EN + 中文 comments in every code block · 每个代码块中英双语注释</span>
+    </div>
+    <pre><code><span class="c">// EN: The Riddle Board exam reads its nine-item array from riddles.riddles.</span>
+<span class="z">// 中文:Riddle Board 考试从 riddles.riddles 读取那个含九项数组。</span>
+const examArray = riddles.riddles;
+
+<span class="c">// EN: Quiz Board is the same idea with different data: questions.questions.</span>
+<span class="z">// 中文:Quiz Board 是同一套思路,只是数据换成 questions.questions。</span>
+const quizArray = questions.questions;
+
+<span class="c">// EN: Both render the list with map() and a stable key taken from the data's id.</span>
+<span class="z">// 中文:两者都用 map() 渲染列表,并用数据自带的 id 作为稳定的 key。</span></code></pre>
+  </div>
+</section>
+
 </main>
 
 <footer class="page">
   <p>Source of this guide · 本指南依据：<code>CSIS-3380-Midterm-Mock-Midterm-Exam/Mock-Midterm-Riddle-Board.pdf</code>（exam rules, steps, errors, marking — 试卷原文）、<code>riddle-board-start/</code>（starter files — 起始文件实测）、<code>Module 4/code/README.md</code> 与 <code>Module 4/code/checkpoints/</code>（Movie Night 教程及分步代码）、<code>Module 4/React Tutorial Codes/</code>（React Code Lab 本地参考）、线上 <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">csis-3380-react-code-lab</a>（Activity 1–4）。</p>
 </footer>
 
-<a class="fab" href="Riddle-Board-Tutorial.html" title="Open the step-by-step tutorial · 打开全流程教学">
-  <span class="dot"></span>riddle-board-start 全流程教学 · Full Tutorial →
-</a>
+<div class="fabs">
+  <a class="fab alt" href="Quiz-Board-Tutorial.html" title="Quiz Board mock exam 2: learn and practice · 模拟考 2:学习与实操">
+    <span class="dot"></span>Quiz Board 模拟考 2 · 学习 + 实操 →
+  </a>
+  <a class="fab" href="Riddle-Board-Tutorial.html" title="Open the step-by-step tutorial · 打开全流程教学">
+    <span class="dot"></span>riddle-board-start 全流程教学 · Full Tutorial →
+  </a>
+</div>
 
 </body>
 </html>

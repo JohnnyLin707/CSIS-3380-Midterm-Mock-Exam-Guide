@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Board 模拟考 2 · 学习与实操 · Learn &amp; Practice</title>
+<style>
+  :root{
+    --ink:#1f2733; --muted:#5b6b7c; --bg:#f4f6f9; --card:#ffffff;
+    --en:#2563eb; --en-bg:#f2f6ff; --zh:#c2571a; --zh-bg:#fdf6ef;
+    --line:#dde4ec; --ok:#15803d; --warn:#b91c1c; --accent:#0f766e;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+
+  header.top{position:sticky;top:0;z-index:50;background:#101826;color:#fff;padding:10px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  header.top .brand{font-weight:700;letter-spacing:.4px}
+  header.top .brand small{opacity:.75;font-weight:400;margin-left:8px}
+  header.top a.home{color:#ffd166;text-decoration:none;font-size:13px;border:1px solid #6b5a1e;border-radius:99px;padding:4px 12px;background:#2a2410}
+  header.top a.home:hover{background:#3a3115}
+  nav.chips{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+  nav.chips a{color:#dbe7ff;text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:99px;background:#1d2a40;border:1px solid #33456a}
+  nav.chips a:hover{background:#2a3c5e}
+
+  .hero{max-width:1280px;margin:26px auto 0;padding:0 22px}
+  .hero .box{background:linear-gradient(135deg,#4c1d78,#2563eb);color:#fff;border-radius:16px;padding:30px 34px;box-shadow:0 8px 30px rgba(76,29,120,.25)}
+  .hero h1{margin:0 0 6px;font-size:30px}
+  .hero p.sub{margin:0;opacity:.9}
+  .badges{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .badges span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:99px;font-size:13px}
+  .cta-row{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+  .cta-row a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:10px 18px;border-radius:99px}
+  .cta-row a.learn{background:#fff;color:#4c1d78}
+  .cta-row a.practice{background:#ffd166;color:#3b2a00;border:1px solid #e2b84d}
+  .cta-row a:hover{filter:brightness(1.08)}
+  .cta-note{margin-top:10px;font-size:12.5px;opacity:.85}
+
+  main{max-width:1280px;margin:0 auto;padding:10px 22px 60px}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .sec-head .no{background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-size:13px;font-weight:700}
+  .sec-head .time{background:#e6f4f2;color:var(--accent);border:1px solid #bfe3de;border-radius:8px;padding:2px 10px;font-size:12.5px;font-weight:600}
+  .sec-head h2{margin:0;font-size:21px}
+  .duo{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px rgba(23,32,44,.08);border:1px solid var(--line)}
+  .cell{padding:18px 22px;background:var(--card)}
+  .cell.en{background:var(--en-bg);border-right:1px dashed var(--line)}
+  .cell.zh{background:var(--zh-bg)}
+  .cell h3{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.8px}
+  .cell.en h3{color:var(--en)} .cell.zh h3{color:var(--zh)}
+  .cell p{margin:8px 0}
+  .cell ul,.cell ol{margin:8px 0 8px 20px;padding:0}
+  .cell li{margin:5px 0}
+  @media (max-width:900px){ .duo{grid-template-columns:1fr} .cell.en{border-right:none;border-bottom:1px dashed var(--line)} }
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:#fff}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#eef2f7;font-weight:700}
+
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:5px;padding:1px 5px;word-break:break-all}
+  pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;background:#101826;color:#dbe7ff;padding:14px 16px;overflow-x:auto;line-height:1.55;margin:0}
+  pre code{background:none;border:none;color:inherit;padding:0}
+  pre .c{color:#7fa3d8} pre .z{color:#f0a9d0} pre .k{color:#f2b134} pre .s{color:#8fd6a5}
+
+  .codecard{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 14px rgba(23,32,44,.08)}
+  .codecard .cc-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#101826;color:#cdd9ec;padding:8px 16px;font-size:12.5px;border-bottom:1px solid #24324a}
+  .codecard .cc-head .file{font-family:"SF Mono",Menlo,Consolas,monospace;color:#8fd6a5;font-weight:700}
+  .codecard .cc-head .src{color:#9db8dd;font-size:12px}
+  .codecard .cc-head .src a{color:#c4d7f2;text-decoration:underline}
+
+  a.src{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;color:var(--accent);background:#e6f4f2;border:1px solid #bfe3de;border-radius:5px;padding:1px 5px;text-decoration:none;word-break:break-all}
+  a.src:hover{background:#d3ebe7;text-decoration:underline}
+  a.ext{color:#1d4ed8;text-decoration:underline;word-break:break-all}
+
+  .note{border-left:4px solid var(--en);background:#fff;border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:13.5px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .note.zh-note{border-left-color:var(--zh)}
+  .checkline{border-left:4px solid var(--ok);background:#f2fbf5;border-radius:0 10px 10px 0;padding:9px 14px;margin:12px 0;font-size:13.5px}
+  .checkline b{color:var(--ok)}
+  ul.check{list-style:none;margin-left:0}
+  ul.check li{padding-left:26px;position:relative;margin:6px 0}
+  ul.check li::before{content:"☐";position:absolute;left:0;color:var(--en);font-size:15px}
+
+  footer.page{max-width:1280px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:13px}
+
+  @media print{ header.top{position:static} section{break-inside:avoid-page} body{background:#fff} .duo{box-shadow:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Quiz Board · 模拟考项目 2 <small>Learn &amp; Practice — 学习与实操</small></div>
+  <a class="home" href="index.html">← 复习指南 / Study Guide</a>
+  <nav class="chips">
+    <a href="#learn">Learning 学习</a>
+    <a href="#start">Start 准备</a>
+    <a href="#step1">1 Live Server</a>
+    <a href="#step2">2 Scripts</a>
+    <a href="#step3">3 App</a>
+    <a href="#step4">4 Props</a>
+    <a href="#step5">5 map + key</a>
+    <a href="#step6">6 Date</a>
+    <a href="#step7">7 Clean 收尾</a>
+    <a href="#final">Final Code 完整代码</a>
+    <a href="#check">Checklist 自查</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="box">
+    <h1>Quiz Board — 第二套模拟考试项目</h1>
+    <p class="sub">Same shape as the Riddle Board exam, different data: nine Module 4 knowledge cards. Study the concepts, then build it yourself. &nbsp;·&nbsp; 与 Riddle Board 考试完全同构，只换了数据：九张 Module 4 知识卡片。先学概念，再自己动手做出来。</p>
+    <div class="badges">
+      <span>🧩 与 riddle-board-start 高度相似</span><span>📚 只用 Module 4 知识</span><span>✏️ 只改 4 个文件</span><span>💬 代码块中英双语注释</span><span>⏱ 约 65 分钟</span>
+    </div>
+    <div class="cta-row">
+      <a class="learn" href="#learn">开始学习 · Start Learning ↓</a>
+      <a class="practice" href="quiz-board-start/index.html">打开起始项目实操 · Open Starter ✏️</a>
+    </div>
+    <p class="cta-note">EN: the starter page is empty at first — that is normal, you have not written any React yet. &nbsp;|&nbsp; 中文:起始页一开始是空白的 —— 这是正常的，你还没写 React。</p>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ LEARNING ============ -->
+<section id="learn">
+  <div class="sec-head"><span class="no">0</span><h2>Learning · 学习：为什么它与考试高度相似</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>This is a <b>second mock exam project</b> with exactly the same shape as <code>riddle-board-start</code>: a static React app from a CDN, nine cards from a data file, a header, a footer with today's date, four components, props, <code>map()</code> and <code>key</code>. Only the data changed — from nine riddles to nine <b>Module 4 knowledge questions</b>, so you also review for the knowledge test while you code.</p>
+      <table>
+        <tr><th>The Riddle Board exam</th><th>Quiz Board (this project)</th></tr>
+        <tr><td>9 riddles in <code>riddles.js</code></td><td>9 questions in <code>questions.js</code></td></tr>
+        <tr><td>The array is <code>riddles.riddles</code></td><td>The array is <code>questions.questions</code></td></tr>
+        <tr><td>Components: <code>App</code>, <code>Header</code>, <code>Riddle</code>, <code>Footer</code></td><td>Components: <code>App</code>, <code>Header</code>, <code>QuizCard</code>, <code>Footer</code></td></tr>
+        <tr><td>Card classes: <code>.card</code>, <code>.card-number</code>, <code>.question</code>, <code>.answer</code></td><td>Exactly the same finished CSS</td></tr>
+        <tr><td><code>map()</code> + <code>key</code>, real date in the footer, CDN React, Live Server, Console</td><td>Exactly the same requirements</td></tr>
+      </table>
+      <p><b>Every idea still comes from the same course material</b> (no state, no hooks — see Section 9 of the Study Guide):</p>
+      <table>
+        <tr><th>Skill</th><th>Where it was taught</th></tr>
+        <tr><td>CDN scripts, <code>type="text/babel"</code>, root div</td><td><a class="src" href="../Module 4/code/movie-night/index.html">Movie Night index.html</a> · Code Lab Activity 1</td></tr>
+        <tr><td>Function components, <code>{ }</code> in JSX</td><td><a class="src" href="../Module 4/code/README.md">Module 4/code/README.md</a> Steps 04, 06, 08 · Activity 2</td></tr>
+        <tr><td>props</td><td>README Steps 10–11 · Activity 3</td></tr>
+        <tr><td><code>map()</code> + <code>key</code></td><td>README Steps 12–13 · Activity 4</td></tr>
+        <tr><td>Today's date</td><td>Exam paper Step 6 hint · MDN <code>toDateString</code></td></tr>
+      </table>
+      <div class="note"><b>The nine questions are the knowledge test itself.</b> Each answer is a sentence taken from the Module 4 tutorial (<code>Module 4/code/README.md</code>) or the exam's error table — read them before you write any code.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>这是<b>第二套模拟考试项目</b>,与 <code>riddle-board-start</code> 完全同构：CDN 版静态 React 应用、数据文件里的九张卡片、标题栏、显示今天日期的页脚、四个组件、props、<code>map()</code> 和 <code>key</code>。只有数据换了 —— 从九条谜语换成九道 <b>Module 4 知识自测题</b>,让你在写代码的同时顺便复习知识测试。</p>
+      <table>
+        <tr><th>Riddle Board 考试</th><th>Quiz Board(本项目)</th></tr>
+        <tr><td>9 条谜语在 <code>riddles.js</code></td><td>9 道题在 <code>questions.js</code></td></tr>
+        <tr><td>数组是 <code>riddles.riddles</code></td><td>数组是 <code>questions.questions</code></td></tr>
+        <tr><td>组件:<code>App</code>、<code>Header</code>、<code>Riddle</code>、<code>Footer</code></td><td>组件:<code>App</code>、<code>Header</code>、<code>QuizCard</code>、<code>Footer</code></td></tr>
+        <tr><td>卡片类:<code>.card</code>、<code>.card-number</code>、<code>.question</code>、<code>.answer</code></td><td>完全复用同一份已完成的 CSS</td></tr>
+        <tr><td><code>map()</code> + <code>key</code>、页脚真实日期、CDN React、Live Server、Console</td><td>要求完全相同</td></tr>
+      </table>
+      <p><b>所有知识点仍然来自同一批教材</b>(没有 state、没有 hooks —— 见复习指南第 9 节)：</p>
+      <table>
+        <tr><th>技能</th><th>教材出处</th></tr>
+        <tr><td>CDN 脚本、<code>type="text/babel"</code>、root div</td><td><a class="src" href="../Module 4/code/movie-night/index.html">Movie Night index.html</a> · Code Lab Activity 1</td></tr>
+        <tr><td>函数组件、JSX 中的 <code>{ }</code></td><td><a class="src" href="../Module 4/code/README.md">Module 4/code/README.md</a> 第 04、06、08 步 · Activity 2</td></tr>
+        <tr><td>props</td><td>README 第 10–11 步 · Activity 3</td></tr>
+        <tr><td><code>map()</code> + <code>key</code></td><td>README 第 12–13 步 · Activity 4</td></tr>
+        <tr><td>今天的日期</td><td>试卷第 6 步提示 · MDN <code>toDateString</code></td></tr>
+      </table>
+      <div class="note zh-note"><b>这九道题本身就是知识测试的复习题。</b>每个答案都是 Module 4 教程(<code>Module 4/code/README.md</code>)或试卷报错表里的原句 —— 写代码之前先把它们读一遍。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">questions.js — 数据预览 · two of the nine questions shown</span>
+      <span class="src">结构与试卷的 riddles.js 完全相同 · 题目内容取自 Module 4 教材</span>
+    </div>
+    <pre><code><span class="c">// EN: questions.js — the data for the Quiz Board. Do NOT copy it into your app.</span>
+<span class="z">// 中文:questions.js —— Quiz Board 的数据文件。不要把它拷进自己的代码。</span>
+<span class="c">// EN: Load this file with a &lt;script&gt; tag in index.html and use the questions variable.</span>
+<span class="z">// 中文:用 index.html 里的 &lt;script&gt; 标签加载本文件,在 React 代码里使用 questions 变量。</span>
+
+const questions = {
+  <span class="s">"questions"</span>: [
+    {
+      <span class="s">"id"</span>: 1,
+      <span class="s">"question"</span>: <span class="s">"What does React.createElement() return?"</span>,
+      <span class="s">"answer"</span>: <span class="s">"A React element: a plain object that describes a DOM node, not the node itself."</span>
+    },
+    {
+      <span class="s">"id"</span>: 2,
+      <span class="s">"question"</span>: <span class="s">"Which two libraries do you load from a CDN for React 18?"</span>,
+      <span class="s">"answer"</span>: <span class="s">"react (the core) and react-dom (the web renderer)."</span>
+    },
+    <span class="c">// EN: …seven more questions (id 3 to 9) in the real file.</span>
+    <span class="z">// 中文:……真实文件里还有七道题(id 3 到 9)。</span>
+  ]
+};
+
+<span class="c">// EN: The array is questions.questions — the name appears twice, just like riddles.riddles.</span>
+<span class="z">// 中文:数组是 questions.questions —— 名字出现两次,与 riddles.riddles 完全一样。</span></code></pre>
+  </div>
+</section>
+
+<!-- ============ START ============ -->
+<section id="start">
+  <div class="sec-head"><span class="no">Start</span><h2>Prepare · 准备与实操入口</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ol>
+        <li>Open the <a class="src" href="quiz-board-start/index.html">quiz-board-start/</a> folder in VS Code and open <code>index.html</code> with <b>Live Server</b>.</li>
+        <li>Open DevTools (F12 / Cmd+Option+I) and keep the <b>Console</b> open the whole time.</li>
+        <li>Also open <a class="src" href="quiz-board-start/mockup.html">quiz-board-start/mockup.html</a> — the design in plain HTML.</li>
+      </ol>
+      <table>
+        <tr><th>File</th><th>What it is</th><th>Change?</th></tr>
+        <tr><td><code>index.html</code></td><td>The page: <code>&lt;div id="root"&gt;</code>, CSS links, TODOs</td><td>Yes: add the scripts</td></tr>
+        <tr><td><code>questions.js</code></td><td>The data: 9 questions in <code>questions.questions</code></td><td>No</td></tr>
+        <tr><td><code>styles.css</code>, <code>normalize.css</code></td><td>Finished styles</td><td>No</td></tr>
+        <tr><td><code>mockup.html</code></td><td>The design preview</td><td>No (just open it)</td></tr>
+        <tr><td><code>components/Header.jsx</code></td><td>Blue header — already finished</td><td>No</td></tr>
+        <tr><td><code>components/QuizCard.jsx</code></td><td>One card, placeholder text</td><td>Yes: use props</td></tr>
+        <tr><td><code>components/Footer.jsx</code></td><td>Footer with “current date” placeholder</td><td>Yes: show the date</td></tr>
+        <tr><td><code>app.js</code></td><td>Empty except TODOs</td><td>Yes: write App + render</td></tr>
+      </table>
+      <div class="note"><b>Why Live Server?</b> Babel loads your files over the network. A <code>file://</code> page blocks those loads and gives you a blank page; the address must start with <code>http://</code>. (Exam paper, Step 1 box)</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ol>
+        <li>在 VS Code 中打开 <a class="src" href="quiz-board-start/index.html">quiz-board-start/</a> 文件夹,用 <b>Live Server</b> 打开 <code>index.html</code>。</li>
+        <li>打开开发者工具(F12 / Cmd+Option+I),全程保持 <b>Console</b> 打开。</li>
+        <li>同时打开 <a class="src" href="quiz-board-start/mockup.html">quiz-board-start/mockup.html</a> —— 纯 HTML 写的设计稿。</li>
+      </ol>
+      <table>
+        <tr><th>文件</th><th>是什么</th><th>要改吗？</th></tr>
+        <tr><td><code>index.html</code></td><td>页面:<code>&lt;div id="root"&gt;</code>、CSS 链接、TODO 注释</td><td>要:添加脚本</td></tr>
+        <tr><td><code>questions.js</code></td><td>数据:9 道题在 <code>questions.questions</code></td><td>不改</td></tr>
+        <tr><td><code>styles.css</code>、<code>normalize.css</code></td><td>已完成的样式</td><td>不改</td></tr>
+        <tr><td><code>mockup.html</code></td><td>设计稿</td><td>不改(打开看看)</td></tr>
+        <tr><td><code>components/Header.jsx</code></td><td>蓝色标题栏 —— 已完成</td><td>不改</td></tr>
+        <tr><td><code>components/QuizCard.jsx</code></td><td>一张卡片,占位文字</td><td>要:改用 props</td></tr>
+        <tr><td><code>components/Footer.jsx</code></td><td>页脚,日期是 “current date” 占位符</td><td>要:显示日期</td></tr>
+        <tr><td><code>app.js</code></td><td>除 TODO 外为空</td><td>要:编写 App 并渲染</td></tr>
+      </table>
+      <div class="note zh-note"><b>为什么要用 Live Server?</b>Babel 要通过网络加载你的文件。<code>file://</code> 页面会拦截这些加载、导致白屏；地址必须以 <code>http://</code> 开头。(试卷第 1 步说明框)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 1 ============ -->
+<section id="step1">
+  <div class="sec-head"><span class="no">Step 1</span><span class="time">5 min</span><h2>Open with Live Server · 用 Live Server 打开项目</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Right-click <code>index.html</code> → Open with Live Server. The page is empty — that is normal. Keep the Console open and look at <code>mockup.html</code> for the target design. Every error shows up in the Console.</p>
+      <div class="checkline"><b>Check:</b> the address starts with <code>http://127.0.0.1:5500</code>; the Console is open; <code>mockup.html</code> shows two sample cards.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>右键 <code>index.html</code> → Open with Live Server。页面是空的 —— 正常。保持 Console 打开，并用 <code>mockup.html</code> 对照目标设计。所有报错都会出现在 Console 里。</p>
+      <div class="checkline"><b>检查：</b>地址以 <code>http://127.0.0.1:5500</code> 开头；Console 已打开；<code>mockup.html</code> 能看到两张示例卡片。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section id="step2">
+  <div class="sec-head"><span class="no">Step 2</span><span class="time">10 min</span><h2>Add the scripts to index.html · 添加脚本</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Replace the TODO comments with eight <code>&lt;script&gt;</code> tags. Order: <b>React → ReactDOM → Babel (CDN)</b> → <code>questions.js</code> (plain script, no type) → three <code>.jsx</code> files (<code>type="text/babel"</code>) → <code>app.js</code> (babel, last). A file can only use what was loaded before it; JSX needs Babel because the browser cannot read it (Movie Night, Step 03).</p>
+      <div class="checkline"><b>Check:</b> no red errors; typing <code>questions.questions.length</code> in the Console prints <code>9</code>. The yellow Babel notice is expected.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>把 TODO 注释换成八个 <code>&lt;script&gt;</code> 标签。顺序：<b>React → ReactDOM → Babel(CDN)</b> → <code>questions.js</code>(普通 script,不加 type) → 三个 <code>.jsx</code> 组件(<code>type="text/babel"</code>) → <code>app.js</code>(babel,最后)。一个文件只能使用在它之前加载的东西；JSX 需要 Babel,因为浏览器读不懂它(Movie Night,第 03 步)。</p>
+      <div class="checkline"><b>检查：</b>无红色报错；在 Console 输入 <code>questions.questions.length</code> 输出 <code>9</code>。黄色 Babel 提示属正常。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">index.html — 完成 · final</span><span class="src">CDN 三行照抄 Module 4/code/movie-night/index.html · 注释中英双语</span></div>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="s">"en"</span>&gt;
+&lt;head&gt;
+  &lt;meta charset=<span class="s">"UTF-8"</span>&gt;
+  &lt;title&gt;Quiz Board&lt;/title&gt;
+  &lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"normalize.css"</span>&gt;
+  &lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"styles.css"</span>&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=<span class="s">"root"</span>&gt;&lt;/div&gt;
+
+  <span class="c">&lt;!-- EN: 1–3: the three CDN scripts, same as Movie Night (Module 4). --&gt;</span>
+  <span class="z">&lt;!-- 中文:1–3:三个 CDN 脚本,与 Movie Night(Module 4)相同。 --&gt;</span>
+  &lt;script crossorigin src=<span class="s">"https://unpkg.com/react@18.3.1/umd/react.development.js"</span>&gt;&lt;/script&gt;
+  &lt;script crossorigin src=<span class="s">"https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"</span>&gt;&lt;/script&gt;
+  &lt;script src=<span class="s">"https://unpkg.com/@babel/standalone@7/babel.min.js"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- EN: 4: the data file — a normal script (no type), plain JavaScript. --&gt;</span>
+  <span class="z">&lt;!-- 中文:4:数据文件 —— 普通 script(不加 type),因为是纯 JavaScript。 --&gt;</span>
+  &lt;script src=<span class="s">"./questions.js"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- EN: 5–7: the components — JSX files need type="text/babel". --&gt;</span>
+  <span class="z">&lt;!-- 中文:5–7:三个组件 —— 含 JSX 的文件需要 type="text/babel"。 --&gt;</span>
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Header.jsx"</span>&gt;&lt;/script&gt;
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/QuizCard.jsx"</span>&gt;&lt;/script&gt;
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Footer.jsx"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- EN: 8: app.js — a Babel script, last, because it uses all the others. --&gt;</span>
+  <span class="z">&lt;!-- 中文:8:app.js —— Babel 脚本,放最后,因为它用到上面所有文件。 --&gt;</span>
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./app.js"</span>&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section id="step3">
+  <div class="sec-head"><span class="no">Step 3</span><span class="time">10 min</span><h2>Render App · 编写并渲染 App</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul>
+        <li>A component is a function that returns React elements; its name starts with a capital letter (Movie Night, Step 06).</li>
+        <li><code>App</code> shows <code>&lt;Header /&gt;</code>, an empty <code>&lt;div className="board"&gt;</code> and <code>&lt;Footer /&gt;</code>. It must return <b>one outer element</b>, so wrap the three in a <code>&lt;div&gt;</code> (exam Step 3 hint).</li>
+        <li>React 18 rendering is two lines: <code>createRoot</code> then <code>render</code> (Movie Night, Steps 01–02).</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> the blue header and “Generated today: current date” appear.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul>
+        <li>组件是返回 React 元素的函数，名字以大写字母开头(Movie Night,第 06 步)。</li>
+        <li><code>App</code> 显示 <code>&lt;Header /&gt;</code>、空的 <code>&lt;div className="board"&gt;</code> 和 <code>&lt;Footer /&gt;</code>。<b>组件只能返回一个外层元素</b>,所以用一个 <code>&lt;div&gt;</code> 把三者包起来(试卷第 3 步提示)。</li>
+        <li>React 18 渲染就两行：<code>createRoot</code> 再 <code>render</code>(Movie Night,第 01–02 步)。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>出现蓝色标题栏和 “Generated today: current date”。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">app.js — 第一版 · first version</span><span class="src">组件=函数:Movie Night Step 06 · 渲染两行:Steps 01–02</span></div>
+    <pre><code><span class="c">// EN: app.js: the App component, and the code that puts it on the page.</span>
+<span class="z">// 中文:app.js:App 组件,以及把应用放到页面上的代码。</span>
+
+<span class="c">// EN: App shows the whole page for now: header, an empty board, footer.</span>
+<span class="z">// 中文:App 目前显示整个页面:标题栏、空的看板、页脚。</span>
+<span class="c">// EN: One component returns ONE outer element, so the three parts are wrapped in a &lt;div&gt;.</span>
+<span class="z">// 中文:一个组件只返回一个外层元素,所以三部分包在同一个 &lt;div&gt; 里。</span>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;div className=<span class="s">"board"</span>&gt;&lt;/div&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="c">// EN: React 18: create the root, then render &lt;App /&gt; into it.</span>
+<span class="z">// 中文:React 18:先创建 root,再把 &lt;App /&gt; 渲染进去。</span>
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section id="step4">
+  <div class="sec-head"><span class="no">Step 4</span><span class="time">15 min</span><h2>One card with props · 用 props 显示一张卡片</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul>
+        <li>props are how data gets into a component: the parent writes them like HTML attributes, the child receives one object named <code>props</code> (Movie Night, Step 10).</li>
+        <li>Replace the placeholder texts with <code>{ }</code> expressions reading from <code>props.card</code>: <code>Question {props.card.id}</code>, <code>{props.card.question}</code>, <code>{props.card.answer}</code>. Anything between <code>{</code> and <code>}</code> is evaluated as JavaScript (Step 04).</li>
+        <li>Test one card in App: <code>&lt;QuizCard card={questions.questions[0]} /&gt;</code> — pass the whole object as one prop, exactly like <code>Movie</code> in Movie Night.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> one card shows “Question 1”, the <code>createElement()</code> question and its answer.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul>
+        <li>props 是数据进入组件的途径：父组件像写 HTML 属性一样传入，子组件把它们作为一个对象 <code>props</code> 接收(Movie Night,第 10 步)。</li>
+        <li>把占位文字换成从 <code>props.card</code> 取值的 <code>{ }</code> 表达式：<code>Question {props.card.id}</code>、<code>{props.card.question}</code>、<code>{props.card.answer}</code>。花括号之间的任何内容都会作为 JavaScript 求值(第 04 步)。</li>
+        <li>在 App 里先测一张卡：<code>&lt;QuizCard card={questions.questions[0]} /&gt;</code> —— 把整个对象作为一个 prop 传入，与 Movie Night 的 <code>Movie</code> 组件完全一样。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>出现一张卡片,显示 “Question 1”、<code>createElement()</code> 那道题及其答案。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/QuizCard.jsx — 完成 · final</span><span class="src">props:Movie Night Steps 10–11 · { } 表达式:Step 04</span></div>
+    <pre><code><span class="c">// EN: QuizCard.jsx: ONE question card. It shows the question it is given, via props.</span>
+<span class="z">// 中文:QuizCard.jsx:一张题目卡片。通过 props 显示传给它的那道题。</span>
+<span class="c">// EN: The parent passes the whole question object as one prop named "card".</span>
+<span class="z">// 中文:父组件把整道题对象作为一个名为 "card" 的 prop 传进来。</span>
+function QuizCard(props) {
+  return (
+    &lt;div className=<span class="s">"card"</span>&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Question {props.card.id}&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{props.card.question}&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{props.card.answer}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">app.js — 先测一张卡 · test with one card (只改 board 那两行)</span><span class="src">与试卷 Step 4 用 riddles.riddles[0] 测一张卡的做法相同</span></div>
+    <pre><code><span class="c">// EN: TEMPORARY test card — replace it with map() in Step 5.</span>
+<span class="z">// 中文:临时测试卡 —— 第 5 步会用 map() 把它替换掉。</span>
+      &lt;div className=<span class="s">"board"</span>&gt;
+        &lt;QuizCard card={questions.questions[<span class="k">0</span>]} /&gt;
+      &lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section id="step5">
+  <div class="sec-head"><span class="no">Step 5</span><span class="time">15 min</span><h2>All nine with map() and key · 用 map() 和 key 显示九张</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul>
+        <li>A <code>for</code> loop is a statement and cannot go inside JSX; <code>map()</code> is an expression that returns a new array (Movie Night, Step 12).</li>
+        <li>Each item needs a <b>unique and stable key</b> — the data already has <code>id</code> (exam Step 5 hint; Movie Night, Step 13). Put <code>key</code> on the element <code>map()</code> returns, not inside the child.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> nine cards numbered 1–9 in a 3×3 grid, no “unique key prop” warning.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul>
+        <li><code>for</code> 循环是语句,不能放进 JSX;<code>map()</code> 是表达式且返回新数组(Movie Night,第 12 步)。</li>
+        <li>每一项都需要<b>唯一且稳定的 key</b> —— 数据里已有 <code>id</code> 字段(试卷第 5 步提示；Movie Night,第 13 步)。<code>key</code> 写在 <code>map()</code> 返回的元素上,不要写在子组件内部。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>九张卡片编号 1–9、宽屏 3×3 网格,没有 “unique key prop” 警告。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">app.js — board 最终写法 · the board (final)</span><span class="src">map():Movie Night Step 12 · key 用数据 id:试卷 Step 5 + Movie Night Step 13</span></div>
+    <pre><code><span class="c">// EN: map() turns each of the nine question objects into one &lt;QuizCard /&gt; element.</span>
+<span class="z">// 中文:map() 把九个题目对象各变成一个 &lt;QuizCard /&gt; 元素。</span>
+<span class="c">// EN: key belongs on the element returned by map(); use the stable id from the data.</span>
+<span class="z">// 中文:key 要写在 map() 返回的元素上,并使用数据里稳定的 id。</span>
+      &lt;div className=<span class="s">"board"</span>&gt;
+        {questions.questions.map((card) =&gt; (
+          &lt;QuizCard key={card.id} card={card} /&gt;
+        ))}
+      &lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 6 ============ -->
+<section id="step6">
+  <div class="sec-head"><span class="no">Step 6</span><span class="time">5 min</span><h2>Today's date in the footer · 页脚显示今天的日期</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul>
+        <li>Store <code>new Date().toDateString()</code> in a variable <b>before the <code>return</code></b>, then put it in JSX with <code>{ }</code> (Movie Night computes <code>watchedCount</code> the same way in Step 15).</li>
+        <li>A Date object cannot go straight into JSX — turn it into text first (exam Step 6 hint). The real date, not typed in.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> “Generated today: Wed Oct 28 2026” (today's real date); tomorrow it shows tomorrow's date.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul>
+        <li>在 <b><code>return</code> 之前</b>把 <code>new Date().toDateString()</code> 存进变量,再用 <code>{ }</code> 放进 JSX(Movie Night 第 15 步计算 <code>watchedCount</code> 也是这么做的)。</li>
+        <li>Date 对象不能直接放进 JSX —— 必须先转成文本(试卷第 6 步提示)。必须是真实日期,不许手写死。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>“Generated today: Wed Oct 28 2026”(今天的真实日期);明天会显示明天的日期。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/Footer.jsx — 完成 · final</span><span class="src">return 之前写普通 JS:Movie Night Step 15 · Date 转文本:试卷 Step 6</span></div>
+    <pre><code><span class="c">// EN: Footer.jsx: the bottom bar. Shows today's real date, not typed-in text.</span>
+<span class="z">// 中文:Footer.jsx:底部栏。显示今天的真实日期,不是手写死的文字。</span>
+<span class="c">// EN: Ordinary JavaScript can go above the return; a Date must become text for JSX.</span>
+<span class="z">// 中文:return 之前可以写普通 JavaScript;Date 必须先转成文本才能进 JSX。</span>
+function Footer() {
+  const today = new Date().toDateString();   <span class="c">// EN: e.g. "Wed Oct 28 2026"</span>  <span class="z">// 中文:例如 "Wed Oct 28 2026"</span>
+  return (
+    &lt;footer&gt;
+      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 7 ============ -->
+<section id="step7">
+  <div class="sec-head"><span class="no">Step 7</span><span class="time">5 min</span><h2>Clean up · 收尾清理</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul>
+        <li>Delete test code and <code>console.log</code> lines; add a short comment above each component (in both languages if you like).</li>
+        <li>Save all four files, refresh, check the Console one last time: no red errors — only the expected yellow Babel notice.</li>
+        <li>If you were timing yourself as a mock exam: zip the whole folder, unzip it somewhere else and test it again before submitting. The full marking scheme is in the <a class="src" href="index.html">Study Guide</a>, Section 6.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> the page matches <code>mockup.html</code>, with all nine cards, and the Console is clean.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul>
+        <li>删除测试代码和 <code>console.log</code>;每个组件上方加一句简短注释(愿意的话中英都写)。</li>
+        <li>保存四个文件，刷新，最后检查一次 Console:无红色报错 —— 只有预期中的黄色 Babel 提示。</li>
+        <li>如果你把它当限时模拟考：压缩整个文件夹，解压到别处再测一次，然后才算提交。完整评分标准见<a class="src" href="index.html">复习指南</a>第 6 节。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>页面与 <code>mockup.html</code> 一致、九张卡片齐全、Console 干净。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CODE ============ -->
+<section id="final">
+  <div class="sec-head"><span class="no">✓</span><h2>Final code review · 最终完整代码对照</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Compare your files with these finished versions. <code>index.html</code> is the one in Step 2 (unchanged since); <code>questions.js</code> and the two CSS files are given and must not be changed. Every code block on this page has <b>English and Chinese comments</b> so you can read it in either language.</p>
+      <p>Most problems are a name typed differently in two places, or scripts in the wrong order (exam paper, Section 6). If a card is missing, compare line by line.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>把你的文件与下面的完成版对照。<code>index.html</code> 见第 2 步(此后不再改动)；<code>questions.js</code> 和两个 CSS 文件是给定的，不许改动。本页所有代码块都带<b>中英文双语注释</b>,用哪种语言都能看懂。</p>
+      <p>大多数问题是“同一个名字在两处写法不同”或“脚本顺序不对”(试卷第 6 节)。如果卡片缺失，请逐行对照。</p>
+    </div>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head"><span class="file">app.js — 最终版 · final</span><span class="src">= Step 3 + Step 5 · 结构对应 Movie Night Step 08(组合)</span></div>
+    <pre><code><span class="c">// EN: app.js: the App component, and the code that puts it on the page.</span>
+<span class="z">// 中文:app.js:App 组件,以及把应用放到页面上的代码。</span>
+
+<span class="c">// EN: App shows the whole page: header, the nine question cards, footer.</span>
+<span class="z">// 中文:App 显示整个页面:标题栏、九张题目卡片、页脚。</span>
+<span class="c">// EN: One outer &lt;div&gt; — a component must return one element.</span>
+<span class="z">// 中文:唯一的外层 &lt;div&gt; —— 组件只能返回一个元素。</span>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;div className=<span class="s">"board"</span>&gt;
+        <span class="c">{/* EN: one &lt;QuizCard /&gt; per question, with a stable key. */}</span>
+        <span class="z">{/* 中文:每道题一个 &lt;QuizCard /&gt;,并带稳定的 key。 */}</span>
+        {questions.questions.map((card) =&gt; (
+          &lt;QuizCard key={card.id} card={card} /&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="c">// EN: Render &lt;App /&gt; into the &lt;div id="root"&gt; in index.html.</span>
+<span class="z">// 中文:把 &lt;App /&gt; 渲染进 index.html 里的 &lt;div id="root"&gt;。</span>
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/Header.jsx — 已给出 · given, do not change</span><span class="src">起始文件原样 · 在 App 里用 &lt;Header /&gt;</span></div>
+    <pre><code><span class="c">// EN: Header.jsx: the blue bar at the top. Already finished — do not change it.</span>
+<span class="z">// 中文:Header.jsx:顶部蓝色标题栏。已完成 —— 不用改。</span>
+<span class="c">// EN: Use it in App as &lt;Header /&gt; (capital H = your component).</span>
+<span class="z">// 中文:在 App 里写 &lt;Header /&gt;(大写 H 表示这是你的组件)。</span>
+function Header() {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Quiz Board&lt;/h1&gt;
+      &lt;p&gt;Nine React questions. Can you answer them before you read the answer?&lt;/p&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/QuizCard.jsx — 最终版 · final</span><span class="src">= Step 4 · props 从父组件传入,只读</span></div>
+    <pre><code><span class="c">// EN: QuizCard.jsx: ONE question card, driven by props.</span>
+<span class="z">// 中文:QuizCard.jsx:一张由 props 驱动的题目卡片。</span>
+<span class="c">// EN: &lt;QuizCard card={...} /&gt; passes the whole object; read its fields here.</span>
+<span class="z">// 中文:&lt;QuizCard card={...} /&gt; 传入整个对象;在这里读取它的字段。</span>
+function QuizCard(props) {
+  return (
+    &lt;div className=<span class="s">"card"</span>&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Question {props.card.id}&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{props.card.question}&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{props.card.answer}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/Footer.jsx — 最终版 · final</span><span class="src">= Step 6 · Date 必须先转成文本</span></div>
+    <pre><code><span class="c">// EN: Footer.jsx: the bottom bar. Shows today's real date.</span>
+<span class="z">// 中文:Footer.jsx:底部栏。显示今天的真实日期。</span>
+<span class="c">// EN: Ordinary JavaScript goes before the return; a Date must become text for JSX.</span>
+<span class="z">// 中文:普通 JavaScript 写在 return 之前;Date 必须转成文本才能进 JSX。</span>
+function Footer() {
+  const today = new Date().toDateString();   <span class="c">// EN: e.g. "Wed Oct 28 2026"</span>  <span class="z">// 中文:例如 "Wed Oct 28 2026"</span>
+  return (
+    &lt;footer&gt;
+      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============ CHECKLIST ============ -->
+<section id="check">
+  <div class="sec-head"><span class="no">☐</span><h2>Self-check checklist · 自查清单</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul class="check">
+        <li>The page opens with Live Server and shows the blue header.</li>
+        <li><code>index.html</code> loads React, ReactDOM and Babel from a CDN, then <code>questions.js</code>, then the components, then <code>app.js</code>.</li>
+        <li><code>questions.js</code> is loaded with a <code>&lt;script&gt;</code> tag and its data is not copied into my code.</li>
+        <li>Four components: <code>App</code>, <code>Header</code>, <code>QuizCard</code>, <code>Footer</code>.</li>
+        <li>Nine cards numbered 1–9, each with its own question and answer.</li>
+        <li>The cards come from <code>map()</code>, not nine hand-written tags.</li>
+        <li>Each card has a <code>key</code>; no key warning in the Console.</li>
+        <li>The footer shows today's real date.</li>
+        <li>No red errors (only the expected Babel warning).</li>
+        <li>Each component has a short comment; no leftover test code.</li>
+      </ul>
+      <p><b>Want more practice?</b> Hide the answers until a card is clicked; show the number of questions computed from <code>questions.questions.length</code>; show only questions whose answer starts with “A”. The first needs state (Module 5) — the other two need only JavaScript you already know, before the <code>return</code>.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul class="check">
+        <li>页面能用 Live Server 打开，并显示蓝色标题栏。</li>
+        <li><code>index.html</code> 依次加载 React、ReactDOM、Babel(CDN),然后是 <code>questions.js</code>、组件文件、<code>app.js</code>。</li>
+        <li><code>questions.js</code> 通过 <code>&lt;script&gt;</code> 标签加载，数据没有拷贝进我的代码。</li>
+        <li>四个组件：<code>App</code>、<code>Header</code>、<code>QuizCard</code>、<code>Footer</code>。</li>
+        <li>九张卡片编号 1–9,每张有自己的题目和答案。</li>
+        <li>卡片来自 <code>map()</code>,不是手写九个标签。</li>
+        <li>每张卡片都有 <code>key</code>;Console 没有 key 警告。</li>
+        <li>页脚显示今天的真实日期。</li>
+        <li>没有红色报错(只有预期中的 Babel 黄色提示)。</li>
+        <li>每个组件上方有简短注释；没有遗留的测试代码。</li>
+      </ul>
+      <p><b>想加练？</b>点击卡片才显示答案；用 <code>questions.questions.length</code> 从数据算出题目数量并显示；只显示答案以 “A” 开头的题目。第一题需要 state(Module 5),后两题只需要你已学过的普通 JavaScript —— 写在 <code>return</code> 之前即可。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="page">
+  <p>Source of this project · 本项目依据：<code>Mock-Midterm-Riddle-Board.pdf</code>(七步计划、检查点、报错表、评分规则)、<code>Module 4/code/README.md</code> 与 <code>Module 4/code/checkpoints/</code>(Movie Night 教程:组件、props、map/key、渲染、Live Server 的概念与代码风格)、<code>Module 4/code/movie-night/index.html</code>(CDN 三行)、线上 <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">csis-3380-react-code-lab</a> Activity 1–4。九道知识自测题的答案取自上述教材原文。</p>
+</footer>
+
+</body>
+</html>
