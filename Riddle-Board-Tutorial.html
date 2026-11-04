@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riddle Board 全流程教学 · Step-by-step Tutorial</title>
+<style>
+  :root{
+    --ink:#1f2733; --muted:#5b6b7c; --bg:#f4f6f9; --card:#ffffff;
+    --en:#2563eb; --en-bg:#f2f6ff; --zh:#c2571a; --zh-bg:#fdf6ef;
+    --line:#dde4ec; --ok:#15803d; --warn:#b91c1c; --accent:#0f766e;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+
+  header.top{position:sticky;top:0;z-index:50;background:#101826;color:#fff;padding:10px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  header.top .brand{font-weight:700;letter-spacing:.4px}
+  header.top .brand small{opacity:.75;font-weight:400;margin-left:8px}
+  header.top a.home{color:#ffd166;text-decoration:none;font-size:13px;border:1px solid #6b5a1e;border-radius:99px;padding:4px 12px;background:#2a2410}
+  header.top a.home:hover{background:#3a3115}
+  nav.chips{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+  nav.chips a{color:#dbe7ff;text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:99px;background:#1d2a40;border:1px solid #33456a}
+  nav.chips a:hover{background:#2a3c5e}
+
+  .hero{max-width:1280px;margin:26px auto 0;padding:0 22px}
+  .hero .box{background:linear-gradient(135deg,#0f2f5f,#0f766e);color:#fff;border-radius:16px;padding:30px 34px;box-shadow:0 8px 30px rgba(15,47,95,.25)}
+  .hero h1{margin:0 0 6px;font-size:30px}
+  .hero p.sub{margin:0;opacity:.9}
+  .badges{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .badges span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:99px;font-size:13px}
+
+  main{max-width:1280px;margin:0 auto;padding:10px 22px 60px}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .sec-head .no{background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-size:13px;font-weight:700}
+  .sec-head .time{background:#e6f4f2;color:var(--accent);border:1px solid #bfe3de;border-radius:8px;padding:2px 10px;font-size:12.5px;font-weight:600}
+  .sec-head h2{margin:0;font-size:21px}
+  .duo{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px rgba(23,32,44,.08);border:1px solid var(--line)}
+  .cell{padding:18px 22px;background:var(--card)}
+  .cell.en{background:var(--en-bg);border-right:1px dashed var(--line)}
+  .cell.zh{background:var(--zh-bg)}
+  .cell h3{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.8px}
+  .cell.en h3{color:var(--en)} .cell.zh h3{color:var(--zh)}
+  .cell p{margin:8px 0}
+  .cell ul,.cell ol{margin:8px 0 8px 20px;padding:0}
+  .cell li{margin:5px 0}
+  @media (max-width:900px){ .duo{grid-template-columns:1fr} .cell.en{border-right:none;border-bottom:1px dashed var(--line)} }
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:#fff}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#eef2f7;font-weight:700}
+
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:5px;padding:1px 5px;word-break:break-all}
+  pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;background:#101826;color:#dbe7ff;padding:14px 16px;overflow-x:auto;line-height:1.55;margin:0}
+  pre code{background:none;border:none;color:inherit;padding:0}
+  pre .c{color:#7fa3d8} pre .k{color:#f2b134} pre .s{color:#8fd6a5}
+
+  .codecard{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 14px rgba(23,32,44,.08)}
+  .codecard .cc-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#101826;color:#cdd9ec;padding:8px 16px;font-size:12.5px;border-bottom:1px solid #24324a}
+  .codecard .cc-head .file{font-family:"SF Mono",Menlo,Consolas,monospace;color:#8fd6a5;font-weight:700}
+  .codecard .cc-head .src{color:#9db8dd;font-size:12px}
+  .codecard .cc-head .src a{color:#c4d7f2;text-decoration:underline}
+
+  a.src{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;color:var(--accent);background:#e6f4f2;border:1px solid #bfe3de;border-radius:5px;padding:1px 5px;text-decoration:none;word-break:break-all}
+  a.src:hover{background:#d3ebe7;text-decoration:underline}
+  a.ext{color:#1d4ed8;text-decoration:underline;word-break:break-all}
+
+  .note{border-left:4px solid var(--en);background:#fff;border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:13.5px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .note.zh-note{border-left-color:var(--zh)}
+  .checkline{border-left:4px solid var(--ok);background:#f2fbf5;border-radius:0 10px 10px 0;padding:9px 14px;margin:12px 0;font-size:13.5px}
+  .checkline b{color:var(--ok)}
+
+  footer.page{max-width:1280px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:13px}
+
+  @media print{
+    header.top{position:static}
+    section{break-inside:avoid-page}
+    body{background:#fff}
+    .duo{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Riddle Board · 全流程教学 <small>Step-by-step Tutorial — riddle-board-start</small></div>
+  <a class="home" href="index.html">← 复习指南 / Study Guide</a>
+  <nav class="chips">
+    <a href="#intro">Start 开始</a>
+    <a href="#step1">1 Live Server</a>
+    <a href="#step2">2 Scripts</a>
+    <a href="#step3">3 App</a>
+    <a href="#step4">4 Props</a>
+    <a href="#step5">5 map + key</a>
+    <a href="#step6">6 Date</a>
+    <a href="#step7">7 Clean 收尾</a>
+    <a href="#final">Final Code 完整代码</a>
+    <a href="#stuck">Stuck? 卡住了</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="box">
+    <h1>riddle-board-start 全流程教学</h1>
+    <p class="sub">From the empty starter page to the finished Riddle Board, in the same seven steps as the exam paper. &nbsp;·&nbsp; 从空白起始页到完成 Riddle Board,与试卷完全相同的七个步骤。</p>
+    <div class="badges">
+      <span>📑 依据 Exam PDF §5 七步计划</span><span>📚 只用 Module 4 教材的知识与术语</span><span>✏️ 只改 4 个文件</span><span>⏱ 全程约 65 分钟</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ INTRO ============ -->
+<section id="intro">
+  <div class="sec-head"><span class="no">0</span><h2>How to use this tutorial · 如何使用本教程</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>This tutorial walks you through the <b>whole riddle-board-start assignment</b>, step by step, showing the code to type at every step. It follows the exam paper's own plan (Section 5, seven steps) and uses <b>only</b> the ideas, terms and code style taught in <b>Module 4 (Movie Night)</b> and <b>Code Lab Activities 1–4</b> — nothing outside the course.</p>
+      <ul>
+        <li>You only touch <b>four files</b>: <code>index.html</code> (add scripts), <code>app.js</code> (write App and render it), <code>components/Riddle.jsx</code> (use props), <code>components/Footer.jsx</code> (show the date). All the other starter files are finished — do not change them.</li>
+        <li><b>Type the code yourself; do not paste it.</b> Most of what you learn comes from the errors you make while typing (Movie Night tutorial, “How to use this handout”).</li>
+        <li>After every step: <b>save, refresh, check</b>. Do not move on until the check passes. If you skip the checks, one small typo early on can cost you the whole exam (exam paper, Section 5).</li>
+        <li>Layout: English on the left, Chinese on the right. The code blocks below each step are shared by both languages — code needs no translation.</li>
+      </ul>
+      <p>You need VS Code with the <b>Live Server</b> extension (by Ritwick Dey) — the same setup as Movie Night Step 00.</p>
+      <p>Not sure what each starter file is for? See the Study Guide (<a class="src" href="index.html">index.html</a>), Section 3.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>本教程带你<b>完整走一遍 riddle-board-start 作业</b>：每一步都给出要敲的代码。步骤与试卷第 5 节的七步计划完全一致，只使用 <b>Module 4(Movie Night)</b> 和 <b>Code Lab Activity 1–4</b> 教过的概念、术语与代码风格 —— 不引入课程之外的任何内容。</p>
+      <ul>
+        <li>你只需要改 <b>4 个文件</b>：<code>index.html</code>(加脚本)、<code>app.js</code>(编写 App 并渲染)、<code>components/Riddle.jsx</code>(改用 props)、<code>components/Footer.jsx</code>(显示日期)。其余起始文件都已完成 —— 不要改动。</li>
+        <li><b>自己敲代码，不要粘贴。</b>今天大部分收获来自你敲错时犯的那些错误(Movie Night 教程“如何使用这份讲义”)。</li>
+        <li>每做完一步：<b>保存、刷新、检查</b>。检查不通过就不要往下走。跳过检查的话，开头一个小小的拼写错误就可能毁掉整场考试(试卷第 5 节)。</li>
+        <li>版式：左边英文，右边中文。每步下方的代码块两种语言共用 —— 代码本身不需要翻译。</li>
+      </ul>
+      <p>需要 VS Code 和 <b>Live Server</b> 扩展(作者 Ritwick Dey)—— 与 Movie Night 第 00 步相同的配置。</p>
+      <p>不清楚起始文件各是干什么的？看复习指南(<a class="src" href="index.html">index.html</a>)第 3 节。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 1 ============ -->
+<section id="step1">
+  <div class="sec-head"><span class="no">Step 1</span><span class="time">5 min</span><h2>Open the project with Live Server · 用 Live Server 打开项目</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> open the starter the right way and set up your tools.</p>
+      <ol>
+        <li>Unzip <code>riddle-board-start.zip</code> (or use the folder you already have). Open the folder in VS Code.</li>
+        <li>Right-click <code>index.html</code> → <b>Open with Live Server</b>. The page is empty now — that is normal; you have not written any React yet.</li>
+        <li>Open the browser's Developer Tools (<b>F12</b>, or <b>Cmd+Option+I</b> on a Mac) and keep the <b>Console</b> tab open for the whole tutorial. Every error shows up there.</li>
+        <li>Also open <code>mockup.html</code> in the browser: it shows, in plain HTML, the design you are aiming for.</li>
+      </ol>
+      <div class="note"><b>Why Live Server?</b> Babel loads your <code>.jsx</code> and <code>app.js</code> files over the network. If you double-click <code>index.html</code>, the address starts with <code>file://</code> and the browser blocks those loads: you get a blank page. The address must start with <code>http://</code>. <i>(exam paper, Step 1 box)</i></div>
+      <div class="checkline"><b>Check:</b> the address bar starts with <code>http://127.0.0.1:5500</code>, the Console is open, and <code>mockup.html</code> shows two sample cards.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>用正确的方式打开项目，并准备好工具。</p>
+      <ol>
+        <li>解压 <code>riddle-board-start.zip</code>(或直接使用已有文件夹)，在 VS Code 中打开该文件夹。</li>
+        <li>右键 <code>index.html</code> → <b>Open with Live Server</b>。页面现在是空的 —— 这是正常的，你还没写任何 React。</li>
+        <li>打开浏览器开发者工具(<b>F12</b>,Mac 上是 <b>Cmd+Option+I</b>),整个教程期间保持 <b>Console</b> 标签页打开。所有报错都会出现在那里。</li>
+        <li>同时在浏览器里打开 <code>mockup.html</code>:它是纯 HTML 写的设计稿，显示你要做出来的样子。</li>
+      </ol>
+      <div class="note zh-note"><b>为什么要用 Live Server?</b>Babel 要通过网络加载你的 <code>.jsx</code> 和 <code>app.js</code> 文件。如果双击打开 <code>index.html</code>,地址以 <code>file://</code> 开头，浏览器会拦截这些加载：页面一片空白。地址必须以 <code>http://</code> 开头。<i>(试卷第 1 步说明框)</i></div>
+      <div class="checkline"><b>检查：</b>地址栏以 <code>http://127.0.0.1:5500</code> 开头，Console 已打开，<code>mockup.html</code> 能看到两张示例卡片。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section id="step2">
+  <div class="sec-head"><span class="no">Step 2</span><span class="time">10 min</span><h2>Add the scripts to index.html · 在 index.html 中添加脚本</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> replace the three TODO comments at the bottom of <code>index.html</code>'s <code>&lt;body&gt;</code> with eight <code>&lt;script&gt;</code> tags, in this order:</p>
+      <ol>
+        <li><b>React, ReactDOM, Babel from a CDN</b> — the same three lines you used in Movie Night (<a class="src" href="../Module 4/code/movie-night/index.html">Module 4/code/movie-night/index.html</a>). No Vite, no npm install.</li>
+        <li><b><code>riddles.js</code> as a normal script</b> — no <code>type</code>, because it is plain JavaScript.</li>
+        <li><b>The three component files and <code>app.js</code></b>, each with <code>type="text/babel"</code>, because they contain JSX, which the browser cannot read: Babel must compile them first (Movie Night, Step 03).</li>
+      </ol>
+      <div class="note"><b>Order matters.</b> The starter's own TODO says it: <i>“a file can only use what was loaded before it.”</i> Libraries come first, then the data, then the components — and <code>app.js</code> goes last, because it uses all the others.</div>
+      <div class="checkline"><b>Check:</b> refresh. The page is still empty, the Console shows no red errors, and typing <code>riddles.riddles.length</code> in the Console prints <code>9</code>. (The yellow “in-browser Babel transformer” notice is expected and fine.)</div>
+      <div class="note"><b>Careful:</b> the variable is called <code>riddles</code> and the array inside it is also called <code>riddles</code>, so the array of nine riddles is <code>riddles.riddles</code>. <i>(exam paper, “Read this carefully”)</i></div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>把 <code>index.html</code> 的 <code>&lt;body&gt;</code> 底部三条 TODO 注释，替换成八个 <code>&lt;script&gt;</code> 标签，顺序如下：</p>
+      <ol>
+        <li><b>从 CDN 加载 React、ReactDOM、Babel</b> —— 就是你在 Movie Night 里用过的那三行(<a class="src" href="../Module 4/code/movie-night/index.html">Module 4/code/movie-night/index.html</a>)。不用 Vite,不用 npm install。</li>
+        <li><b><code>riddles.js</code> 用普通 script 标签</b> —— 不加 <code>type</code>,因为它是纯 JavaScript。</li>
+        <li><b>三个组件文件和 <code>app.js</code></b>,每个都加 <code>type="text/babel"</code>,因为它们包含 JSX —— 浏览器读不懂 JSX,必须先由 Babel 编译(Movie Night,第 03 步)。</li>
+      </ol>
+      <div class="note zh-note"><b>顺序很重要。</b>起始文件的 TODO 注释自己就写了：<i>“a file can only use what was loaded before it(一个文件只能使用在它之前加载的东西)。”</i>所以：先库，再数据，再组件 —— <code>app.js</code> 放最后，因为它用到上面所有文件。</div>
+      <div class="checkline"><b>检查：</b>刷新。页面仍然为空，Console 没有红色报错，在 Console 里输入 <code>riddles.riddles.length</code> 会输出 <code>9</code>。(黄色的 “in-browser Babel transformer” 提示是预期的，没问题。)</div>
+      <div class="note zh-note"><b>注意：</b>变量叫 <code>riddles</code>,它内部的数组也叫 <code>riddles</code>,所以九条谜语的数组是 <code>riddles.riddles</code>。<i>(试卷 “Read this carefully” 提示)</i></div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">index.html — 完成 · final</span>
+      <span class="src">CDN 三行照抄自 <a href="../Module 4/code/movie-night/index.html">Module 4/code/movie-night/index.html</a> · 加载顺序来自试卷 Step 2</span>
+    </div>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="s">"en"</span>&gt;
+
+&lt;head&gt;
+  &lt;meta charset=<span class="s">"UTF-8"</span>&gt;
+  &lt;meta name=<span class="s">"viewport"</span> content=<span class="s">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;title&gt;Riddle Board&lt;/title&gt;
+  &lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"normalize.css"</span>&gt;
+  &lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"styles.css"</span>&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id=<span class="s">"root"</span>&gt;&lt;/div&gt;
+
+  <span class="c">&lt;!-- 1–3: the three CDN scripts (same as Movie Night) --&gt;</span>
+  &lt;script crossorigin src=<span class="s">"https://unpkg.com/react@18.3.1/umd/react.development.js"</span>&gt;&lt;/script&gt;
+  &lt;script crossorigin src=<span class="s">"https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"</span>&gt;&lt;/script&gt;
+  &lt;script src=<span class="s">"https://unpkg.com/@babel/standalone@7/babel.min.js"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- 4: the data file — a normal script (no type), plain JavaScript --&gt;</span>
+  &lt;script src=<span class="s">"./riddles.js"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- 5–7: the components — JSX files need type="text/babel" --&gt;</span>
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Header.jsx"</span>&gt;&lt;/script&gt;
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Riddle.jsx"</span>&gt;&lt;/script&gt;
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Footer.jsx"</span>&gt;&lt;/script&gt;
+
+  <span class="c">&lt;!-- 8: app.js — a Babel script, and the last one: it uses all the others --&gt;</span>
+  &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./app.js"</span>&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section id="step3">
+  <div class="sec-head"><span class="no">Step 3</span><span class="time">10 min</span><h2>Render App with the header and footer · 渲染 App(页眉 + 空白看板 + 页脚)</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> in <code>app.js</code>, write a function component called <code>App</code> and render it into the root div. (These are exactly the two TODOs written in the starter file.)</p>
+      <ul>
+        <li>A component is a <b>function that returns React elements</b> (Movie Night, Step 06). Its name must <b>start with a capital letter</b>: <code>&lt;App /&gt;</code> with a capital A is your component; a lowercase tag is read as an HTML tag.</li>
+        <li><code>App</code> shows three parts: <code>&lt;Header /&gt;</code>, an empty <code>&lt;div className="board"&gt;&lt;/div&gt;</code>, and <code>&lt;Footer /&gt;</code>. <b>A component must return one outer element</b>, so wrap the three parts in a <code>&lt;div&gt;</code> (exam paper, Step 3 hint).</li>
+        <li>Rendering with React 18 takes <b>two lines</b> — you wrote them in every Module 4 exercise (Movie Night, Steps 01–02): <code>ReactDOM.createRoot(...)</code> then <code>root.render(&lt;App /&gt;)</code>.</li>
+        <li>Style note: the starter files define components as <b>function declarations</b> (<code>function Header() {…}</code>). Movie Night also shows the arrow-function form (<code>const App = () =&gt; {…}</code>, Step 06) — they behave the same. This tutorial keeps the starter's function style.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> save and refresh. You see the blue header and, at the bottom, “Generated today: current date”.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>在 <code>app.js</code> 里写一个叫 <code>App</code> 的函数组件，并把它渲染进 root div。(这正是起始文件里写好的两条 TODO。)</p>
+      <ul>
+        <li>组件就是<b>返回 React 元素的函数</b>(Movie Night,第 06 步)。名字必须<b>以大写字母开头</b>:大写的 <code>&lt;App /&gt;</code> 是你的组件；小写标签会被当成普通 HTML 标签。</li>
+        <li><code>App</code> 显示三部分：<code>&lt;Header /&gt;</code>、空的 <code>&lt;div className="board"&gt;&lt;/div&gt;</code> 和 <code>&lt;Footer /&gt;</code>。<b>组件必须返回一个外层元素</b>,所以要把三部分包进一个 <code>&lt;div&gt;</code>(试卷第 3 步提示)。</li>
+        <li>用 React 18 渲染只要<b>两行</b> —— Module 4 的每个练习里你都写过(Movie Night,第 01–02 步)：<code>ReactDOM.createRoot(...)</code> 然后 <code>root.render(&lt;App /&gt;)</code>。</li>
+        <li>风格说明：起始文件用<b>函数声明</b>定义组件(<code>function Header() {…}</code>)。Movie Night 也演示了箭头函数写法(<code>const App = () =&gt; {…}</code>,第 06 步)—— 两者行为相同。本教程沿用起始文件的函数声明风格。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>保存并刷新。你能看到蓝色标题栏，底部有 “Generated today: current date”。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">app.js — 第一版 · first version</span>
+      <span class="src">组件=返回元素的函数:Movie Night Step 06 · 渲染两行:Movie Night Steps 01–02 · 包一层 div:试卷 Step 3 提示</span>
+    </div>
+    <pre><code><span class="c">// app.js: the App component, and the code that puts it on the page.</span>
+
+<span class="c">// App shows the whole page for now: the header, an empty board, the footer.</span>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;div className=<span class="s">"board"</span>&gt;&lt;/div&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="c">// React 18: create the root, then render &lt;App /&gt; into it.</span>
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section id="step4">
+  <div class="sec-head"><span class="no">Step 4</span><span class="time">15 min</span><h2>Show one riddle card with props · 用 props 显示一张卡片</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> make <code>Riddle</code> show the riddle it is given, instead of the placeholder text.</p>
+      <ul>
+        <li><b>props are how data gets into a component.</b> The parent writes them like HTML attributes where the component is used; the child receives them as one object, conventionally named <code>props</code> (Movie Night, Step 10).</li>
+        <li>Let the function take props: <code>function Riddle(props)</code>. Then replace the three placeholder texts with <code>{ }</code> expressions that read from the props. <b>Anything between <code>{</code> and <code>}</code> is evaluated as JavaScript</b> (Movie Night, Step 04): <code>Riddle {props.riddle.id}</code>, <code>{props.riddle.question}</code>, <code>{props.riddle.answer}</code>.</li>
+        <li><b>Test with one card:</b> in App's board, write <code>&lt;Riddle riddle={riddles.riddles[0]} /&gt;</code>. <code>riddles.riddles[0]</code> is the first riddle object (<code>{id: 1, question: "…", answer: "…"}</code>), so <code>props.riddle.question</code> is its question. Passing a whole object as one prop, then reading its fields in the child, is exactly what Movie Night does with the <code>Movie</code> component.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> one card shows “RIDDLE 1”, the keyboard question and “A keyboard.”.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>让 <code>Riddle</code> 显示传给它的那条谜语，而不是占位文字。</p>
+      <ul>
+        <li><b>props 是数据进入组件的途径。</b>父组件在使用组件的地方像写 HTML 属性一样传入；子组件把它们作为一个对象接收，习惯上命名为 <code>props</code>(Movie Night,第 10 步)。</li>
+        <li>让函数接收 props:<code>function Riddle(props)</code>。然后把三处占位文字换成从 props 取值的 <code>{ }</code> 表达式。<b>花括号之间的任何内容都会作为 JavaScript 求值</b>(Movie Night,第 04 步)：<code>Riddle {props.riddle.id}</code>、<code>{props.riddle.question}</code>、<code>{props.riddle.answer}</code>。</li>
+        <li><b>先用一张卡片测试：</b>在 App 的 board 里写 <code>&lt;Riddle riddle={riddles.riddles[0]} /&gt;</code>。<code>riddles.riddles[0]</code> 是第一条谜语对象(<code>{id: 1, question: "…", answer: "…"}</code>),所以 <code>props.riddle.question</code> 就是它的问题。“把整个对象作为一个 prop 传入，子组件再读它的字段” —— 正是 Movie Night 里 <code>Movie</code> 组件的做法。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>出现一张卡片，显示 “RIDDLE 1”、键盘谜语和 “A keyboard.”。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">components/Riddle.jsx — 完成 · final</span>
+      <span class="src">props 用法:Movie Night Steps 10–11 · { } 表达式:Movie Night Step 04</span>
+    </div>
+    <pre><code><span class="c">// Riddle.jsx: ONE riddle card. It shows the riddle it is given, via props.</span>
+function Riddle(props) {
+  return (
+    &lt;div className=<span class="s">"card"</span>&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle {props.riddle.id}&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{props.riddle.question}&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{props.riddle.answer}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">app.js — 先测一张卡 · test with one card (只改 board 那两行)</span>
+      <span class="src">试卷 Step 4:"pass it the first riddle, riddles.riddles[0]"</span>
+    </div>
+    <pre><code>      &lt;div className=<span class="s">"board"</span>&gt;
+        &lt;Riddle riddle={riddles.riddles[<span class="k">0</span>]} /&gt;
+      &lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section id="step5">
+  <div class="sec-head"><span class="no">Step 5</span><span class="time">15 min</span><h2>Show all nine with map() and key · 用 map() 和 key 显示全部九张</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> replace the single test card with a loop — one <code>Riddle</code> for every riddle in the array.</p>
+      <ul>
+        <li>You <b>cannot put a <code>for</code> loop inside JSX, because <code>for</code> is a statement</b>, and JSX only accepts expressions. Arrays have a method that <i>is</i> an expression and returns a new array: <code>map()</code> (Movie Night, Step 12).</li>
+        <li><code>{riddles.riddles.map((riddle) =&gt; (&lt;Riddle … /&gt;))}</code> turns each of the nine riddle objects into one <code>&lt;Riddle /&gt;</code> element, and React renders them one after another.</li>
+        <li>Each item needs a <b>key that is unique and stable — and the data already has one for you</b>: the <code>id</code> field (exam paper, Step 5 hint; Movie Night, Step 13). Write <code>key</code> on the element that <code>map()</code> returns, <b>not</b> inside the child component. React keeps <code>key</code> for itself: <code>props.key</code> inside <code>Riddle</code> is <code>undefined</code> (Movie Night, Step 13 table).</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> nine cards, numbered 1 to 9, in a three-by-three grid on a wide screen, and the Console has no “unique key prop” warning.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>把单张测试卡换成一个循环 —— 数组里每条谜语对应一个 <code>Riddle</code>。</p>
+      <ul>
+        <li><b>不能把 <code>for</code> 循环放进 JSX,因为 <code>for</code> 是语句</b>,而 JSX 只接受表达式。数组有一个方法本身就是表达式、又返回新数组：<code>map()</code>(Movie Night,第 12 步)。</li>
+        <li><code>{riddles.riddles.map((riddle) =&gt; (&lt;Riddle … /&gt;))}</code> 把九个谜语对象各变成一个 <code>&lt;Riddle /&gt;</code> 元素，React 再把它们依次渲染出来。</li>
+        <li>每一项都需要一个<b>唯一且稳定的 key —— 而数据里已经自带了</b>:<code>id</code> 字段(试卷第 5 步提示；Movie Night,第 13 步)。<code>key</code> 要写在 <code>map()</code> 返回的那个元素上,<b>不要</b>写在子组件内部。React 自己保留 <code>key</code>:在 <code>Riddle</code> 里访问 <code>props.key</code> 是 <code>undefined</code>(Movie Night,第 13 步表格)。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>出现九张卡片，编号 1–9,宽屏下呈三行三列网格；Console 没有 “unique key prop” 警告。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">app.js — board 最终写法 · the board (final)</span>
+      <span class="src">map() 渲染列表:Movie Night Step 12 · key 用数据自带的 id:试卷 Step 5 提示 + Movie Night Step 13</span>
+    </div>
+    <pre><code>      &lt;div className=<span class="s">"board"</span>&gt;
+        {riddles.riddles.map((riddle) =&gt; (
+          &lt;Riddle key={riddle.id} riddle={riddle} /&gt;
+        ))}
+      &lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 6 ============ -->
+<section id="step6">
+  <div class="sec-head"><span class="no">Step 6</span><span class="time">5 min</span><h2>Today's date in the footer · 页脚显示今天的日期</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> replace “current date” in <code>Footer.jsx</code> with the real date.</p>
+      <ul>
+        <li><code>new Date()</code> gives you the date and time right now. <b>Store it in a variable before the <code>return</code></b> — ordinary JavaScript can go there (Movie Night computes <code>watchedCount</code> the same way in Step 15) — then put it in the JSX with <code>{ }</code>.</li>
+        <li><b>A Date object cannot go straight into JSX: turn it into text first</b> (exam paper, Step 6 hint). Try these in the Console and pick one: <code>new Date().toDateString()</code> → “Wed Oct 28 2026”, or <code>new Date().toLocaleDateString()</code> → “10/28/2026”.</li>
+        <li>The date must be <b>the real date, not typed in</b> (requirement 5): tomorrow the page shows tomorrow's date by itself.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> the footer reads, for example, “Generated today: Wed Oct 28 2026”, and tomorrow it will show tomorrow's date.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>把 <code>Footer.jsx</code> 里的 “current date” 换成真实日期。</p>
+      <ul>
+        <li><code>new Date()</code> 给出此刻的日期和时间。<b>先把它存进一个变量，放在 <code>return</code> 之前</b> —— 那里可以写普通 JavaScript(Movie Night 第 15 步计算 <code>watchedCount</code> 就是这么做的)—— 然后用 <code>{ }</code> 放进 JSX。</li>
+        <li><b>Date 对象不能直接放进 JSX:必须先转成文本</b>(试卷第 6 步提示)。在 Console 里试试这两种，选一个:<code>new Date().toDateString()</code> → “Wed Oct 28 2026”,或 <code>new Date().toLocaleDateString()</code> → “10/28/2026”。</li>
+        <li>日期必须是<b>真实的日期，不许手写死</b>(要求第 5 条)：明天打开页面，它要自己显示明天的日期。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>页脚显示类似 “Generated today: Wed Oct 28 2026”,明天会显示明天的日期。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">components/Footer.jsx — 完成 · final</span>
+      <span class="src">return 之前写普通 JavaScript:Movie Night Step 15 · Date 转文本:试卷 Step 6 提示</span>
+    </div>
+    <pre><code><span class="c">// Footer.jsx: the bar fixed to the bottom of the page. Shows today's real date.</span>
+function Footer() {
+  const today = new Date().toDateString();   <span class="c">// e.g. "Wed Oct 28 2026"</span>
+  return (
+    &lt;footer&gt;
+      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============ STEP 7 ============ -->
+<section id="step7">
+  <div class="sec-head"><span class="no">Step 7</span><span class="time">5 min</span><h2>Clean up · 收尾清理</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Goal:</b> leave clean, exam-ready code (requirement 6 and marking row IV).</p>
+      <ul>
+        <li>Delete test code, <code>console.log</code> lines and code you commented out.</li>
+        <li>Add a <b>short comment above each component</b> saying what it shows — all four components (<code>App</code>, <code>Header</code>, <code>Riddle</code>, <code>Footer</code>).</li>
+        <li>Make sure all four files are saved, refresh, and look at the Console one last time: no red errors — only the expected yellow Babel notice.</li>
+        <li><b>Before you submit:</b> zip the <i>whole folder</i> (not just <code>app.js</code>), unzip it somewhere else, open it with Live Server and check the page still works — then upload the .zip to Blackboard. A missing file in the zip is the most common way to get zero. The full marking scheme and self-mark checklist are in the Study Guide, Section 6.</li>
+      </ul>
+      <div class="checkline"><b>Check:</b> the finished page matches <code>mockup.html</code>'s design, with all nine cards, and the Console is clean (no red errors).</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>目标：</b>留下干净、达到考试要求的代码(要求第 6 条、评分项 IV)。</p>
+      <ul>
+        <li>删除测试代码、<code>console.log</code> 以及被你注释掉的代码。</li>
+        <li>在<b>每个组件上方加一句简短注释</b>，说明它显示什么 —— 四个组件(<code>App</code>、<code>Header</code>、<code>Riddle</code>、<code>Footer</code>)都要有。</li>
+        <li>确认四个文件都已保存，刷新，最后再看一眼 Console:没有红色报错 —— 只有预期中的黄色 Babel 提示。</li>
+        <li><b>提交前：</b>压缩<i>整个文件夹</i>(不只是 <code>app.js</code>),把 zip 解压到另一个位置，用 Live Server 打开并确认页面仍能运行 —— 然后把 .zip 上传到 Blackboard。zip 里缺文件是拿 0 分最常见的原因。完整评分标准与自查清单见复习指南第 6 节。</li>
+      </ul>
+      <div class="checkline"><b>检查：</b>成品页面与 <code>mockup.html</code> 的设计一致、九张卡片齐全，Console 干净(无红色报错)。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CODE ============ -->
+<section id="final">
+  <div class="sec-head"><span class="no">✓</span><h2>Final code review · 最终完整代码对照</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Compare your files with these finished versions — they are exactly what the seven steps above produce. <code>index.html</code> is the one shown in Step 2 (unchanged since). <code>riddles.js</code>, <code>styles.css</code> and <code>normalize.css</code> are given and must not be changed or copied.</p>
+      <p>If a card is missing or the Console shows an error, compare line by line: most problems are a name typed differently in two places, or scripts in the wrong order (exam paper, Section 6).</p>
+      <p>The four changes you made, and where each idea comes from:</p>
+      <table>
+        <tr><th>What you wrote</th><th>The idea</th><th>Source in the course</th></tr>
+        <tr><td>Eight <code>&lt;script&gt;</code> tags in <code>index.html</code></td><td>Libraries → data → components → app; JSX needs <code>type="text/babel"</code></td><td>Movie Night Steps 01/03 · Code Lab Activity 1</td></tr>
+        <tr><td><code>function App()</code> + <code>createRoot</code>/<code>render</code></td><td>A component is a function returning elements, wrapped in one outer element</td><td>Movie Night Steps 02/06/08 · Code Lab Activity 2</td></tr>
+        <tr><td><code>Riddle(props)</code> reading <code>props.riddle.…</code></td><td>Props carry data from parent to child; <code>{ }</code> holds JavaScript expressions</td><td>Movie Night Steps 04/10/11 · Code Lab Activity 3</td></tr>
+        <tr><td><code>map()</code> with <code>key={riddle.id}</code> + <code>new Date().toDateString()</code></td><td>Lists come from data with a stable key; a Date must become text before JSX</td><td>Movie Night Steps 12/13/15 · Code Lab Activity 4 · exam Step 6 hint</td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>把你的文件与下面的完成版逐行对照 —— 它们正是上面七步做出来的结果。<code>index.html</code> 见第 2 步(此后不再改动)。<code>riddles.js</code>、<code>styles.css</code> 和 <code>normalize.css</code> 是给定的，不许改动、也不许拷贝进自己的代码。</p>
+      <p>如果卡片缺失或 Console 报错，请逐行对照：大多数问题是“同一个名字在两处写法不同”或“脚本顺序不对”(试卷第 6 节)。</p>
+      <p>你做的四处修改，以及每个知识点来自哪里：</p>
+      <table>
+        <tr><th>你写的代码</th><th>背后的概念</th><th>课程出处</th></tr>
+        <tr><td><code>index.html</code> 里八个 <code>&lt;script&gt;</code> 标签</td><td>先库 → 再数据 → 再组件 → 最后 app;JSX 需要 <code>type="text/babel"</code></td><td>Movie Night 第 01/03 步 · Code Lab Activity 1</td></tr>
+        <tr><td><code>function App()</code> + <code>createRoot</code>/<code>render</code></td><td>组件是返回元素的函数，且只返回一个外层元素</td><td>Movie Night 第 02/06/08 步 · Code Lab Activity 2</td></tr>
+        <tr><td><code>Riddle(props)</code> 读取 <code>props.riddle.…</code></td><td>props 把数据从父组件传到子组件;<code>{ }</code> 里放 JavaScript 表达式</td><td>Movie Night 第 04/10/11 步 · Code Lab Activity 3</td></tr>
+        <tr><td><code>map()</code> + <code>key={riddle.id}</code> + <code>new Date().toDateString()</code></td><td>列表来自数据且每项要有稳定 key;Date 必须先变文本才能进 JSX</td><td>Movie Night 第 12/13/15 步 · Code Lab Activity 4 · 试卷第 6 步提示</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">app.js — 最终版 · final</span>
+      <span class="src">= Step 3 + Step 5 组合 · 结构对应 Movie Night Step 08(App 组合各组件)</span>
+    </div>
+    <pre><code><span class="c">// app.js: the App component, and the code that puts it on the page.</span>
+
+<span class="c">// App shows the whole page: the header, the nine riddle cards, the footer.</span>
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Header /&gt;
+      &lt;div className=<span class="s">"board"</span>&gt;
+        {riddles.riddles.map((riddle) =&gt; (
+          &lt;Riddle key={riddle.id} riddle={riddle} /&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;Footer /&gt;
+    &lt;/div&gt;
+  );
+}
+
+<span class="c">// Render &lt;App /&gt; into the &lt;div id="root"&gt; in index.html.</span>
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">components/Header.jsx — 已给出 · given, do not change</span>
+      <span class="src">起始文件原样 · used in App as &lt;Header /&gt;</span>
+    </div>
+    <pre><code><span class="c">// Header.jsx: the blue bar at the top of the page.</span>
+<span class="c">// This component is already finished. Use it in App as &lt;Header /&gt;.</span>
+function Header() {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Riddle Board&lt;/h1&gt;
+      &lt;p&gt;Nine riddles. Can you guess them before you read the answer?&lt;/p&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">components/Riddle.jsx — 最终版 · final</span>
+      <span class="src">= Step 4 的成果 · 同 Step 4 代码</span>
+    </div>
+    <pre><code><span class="c">// Riddle.jsx: ONE riddle card. It shows the riddle it is given, via props.</span>
+function Riddle(props) {
+  return (
+    &lt;div className=<span class="s">"card"</span>&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle {props.riddle.id}&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{props.riddle.question}&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{props.riddle.answer}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">components/Footer.jsx — 最终版 · final</span>
+      <span class="src">= Step 6 的成果 · 同 Step 6 代码</span>
+    </div>
+    <pre><code><span class="c">// Footer.jsx: the bar fixed to the bottom of the page. Shows today's real date.</span>
+function Footer() {
+  const today = new Date().toDateString();   <span class="c">// e.g. "Wed Oct 28 2026"</span>
+  return (
+    &lt;footer&gt;
+      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+}</code></pre>
+  </div>
+</section>
+
+<!-- ============ STUCK ============ -->
+<section id="stuck">
+  <div class="sec-head"><span class="no">!</span><h2>Stuck? Where to look · 卡住了？去哪里查</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>If you are stuck on something, look at the same source the exam paper points to (its Section 9):</p>
+      <table>
+        <tr><th>If you are stuck on…</th><th>Look at…</th></tr>
+        <tr><td>The CDN scripts, <code>type="text/babel"</code>, the root div</td><td><a class="src" href="../Module 4/code/movie-night/index.html">Movie Night (Module 4), its index.html</a> · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 1</a></td></tr>
+        <tr><td>Writing a component and using <code>{ }</code> in JSX</td><td><a class="src" href="../Module 4/code/README.md">Movie Night (Module 4)</a> · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 2</a></td></tr>
+        <tr><td>Passing data with props</td><td>Movie Night, the <code>Movie</code> component (<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">checkpoints/step-11-reusable/app.js</a>) · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 3</a></td></tr>
+        <tr><td><code>map()</code> and key</td><td>Movie Night, the movie list (<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">checkpoints/step-13-keys/app.js</a>) · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 4</a></td></tr>
+        <tr><td>The Date object</td><td>MDN: search “JavaScript Date toDateString” <a class="ext" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toDateString">(MDN link)</a></td></tr>
+      </table>
+      <p>For a specific error message, use the full error table in the Study Guide, Section 5 (<a class="src" href="index.html">index.html</a>): blank page, “React is not defined”, “riddles is not defined”, <code>Unexpected token '&lt;'</code>, the key warning, and more.</p>
+      <div class="note"><b>Read the error, then the file and line.</b> The Console says which file and line went wrong — click it to jump there. Most errors in this exam are a name typed differently in two places, or scripts in the wrong order.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>卡在某个知识点上时，查试卷第 9 节指向的同一批出处：</p>
+      <table>
+        <tr><th>卡在…</th><th>查…</th></tr>
+        <tr><td>CDN 脚本、<code>type="text/babel"</code>、root div</td><td><a class="src" href="../Module 4/code/movie-night/index.html">Movie Night(Module 4)的 index.html</a> · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 1</a></td></tr>
+        <tr><td>编写组件、在 JSX 中用 <code>{ }</code></td><td><a class="src" href="../Module 4/code/README.md">Movie Night(Module 4)</a> · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 2</a></td></tr>
+        <tr><td>用 props 传数据</td><td>Movie Night 的 <code>Movie</code> 组件(<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">checkpoints/step-11-reusable/app.js</a>) · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 3</a></td></tr>
+        <tr><td><code>map()</code> 与 key</td><td>Movie Night 的电影列表(<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">checkpoints/step-13-keys/app.js</a>) · Code Lab <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">Activity 4</a></td></tr>
+        <tr><td>Date 对象</td><td>MDN:搜索 “JavaScript Date toDateString” <a class="ext" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toDateString">(MDN 链接)</a></td></tr>
+      </table>
+      <p>遇到具体报错信息，请查复习指南第 5 节的完整报错表(<a class="src" href="index.html">index.html</a>):白屏、“React is not defined”、“riddles is not defined”、<code>Unexpected token '&lt;'</code>、key 警告等。</p>
+      <div class="note zh-note"><b>先读报错，再看文件和行号。</b>Console 会指出出错的文件与行号 —— 点击即可跳转。本题的报错大多是“同一个名字在两处写法不同”或“脚本顺序不对”。</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="page">
+  <p>Source of this tutorial · 本教程依据：<code>riddle-board-start/</code> 起始文件的 TODO 注释与文件结构 · <code>Mock-Midterm-Riddle-Board.pdf</code> Section 5(七步计划与检查点)、Section 6(报错)、Section 9(出处)· <code>Module 4/code/README.md</code> 与 <code>Module 4/code/checkpoints/</code>(Movie Night 教程：组件、props、map/key、渲染、Live Server 的全部概念与代码风格)· CDN 三行照抄自 <code>Module 4/code/movie-night/index.html</code> · 线上 <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">csis-3380-react-code-lab</a> Activity 1–4。</p>
+</footer>
+
+</body>
+</html>
