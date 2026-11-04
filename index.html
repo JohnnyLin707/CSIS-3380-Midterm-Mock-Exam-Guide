@@ -100,6 +100,9 @@
   .fab.alt:hover{box-shadow:0 14px 30px rgba(76,29,120,.5)}
   .fab .dot{width:10px;height:10px;border-radius:50%;background:#ffd166;box-shadow:0 0 0 4px rgba(255,209,102,.25);animation:pulse 1.8s infinite}
   .fab.alt .dot{background:#8fd6a5}
+  .fab.third{background:linear-gradient(135deg,#7c2d12,#c2571a);box-shadow:0 10px 26px rgba(124,45,18,.4)}
+  .fab.third:hover{box-shadow:0 14px 30px rgba(124,45,18,.5)}
+  .fab.third .dot{background:#ffd8a8}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,209,102,.25)}50%{box-shadow:0 0 0 8px rgba(255,209,102,.08)}}
   @media print{.fabs{display:none}}
 
@@ -128,6 +131,7 @@
     <a href="#s8">8 Cheat Sheet 代码速查</a>
     <a href="#s9">9 Note 笔记</a>
     <a href="#s10">10 Quiz Board 模拟考 2</a>
+    <a href="#s11">11 Fact Board 模拟考 3</a>
   </nav>
 </header>
 
@@ -741,6 +745,63 @@ const quizArray = questions.questions;
   </div>
 </section>
 
+<!-- ============ SECTION 11 ============ -->
+<section id="s11">
+  <div class="sec-head"><span class="no">11</span><h2>Mock exam project 3 · 第三套模拟考试：Fact Board(变体考法)</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>What would the instructor change on the real midterm? The exam shape stays a static CDN React app, so only the <b>data, component interfaces and small JS requirements</b> can vary. I ranked seven likely variations by their evidence in the course material and built all of them into <a class="src" href="fact-board-start/index.html">fact-board-start/</a>:</p>
+      <table>
+        <tr><th>#</th><th>Guessed variation</th><th>Evidence</th></tr>
+        <tr><td>1</td><td>Different data names: <code>facts.items</code> instead of <code>riddles.riddles</code></td><td>Exam p.3 “READ THIS CAREFULLY” box — a designed trap, most likely to be renamed</td></tr>
+        <tr><td>2</td><td>12 cards instead of 9</td><td>Exam checklist: cards must come from <code>map()</code>, not hand-written tags</td></tr>
+        <tr><td>3</td><td>Header count worked out with <code>.length</code></td><td>Exam “Want more practice?” #2 · Movie Night Step 12</td></tr>
+        <tr><td>4</td><td>Four separate props instead of one object</td><td>Exam Step 4 hint passes an object; Movie Night Step 11 passes separate fields — both are taught</td></tr>
+        <tr><td>5</td><td>Conditional STAR badge with <code>&amp;&amp;</code></td><td>Movie Night Steps 05/14 — Module 4 conditionals, allowed by “no state”</td></tr>
+        <tr><td>6</td><td><code>toLocaleDateString()</code> + “Last updated:”</td><td>Exam Step 6 hint offers both date methods: “pick the one you like”</td></tr>
+        <tr><td>7</td><td><code>.filter()</code> before <code>map()</code> (bonus)</td><td>Exam “Want more practice?” #3 · Movie Night Step 15 uses <code>.filter()</code></td></tr>
+      </table>
+      <div class="note"><b>Deliberately excluded:</b> state, hooks, buttons, events and random order — the exam fixes the scope at Module 4 (Section 9). Every code block on the new tutorial has <b>English + Chinese comments</b>.</div>
+      <p><b>Three ways in:</b> <a class="src" href="Fact-Board-Tutorial.html">Fact-Board-Tutorial.html</a>(guesses + seven steps + final code) · <a class="src" href="fact-board-start/index.html">fact-board-start/index.html</a>(open the starter, hands-on) · <a class="src" href="fact-board-start/mockup.html">fact-board-start/mockup.html</a>(design).</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>真实期中考老师会改什么？考试形状固定为 CDN 静态 React 应用,能变的只有<b>数据、组件接口和小段 JS 要求</b>。我按教材线索强弱排出七个最可能的变体,并把它们全部做进 <a class="src" href="fact-board-start/index.html">fact-board-start/</a>：</p>
+      <table>
+        <tr><th>#</th><th>猜测的变体</th><th>依据</th></tr>
+        <tr><td>1</td><td>改数据名：<code>facts.items</code> 而非 <code>riddles.riddles</code></td><td>试卷第 3 页 “READ THIS CAREFULLY” 整框强调 —— 精心设计的陷阱最可能被改名</td></tr>
+        <tr><td>2</td><td>卡片由 9 张变 12 张</td><td>试卷自查清单：卡片必须来自 <code>map()</code>,不许手写标签</td></tr>
+        <tr><td>3</td><td>用 <code>.length</code> 从数据算出数量显示在标题栏</td><td>试卷 “Want more practice?” 第 2 题 · Movie Night 第 12 步</td></tr>
+        <tr><td>4</td><td>改成四个单独 prop,不再传整个对象</td><td>试卷第 4 步提示传对象；Movie Night 第 11 步传单独字段 —— 教材两种都教过</td></tr>
+        <tr><td>5</td><td>用 <code>&amp;&amp;</code> 条件渲染 STAR 徽章</td><td>Movie Night 第 05/14 步 —— 同属 Module 4, “no state” 并未排除它</td></tr>
+        <tr><td>6</td><td><code>toLocaleDateString()</code> + “Last updated:”</td><td>试卷第 6 步提示同时给出两种日期方法：“pick the one you like”</td></tr>
+        <tr><td>7</td><td><code>map()</code> 之前先 <code>.filter()</code>(加练)</td><td>试卷 “Want more practice?” 第 3 题 · Movie Night 第 15 步用过 <code>.filter()</code></td></tr>
+      </table>
+      <div class="note zh-note"><b>刻意不加：</b>state、hooks、按钮、事件和随机顺序 —— 试卷把范围锁在 Module 4(第 9 节)。新教学页的每个代码块都有<b>中英双语注释</b>。</div>
+      <p><b>三个入口：</b><a class="src" href="Fact-Board-Tutorial.html">Fact-Board-Tutorial.html</a>(猜题依据 + 七步 + 完整代码) · <a class="src" href="fact-board-start/index.html">fact-board-start/index.html</a>(打开起始项目实操) · <a class="src" href="fact-board-start/mockup.html">fact-board-start/mockup.html</a>(设计稿)。</p>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">变体示例 · a variation in code</span>
+      <span class="src">EN + 中文 comments · 双语注释</span>
+    </div>
+    <pre><code><span class="c">// EN: Variation 1 — the array is facts.items, so read facts.js before writing code.</span>
+<span class="z">// 中文:变体 1 —— 数组是 facts.items,所以写代码前先打开 facts.js 看清楚。</span>
+<span class="c">// EN: Variation 3 — the header count is computed from the data, never typed in.</span>
+<span class="z">// 中文:变体 3 —— 标题栏数量由数据算出,绝不手写死。</span>
+&lt;Header count={facts.items.length} /&gt;
+
+<span class="c">// EN: Variations 2, 4, 5 — map() all 12 items, pass four props, badge with &amp;&amp;.</span>
+<span class="z">// 中文:变体 2、4、5 —— map() 生成 12 张卡、传四个 prop、用 &amp;&amp; 显示徽章。</span>
+{facts.items.map((item) =&gt; (
+  &lt;Fact key={item.id} id={item.id} question={item.question}
+        answer={item.answer} starred={item.starred} /&gt;
+))}</code></pre>
+  </div>
+</section>
+
 </main>
 
 <footer class="page">
@@ -748,6 +809,9 @@ const quizArray = questions.questions;
 </footer>
 
 <div class="fabs">
+  <a class="fab third" href="Fact-Board-Tutorial.html" title="Fact Board mock exam 3: exam variations · 模拟考 3:变体考法">
+    <span class="dot"></span>Fact Board 模拟考 3 · 变体考法 →
+  </a>
   <a class="fab alt" href="Quiz-Board-Tutorial.html" title="Quiz Board mock exam 2: learn and practice · 模拟考 2:学习与实操">
     <span class="dot"></span>Quiz Board 模拟考 2 · 学习 + 实操 →
   </a>
