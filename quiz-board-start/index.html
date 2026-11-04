@@ -14,12 +14,31 @@
 
   <!-- EN: TODO 1: add the three CDN scripts: React, ReactDOM and Babel.          -->
   <!-- 中文:TODO 1:添加三个 CDN 脚本:React、ReactDOM 和 Babel。                     -->
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+
   <!-- EN: TODO 2: load the data file questions.js (a normal script, not Babel).  -->
   <!-- 中文:TODO 2:加载数据文件 questions.js(普通 script,不用 Babel)。              -->
   <!-- EN: TODO 3: load the component files and app.js (these ARE Babel scripts). -->
   <!-- 中文:TODO 3:加载组件文件和 app.js(它们需要 type="text/babel")。               -->
   <!-- EN: Order matters: a file can only use what was loaded before it.          -->
   <!-- 中文:顺序很重要:一个文件只能使用在它之前加载的东西。                            -->
+
+  <!-- EN: 4: the data file — a normal script (no type), plain JavaScript. -->
+  <!-- 中文:4:数据文件 —— 普通 script(不加 type),因为是纯 JavaScript。 -->
+  <script src="./questions.js"></script>
+
+  <!-- EN: 5–7: the components — JSX files need type="text/babel". -->
+  <!-- 中文:5–7:三个组件 —— 含 JSX 的文件需要 type="text/babel"。 -->
+  <script type="text/babel" src="./components/Header.jsx"></script>
+  <script type="text/babel" src="./components/QuizCard.jsx"></script>
+  <script type="text/babel" src="./components/Footer.jsx"></script>
+
+  <!-- EN: 8: app.js — a Babel script, last, because it uses all the others. -->
+  <!-- 中文:8:app.js —— Babel 脚本,放最后,因为它用到上面所有文件。 -->
+  <script type="text/babel" src="./app.js"></script>
+    
 </body>
 
 </html>

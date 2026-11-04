@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision Board</title>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- EN: TASK 0 — a React page needs an empty root element before the scripts. -->
+  <!-- 中文:任务 0 —— React 页面在脚本之前需要一个空的 root 元素。 -->
+  <div id="root"></div>
+
+  <!-- EN: ANSWER 0a — React, then ReactDOM, then Babel, all from unpkg (Movie Night). -->
+  <!-- 中文:补全点 0a —— 依次加载 React、ReactDOM、Babel,均来自 unpkg(Movie Night)。 -->
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+
+  <!-- EN: ANSWER 0b — the data file is plain JavaScript, so NO type attribute. -->
+  <!-- 中文:补全点 0b —— 数据文件是纯 JavaScript,所以不加 type。 -->
+  <script src="./tasks.js"></script>
+
+  <!-- EN: ANSWER 0c — JSX files need type="text/babel" so Babel compiles them. -->
+  <!-- 中文:补全点 0c —— 含 JSX 的文件需要 type="text/babel",由 Babel 编译。 -->
+  <script type="text/babel" src="./components/Header.jsx"></script>
+  <script type="text/babel" src="./components/TaskCard.jsx"></script>
+  <script type="text/babel" src="./components/Footer.jsx"></script>
+
+  <!-- EN: ANSWER 0d — app.js comes last, because it uses everything above. -->
+  <!-- 中文:补全点 0d —— app.js 放最后,因为它用到上面所有文件。 -->
+  <script type="text/babel" src="./app.js"></script>
+</body>
+
+</html>

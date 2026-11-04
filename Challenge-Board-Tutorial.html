@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Challenge Board · 教授可能出的综合挑战题 · Predicted Hard Mock</title>
+<style>
+  :root{--ink:#1f2733;--muted:#5b6b7c;--bg:#f4f6f9;--card:#fff;--en:#2563eb;--en-bg:#f2f6ff;--zh:#c2571a;--zh-bg:#fdf6ef;--line:#dde4ec;--ok:#15803d;--accent:#0f766e}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65}
+  header.top{position:sticky;top:0;z-index:50;background:#101826;color:#fff;padding:10px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+  header.top .brand{font-weight:700;letter-spacing:.4px}
+  header.top .brand small{opacity:.75;font-weight:400;margin-left:8px}
+  header.top a.home{color:#ffd166;text-decoration:none;font-size:13px;border:1px solid #6b5a1e;border-radius:99px;padding:4px 12px;background:#2a2410}
+  nav.chips{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+  nav.chips a{color:#dbe7ff;text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:99px;background:#1d2a40;border:1px solid #33456a}
+  nav.chips a:hover{background:#2a3c5e}
+  .hero{max-width:1280px;margin:26px auto 0;padding:0 22px}
+  .hero .box{background:linear-gradient(135deg,#134e4a,#0f766e);color:#fff;border-radius:16px;padding:30px 34px;box-shadow:0 8px 30px rgba(19,78,74,.25)}
+  .hero h1{margin:0 0 6px;font-size:29px}
+  .hero p.sub{margin:0;opacity:.92}
+  .badges{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .badges span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:99px;font-size:13px}
+  .cta-row{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+  .cta-row a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;padding:10px 18px;border-radius:99px}
+  .cta-row a.learn{background:#fff;color:#134e4a}
+  .cta-row a.practice{background:#ffd166;color:#3b2a00;border:1px solid #e2b84d}
+  .cta-row a:hover{filter:brightness(1.08)}
+  main{max-width:1280px;margin:0 auto;padding:10px 22px 60px}
+  section{margin-top:34px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .sec-head .no{background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-size:13px;font-weight:700}
+  .sec-head .tag{background:#e6f4f2;color:var(--accent);border:1px solid #bfe3de;border-radius:8px;padding:2px 10px;font-size:12.5px;font-weight:600}
+  .sec-head h2{margin:0;font-size:21px}
+  .duo{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;box-shadow:0 3px 14px rgba(23,32,44,.08);border:1px solid var(--line)}
+  .cell{padding:18px 22px;background:var(--card)}
+  .cell.en{background:var(--en-bg);border-right:1px dashed var(--line)}
+  .cell.zh{background:var(--zh-bg)}
+  .cell h3{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.8px}
+  .cell.en h3{color:var(--en)} .cell.zh h3{color:var(--zh)}
+  .cell p{margin:8px 0}
+  .cell ul,.cell ol{margin:8px 0 8px 20px;padding:0}
+  .cell li{margin:5px 0}
+  @media (max-width:900px){.duo{grid-template-columns:1fr}.cell.en{border-right:none;border-bottom:1px dashed var(--line)}}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;background:#fff}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#eef2f7;font-weight:700}
+  code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:5px;padding:1px 5px;word-break:break-all}
+  pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.3px;background:#101826;color:#dbe7ff;padding:14px 16px;overflow-x:auto;line-height:1.55;margin:0}
+  pre .c{color:#7fa3d8} pre .z{color:#f0a9d0} pre .s{color:#8fd6a5}
+  .codecard{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 14px rgba(23,32,44,.08)}
+  .codecard .cc-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#101826;color:#cdd9ec;padding:8px 16px;font-size:12.5px;border-bottom:1px solid #24324a}
+  .codecard .cc-head .file{font-family:"SF Mono",Menlo,Consolas,monospace;color:#8fd6a5;font-weight:700}
+  .codecard .cc-head .src{color:#9db8dd;font-size:12px}
+  a.src{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;color:var(--accent);background:#e6f4f2;border:1px solid #bfe3de;border-radius:5px;padding:1px 5px;text-decoration:none;word-break:break-all}
+  a.src:hover{background:#d3ebe7;text-decoration:underline}
+  .note{border-left:4px solid var(--en);background:#fff;border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:13.5px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .note.zh-note{border-left-color:var(--zh)}
+  .checkline{border-left:4px solid var(--ok);background:#f2fbf5;border-radius:0 10px 10px 0;padding:9px 14px;margin:12px 0;font-size:13.5px}
+  ul.check{list-style:none;margin-left:0}
+  ul.check li{padding-left:26px;position:relative;margin:6px 0}
+  ul.check li::before{content:"☐";position:absolute;left:0;color:var(--en);font-size:15px}
+  footer.page{max-width:1280px;margin:0 auto;padding:0 22px 40px;color:var(--muted);font-size:13px}
+  @media print{header.top{position:static}section{break-inside:avoid-page}body{background:#fff}.duo{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Challenge Board · 综合挑战题 <small>Predicted hard mock — 教材范围内的预测题</small></div>
+  <a class="home" href="index.html">← 复习指南 / Study Guide</a>
+  <nav class="chips">
+    <a href="#guesses">Guesses 猜题依据</a>
+    <a href="#upgrade">Upgrade 升级对照</a>
+    <a href="#files">Files 文件结构</a>
+    <a href="#code">Full Code 完整代码</a>
+    <a href="#check">Checklist 自查</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="box">
+    <h1>Revision Board — 教授可能出的综合挑战题</h1>
+    <p class="sub">A finished, runnable project built from the hardest combination of Module 4 ideas: data through props, filter(), &amp;&amp;, ? :, map() + keys, and a real date. &nbsp;·&nbsp; 一个已完成的、可直接运行的项目,把 Module 4 最难的组合考点集中到一道题里。</p>
+    <div class="badges">
+      <span>🎯 7 项猜测,均附教材依据</span><span>📚 只用 Module 4</span><span>✅ 真实渲染跑通</span><span>💬 // EN: + // 中文: 双语题目与补全注释</span>
+    </div>
+    <div class="cta-row">
+      <a class="learn" href="#guesses">看猜题依据 · Why this task ↓</a>
+      <a class="practice" href="challenge-board/index.html">打开成品项目 · Open Finished App →</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- GUESSES -->
+<section id="guesses">
+  <div class="sec-head"><span class="no">0</span><h2>My guesses · 我猜教授会怎么加难度</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>The three earlier mocks all read a <b>global nested array</b> (<code>riddles.riddles</code>, <code>questions.questions</code>, <code>facts.items</code>). The hardest step still inside the course is the one in the <b>Professor's Activity 4 Proper code</b>. Every guess below comes from a line of that code or from the exam paper:</p>
+      <table>
+        <tr><th>#</th><th>Guessed challenge</th><th>Evidence</th></tr>
+        <tr><td>1</td><td>Data enters through <code>root.render(&lt;App tasks={ tasks } /&gt;)</code>; App uses <b>only</b> <code>props.tasks</code>, never the global variable</td><td>Professor's Activity 4 ends with <code>root.render(&lt;App movies={ movies } /&gt;)</code> and App is <code>const App = (props) =&gt; …</code></td></tr>
+        <tr><td>2</td><td>The data file is a <b>top-level array</b>, not a nested object</td><td>All four Proper codes use <code>const movies = [ … ]</code>; the nested <code>{riddles:[…]}</code> shape exists only in the exam starter</td></tr>
+        <tr><td>3</td><td>Header gets its numbers through props: <code>total={ … }</code>, <code>doneCount={ … }</code></td><td>Activity 3/4: <code>&lt;Header title="Movie Night" totalMovies={ props.movies.length } /&gt;</code></td></tr>
+        <tr><td>4</td><td>Count with <code>filter(…).length</code> before the <code>return</code></td><td>Activity 4: <code>const watchedCount = props.movies.filter(movie =&gt; movie.watched).length;</code></td></tr>
+        <tr><td>5</td><td>Two conditional renderings in one card: <code>&amp;&amp;</code> badge and <code>? :</code> two-version badge</td><td>Activity 4's <code>Movie</code> component (STAFF PICK / WATCHED / NOT YET) + Activity 2's <code>&amp;&amp;</code> and ternary</td></tr>
+        <tr><td>6</td><td>Footer receives the counts through props <b>and</b> shows today's real date</td><td>Activity 4's <code>&lt;Footer watchedCount={ … } totalMovies={ … } /&gt;</code> + exam Step 6 hint</td></tr>
+        <tr><td>7</td><td>Professor code style throughout: arrow components, spaced <code>{ }</code>, <code>key={ … }</code>, one prop per field</td><td>All four Proper codes supplied by the professor</td></tr>
+      </table>
+      <div class="note"><b>Deliberately excluded:</b> state, hooks, events, buttons, <code>reduce()</code>, <code>sort()</code>, random order. None of them appears in the Module 4 materials or the exam paper. This is still a pure, static render.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>前三套模拟考都从<b>全局嵌套数组</b>读数据(<code>riddles.riddles</code>、<code>questions.questions</code>、<code>facts.items</code>)。教材范围内还能加的最难一步,正是 <b>Professor 活动 4 的 Proper code</b> 里的写法。下面每条猜测都有代码或试卷依据：</p>
+      <table>
+        <tr><th>#</th><th>猜测的难度</th><th>依据</th></tr>
+        <tr><td>1</td><td>数据通过 <code>root.render(&lt;App tasks={ tasks } /&gt;)</code> 进入;App 全程只用 <code>props.tasks</code>,不碰全局变量</td><td>Professor 活动 4 末行 <code>root.render(&lt;App movies={ movies } /&gt;)</code>,且 App 是 <code>const App = (props) =&gt; …</code></td></tr>
+        <tr><td>2</td><td>数据文件是<b>顶层数组</b>,不再是嵌套对象</td><td>四份 Proper code 都用 <code>const movies = [ … ]</code>;<code>{riddles:[…]}</code> 那种嵌套只出现在考试起始文件里</td></tr>
+        <tr><td>3</td><td>Header 的数字全部通过 props 传入：<code>total={ … }</code>、<code>doneCount={ … }</code></td><td>活动 3/4：<code>&lt;Header title="Movie Night" totalMovies={ props.movies.length } /&gt;</code></td></tr>
+        <tr><td>4</td><td>在 <code>return</code> 之前用 <code>filter(…).length</code> 统计</td><td>活动 4：<code>const watchedCount = props.movies.filter(movie =&gt; movie.watched).length;</code></td></tr>
+        <tr><td>5</td><td>一张卡片里同时用两种条件渲染：<code>&amp;&amp;</code> 徽章 + <code>? :</code> 两态徽章</td><td>活动 4 的 <code>Movie</code> 组件(STAFF PICK / WATCHED / NOT YET)+ 活动 2 的 <code>&amp;&amp;</code> 与三元表达式</td></tr>
+        <tr><td>6</td><td>Footer 既通过 props 接收数量,又显示今天的真实日期</td><td>活动 4 的 <code>&lt;Footer watchedCount={ … } totalMovies={ … } /&gt;</code> + 试卷第 6 步提示</td></tr>
+        <tr><td>7</td><td>全程 Professor 代码风格：箭头函数组件、<code>{ }</code> 留空格、<code>key={ … }</code>、逐字段传 prop</td><td>教授给出的四份 Proper code</td></tr>
+      </table>
+      <div class="note zh-note"><b>刻意不加：</b>state、hooks、事件、按钮、<code>reduce()</code>、<code>sort()</code>、随机顺序 —— 这些都没有出现在 Module 4 教材或试卷里。本题仍是纯静态渲染。</div>
+    </div>
+  </div>
+</section>
+
+<!-- UPGRADE -->
+<section id="upgrade">
+  <div class="sec-head"><span class="no">1</span><h2>From the three mocks to this challenge · 三套模拟考 → 本题</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <table>
+        <tr><th>Skill</th><th>Riddle / Quiz / Fact Board</th><th>Revision Board (this challenge)</th></tr>
+        <tr><td>Data source</td><td>Global nested array</td><td>Top-level array passed as a prop to App</td></tr>
+        <tr><td>App reads</td><td><code>riddles.riddles</code> / <code>questions.questions</code> / <code>facts.items</code></td><td><code>props.tasks</code> only</td></tr>
+        <tr><td>Header</td><td>Fixed text (or one <code>count</code> prop)</td><td>Two computed numbers through props</td></tr>
+        <tr><td>Statistics</td><td><code>.length</code> in one place</td><td><code>.length</code> + <code>filter().length</code>, reused in Header and Footer</td></tr>
+        <tr><td>Conditionals</td><td>None (or a single <code>&amp;&amp;</code> badge)</td><td><code>&amp;&amp;</code> badge + <code>? :</code> two-version badge + ternary answer line</td></tr>
+        <tr><td>Footer</td><td>Date only</td><td>Counts from props + real date</td></tr>
+      </table>
+      <div class="checkline"><b>Verified in a real browser:</b> 9 cards, 3 DONE badges, 4 HIGH badges, 5 NORMAL badges, header “9 tasks · 3 done”, footer “3 of 9 done · Generated today: …”, zero JavaScript errors.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <table>
+        <tr><th>技能</th><th>Riddle / Quiz / Fact Board</th><th>Revision Board(本题)</th></tr>
+        <tr><td>数据来源</td><td>全局嵌套数组</td><td>顶层数组,作为 prop 传给 App</td></tr>
+        <tr><td>App 读取</td><td><code>riddles.riddles</code> / <code>questions.questions</code> / <code>facts.items</code></td><td>只用 <code>props.tasks</code></td></tr>
+        <tr><td>Header</td><td>固定文字(或一个 <code>count</code> prop)</td><td>两个由数据算出的数字经 props 传入</td></tr>
+        <tr><td>统计</td><td>一处 <code>.length</code></td><td><code>.length</code> + <code>filter().length</code>,Header 与 Footer 复用</td></tr>
+        <tr><td>条件渲染</td><td>无(或只有一个 <code>&amp;&amp;</code> 徽章)</td><td><code>&amp;&amp;</code> 徽章 + <code>? :</code> 两态徽章 + 三元答案行</td></tr>
+        <tr><td>Footer</td><td>只有日期</td><td>props 数量 + 真实日期</td></tr>
+      </table>
+      <div class="checkline"><b>真实浏览器验证通过：</b>9 张卡片、3 个 DONE、4 个 HIGH、5 个 NORMAL、标题栏 “9 tasks · 3 done”、页脚 “3 of 9 done · Generated today: …”,零 JavaScript 报错。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILES -->
+<section id="files">
+  <div class="sec-head"><span class="no">2</span><h2>The finished project · 成品项目文件</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><a class="src" href="challenge-board/index.html">challenge-board/</a> is a <b>finished, runnable</b> project — open <code>index.html</code> with Live Server and it works. Every JS/JSX file carries <code>// EN:</code> and <code>// 中文:</code> task questions; <code>index.html</code> uses the equivalent <code>&lt;!-- EN: --&gt;</code> / <code>&lt;!-- 中文: --&gt;</code> form because HTML has no <code>//</code> comments. Every code-completion point has both languages.</p>
+      <table>
+        <tr><th>File</th><th>Responsibility</th></tr>
+        <tr><td><code>index.html</code></td><td>Root div, the three CDN scripts, <code>tasks.js</code>, three Babel components, <code>app.js</code> — in that order</td></tr>
+        <tr><td><code>tasks.js</code></td><td><code>const tasks = [ …9 objects… ]</code> with <code>id, title, topic, minutes, done, priority</code></td></tr>
+        <tr><td><code>app.js</code></td><td><code>App(props)</code>: <code>filter().length</code>, <code>map()</code> + key, six props per card, <code>root.render(&lt;App tasks={ tasks } /&gt;)</code></td></tr>
+        <tr><td><code>components/Header.jsx</code></td><td>Title + two counts from props</td></tr>
+        <tr><td><code>components/TaskCard.jsx</code></td><td>One card: <code>&amp;&amp;</code> DONE badge, <code>? :</code> priority badge, ternary answer line</td></tr>
+        <tr><td><code>components/Footer.jsx</code></td><td>Counts from props + <code>new Date().toDateString()</code></td></tr>
+        <tr><td><code>styles.css</code>, <code>normalize.css</code></td><td>Finished styles, including the three badge colours</td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><a class="src" href="challenge-board/index.html">challenge-board/</a> 是<b>已完成、可直接运行</b>的项目 —— 用 Live Server 打开 <code>index.html</code> 即可。每个 JS/JSX 文件都有 <code>// EN:</code> 与 <code>// 中文:</code> 的题目注释;<code>index.html</code> 用等价的 <code>&lt;!-- EN: --&gt;</code> / <code>&lt;!-- 中文: --&gt;</code>(HTML 不支持 <code>//</code> 注释)。每个代码补全点也都带中英双语注释。</p>
+      <table>
+        <tr><th>文件</th><th>职责</th></tr>
+        <tr><td><code>index.html</code></td><td>root div、三个 CDN 脚本、<code>tasks.js</code>、三个 Babel 组件、<code>app.js</code> —— 按此顺序</td></tr>
+        <tr><td><code>tasks.js</code></td><td><code>const tasks = [ …9 个对象… ]</code>,字段 <code>id, title, topic, minutes, done, priority</code></td></tr>
+        <tr><td><code>app.js</code></td><td><code>App(props)</code>：<code>filter().length</code>、<code>map()</code> + key、每卡六个 prop、<code>root.render(&lt;App tasks={ tasks } /&gt;)</code></td></tr>
+        <tr><td><code>components/Header.jsx</code></td><td>标题 + 两个来自 props 的数量</td></tr>
+        <tr><td><code>components/TaskCard.jsx</code></td><td>一张卡：<code>&amp;&amp;</code> 的 DONE 徽章、<code>? :</code> 的优先级徽章、三元答案行</td></tr>
+        <tr><td><code>components/Footer.jsx</code></td><td>来自 props 的数量 + <code>new Date().toDateString()</code></td></tr>
+        <tr><td><code>styles.css</code>、<code>normalize.css</code></td><td>已完成的样式,含三种徽章配色</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FULL CODE -->
+<section id="code">
+  <div class="sec-head"><span class="no">3</span><span class="tag">// EN: + // 中文: in every JS/JSX file</span><h2>Full working code · 完整可运行代码</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>The blocks below are the <b>exact contents</b> of the finished project files (inserted automatically, so this page can never drift out of sync with the app). Blue lines are <code>// EN:</code> task/answer comments; pink lines are their <code>// 中文:</code> counterparts.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>下面每个代码块都是成品项目文件的<b>逐字内容</b>(由脚本自动注入,教材页与项目永远不会不一致)。蓝色行是 <code>// EN:</code> 题目/补全注释,粉色行是对应的 <code>// 中文:</code> 翻译。</p>
+    </div>
+  </div>
+
+  <div class="codecard">
+    <div class="cc-head"><span class="file">index.html</span><span class="src">CDN 顺序:Movie Night / 活动 1 · 8 个 script 标签</span></div>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Revision Board&lt;/title&gt;
+  &lt;link rel="stylesheet" href="normalize.css"&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+<span class="c">  &lt;!-- EN: TASK 0 — a React page needs an empty root element before the scripts. --&gt;</span>
+<span class="z">  &lt;!-- 中文:任务 0 —— React 页面在脚本之前需要一个空的 root 元素。 --&gt;</span>
+  &lt;div id="root"&gt;&lt;/div&gt;
+
+<span class="c">  &lt;!-- EN: ANSWER 0a — React, then ReactDOM, then Babel, all from unpkg (Movie Night). --&gt;</span>
+<span class="z">  &lt;!-- 中文:补全点 0a —— 依次加载 React、ReactDOM、Babel,均来自 unpkg(Movie Night)。 --&gt;</span>
+  &lt;script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"&gt;&lt;/script&gt;
+  &lt;script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"&gt;&lt;/script&gt;
+  &lt;script src="https://unpkg.com/@babel/standalone@7/babel.min.js"&gt;&lt;/script&gt;
+
+<span class="c">  &lt;!-- EN: ANSWER 0b — the data file is plain JavaScript, so NO type attribute. --&gt;</span>
+<span class="z">  &lt;!-- 中文:补全点 0b —— 数据文件是纯 JavaScript,所以不加 type。 --&gt;</span>
+  &lt;script src="./tasks.js"&gt;&lt;/script&gt;
+
+<span class="c">  &lt;!-- EN: ANSWER 0c — JSX files need type="text/babel" so Babel compiles them. --&gt;</span>
+<span class="z">  &lt;!-- 中文:补全点 0c —— 含 JSX 的文件需要 type="text/babel",由 Babel 编译。 --&gt;</span>
+  &lt;script type="text/babel" src="./components/Header.jsx"&gt;&lt;/script&gt;
+  &lt;script type="text/babel" src="./components/TaskCard.jsx"&gt;&lt;/script&gt;
+  &lt;script type="text/babel" src="./components/Footer.jsx"&gt;&lt;/script&gt;
+
+<span class="c">  &lt;!-- EN: ANSWER 0d — app.js comes last, because it uses everything above. --&gt;</span>
+<span class="z">  &lt;!-- 中文:补全点 0d —— app.js 放最后,因为它用到上面所有文件。 --&gt;</span>
+  &lt;script type="text/babel" src="./app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">tasks.js</span><span class="src">顶层数组,9 个对象 · 与 Professor 的 const movies = [ … ] 同构</span></div>
+    <pre><code><span class="c">// EN: TASK 1 — the data is a TOP-LEVEL ARRAY, not a nested object.</span>
+<span class="z">// 中文:任务 1 —— 数据是顶层数组,不是嵌套对象。</span>
+<span class="c">// EN: Read it carefully: the array is `tasks` (NOT tasks.tasks, NOT tasks.items).</span>
+<span class="z">// 中文:仔细看:数组就是 `tasks`(不是 tasks.tasks,也不是 tasks.items)。</span>
+<span class="c">// EN: ANSWER 1 — do NOT copy this data into your React code; this file is loaded</span>
+//     by a &lt;script&gt; tag and passed into App at the bottom of app.js.
+<span class="z">// 中文:补全点 1 —— 不要把数据拷进 React 代码;本文件由 &lt;script&gt; 标签加载,</span>
+//     并在 app.js 末尾传给 App。
+
+const tasks = [
+  { id: 1, title: "Add React CDN scripts", topic: "HTML setup", minutes: 10, done: true, priority: "high" },
+  { id: 2, title: "Create the root element", topic: "HTML setup", minutes: 5, done: true, priority: "normal" },
+  { id: 3, title: "Write JSX with Babel", topic: "JSX", minutes: 15, done: false, priority: "high" },
+  { id: 4, title: "Use { } expressions", topic: "JSX", minutes: 10, done: true, priority: "normal" },
+  { id: 5, title: "Build a function component", topic: "Components", minutes: 15, done: false, priority: "high" },
+  { id: 6, title: "Pass props to a child", topic: "Props", minutes: 10, done: false, priority: "normal" },
+  { id: 7, title: "Render a list with map()", topic: "Lists", minutes: 15, done: false, priority: "high" },
+  { id: 8, title: "Give each item a key", topic: "Lists", minutes: 5, done: false, priority: "normal" },
+  { id: 9, title: "Show today's real date", topic: "Footer", minutes: 5, done: false, priority: "normal" }
+];</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">app.js</span><span class="src">props.tasks · filter().length · map() + key · root.render(&lt;App tasks={ tasks } /&gt;)</span></div>
+    <pre><code><span class="c">// EN: TASK 2 — App receives the data ONLY through props (Professor's Activity 4 style).</span>
+<span class="z">// 中文:任务 2 —— App 只通过 props 接收数据(Professor 活动 4 的写法)。</span>
+<span class="c">// EN: Do NOT read the global `tasks` variable inside App; use `props.tasks`.</span>
+<span class="z">// 中文:不要在 App 里读全局 `tasks` 变量;要用 `props.tasks`。</span>
+
+<span class="c">// EN: App shows the header, the nine task cards and the footer, in ONE outer div.</span>
+<span class="z">// 中文:App 显示标题栏、九张任务卡片和页脚,包在唯一一个外层 div 里。</span>
+const App = (props) =&gt; {
+<span class="c">  // EN: ANSWER 2a — count the finished tasks with filter().length BEFORE the return.</span>
+<span class="z">  // 中文:补全点 2a —— 在 return 之前用 filter().length 统计已完成任务数。</span>
+<span class="c">  // EN: filter() keeps the items that pass a test; .length counts them (Movie Night Step 15).</span>
+<span class="z">  // 中文:filter() 保留通过测试的项,.length 统计数量(Movie Night 第 15 步)。</span>
+  const doneCount = props.tasks.filter(task =&gt; task.done).length;
+
+  return (
+    &lt;div&gt;
+<span class="c">      {/* EN: ANSWER 2b — both numbers come from the data, never typed in. */}</span>
+<span class="z">      {/* 中文:补全点 2b —— 两个数字都由数据算出,绝不手写死。 */}</span>
+      &lt;Header total={ props.tasks.length } doneCount={ doneCount } /&gt;
+
+      &lt;div className="board"&gt;
+<span class="c">        {/* EN: ANSWER 2c — map() builds the list; key uses the stable id from the data. */}</span>
+<span class="z">        {/* 中文:补全点 2c —— 用 map() 生成列表;key 用数据里稳定的 id。 */}</span>
+<span class="c">        {/* EN: Pass every field as its OWN prop, with spaces inside the braces. */}</span>
+<span class="z">        {/* 中文:每个字段单独作为一个 prop 传入,花括号内留空格。 */}</span>
+        { props.tasks.map(task =&gt;
+          &lt;TaskCard
+            key={ task.id }
+            id={ task.id }
+            title={ task.title }
+            topic={ task.topic }
+            minutes={ task.minutes }
+            done={ task.done }
+            priority={ task.priority }
+          /&gt;
+        ) }
+      &lt;/div&gt;
+
+      &lt;Footer total={ props.tasks.length } doneCount={ doneCount } /&gt;
+    &lt;/div&gt;
+  );
+};
+
+<span class="c">// EN: ANSWER 2d — the data enters the component tree HERE, as one prop.</span>
+<span class="z">// 中文:补全点 2d —— 数据在这里作为 prop 进入组件树。</span>
+<span class="c">// EN: This is the line that makes this challenge harder than the three earlier mocks.</span>
+<span class="z">// 中文:正是这一行让本题比前三套模拟考更难。</span>
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(&lt;App tasks={ tasks } /&gt;);</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/Header.jsx</span><span class="src">两个数字均来自 props(活动 3/4 写法)</span></div>
+    <pre><code><span class="c">// EN: TASK 3 — Header reads BOTH numbers from props (Professor's Activity 3/4 style).</span>
+<span class="z">// 中文:任务 3 —— Header 的两个数字都从 props 读取(Professor 活动 3/4 的写法)。</span>
+<span class="c">// EN: The title is typed in, but the counts must come from the parent.</span>
+<span class="z">// 中文:标题可以写死,但数量必须由父组件传入。</span>
+
+<span class="c">// EN: Header.jsx: the blue bar at the top of the page.</span>
+<span class="z">// 中文:Header.jsx:页面顶部的蓝色标题栏。</span>
+const Header = (props) =&gt; {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;Revision Board&lt;/h1&gt;
+<span class="c">      {/* EN: ANSWER 3a — build the count line from props.total and props.doneCount. */}</span>
+<span class="z">      {/* 中文:补全点 3a —— 用 props.total 和 props.doneCount 拼出数量行。 */}</span>
+      &lt;p&gt;{ props.total } tasks · { props.doneCount } done&lt;/p&gt;
+    &lt;/header&gt;
+  );
+};</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/TaskCard.jsx</span><span class="src">&amp;&amp; 徽章 + ? : 两态徽章 + 三元答案行(活动 2/4)</span></div>
+    <pre><code><span class="c">// EN: TASK 4 — ONE card, with two kinds of conditional rendering.</span>
+<span class="z">// 中文:任务 4 —— 一张卡片,含两种条件渲染。</span>
+<span class="c">// EN: Use &amp;&amp; for the badge that is either there or not, and ? : for the badge</span>
+//     that has two versions (Movie Night Steps 05/14; Activity 4's Movie component).
+<span class="z">// 中文:"有或没有"的徽章用 &amp;&amp;,"有两个版本"的徽章用 ? :</span>
+//     (Movie Night 第 05/14 步;活动 4 的 Movie 组件)。
+
+<span class="c">// EN: TaskCard.jsx: ONE task card. Six separate props come from App.</span>
+<span class="z">// 中文:TaskCard.jsx:一张任务卡片。App 传入六个单独的 prop。</span>
+const TaskCard = (props) =&gt; {
+  return (
+    &lt;div className="card"&gt;
+<span class="c">      {/* EN: ANSWER 4a — the number comes from props.id, not typed in. */}</span>
+<span class="z">      {/* 中文:补全点 4a —— 编号来自 props.id,不是手写死的。 */}</span>
+      &lt;span className="card-number"&gt;Task { props.id }&lt;/span&gt;
+
+<span class="c">      {/* EN: ANSWER 4b — &amp;&amp; shows DONE only when props.done is true. */}</span>
+<span class="z">      {/* 中文:补全点 4b —— &amp;&amp; 仅在 props.done 为 true 时显示 DONE 徽章。 */}</span>
+      { props.done &amp;&amp; &lt;span className="badge badge-done"&gt;DONE&lt;/span&gt; }
+
+      &lt;p className="question"&gt;{ props.title }&lt;/p&gt;
+      &lt;p className="meta"&gt;{ props.topic } · { props.minutes } min&lt;/p&gt;
+
+<span class="c">      {/* EN: ANSWER 4c — ? : picks one of two badges; an if statement cannot go here. */}</span>
+<span class="z">      {/* 中文:补全点 4c —— ? : 二选一显示徽章;这里不能用 if 语句。 */}</span>
+      { props.priority === "high"
+          ? &lt;span className="badge badge-high"&gt;HIGH&lt;/span&gt;
+          : &lt;span className="badge badge-normal"&gt;NORMAL&lt;/span&gt; }
+
+<span class="c">      {/* EN: ANSWER 4d — the answer line stays empty on purpose: it is a study checklist. */}</span>
+<span class="z">      {/* 中文:补全点 4d —— 答案行故意留空:这是一张复习清单卡片。 */}</span>
+      &lt;p className="answer"&gt;{ props.done ? "Reviewed." : "Still to review." }&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};</code></pre>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">components/Footer.jsx</span><span class="src">props 数量 + 今天的真实日期(试卷 Step 6)</span></div>
+    <pre><code><span class="c">// EN: TASK 5 — Footer combines a count from props with TODAY'S REAL DATE.</span>
+<span class="z">// 中文:任务 5 —— Footer 要把 props 传来的数量与今天的真实日期合在一起。</span>
+<span class="c">// EN: A Date object cannot go into JSX directly; turn it into text first.</span>
+<span class="z">// 中文:Date 对象不能直接放进 JSX;必须先转成文本。</span>
+
+<span class="c">// EN: Footer.jsx: the bar fixed to the bottom of the page.</span>
+<span class="z">// 中文:Footer.jsx:固定在页面底部的栏。</span>
+const Footer = (props) =&gt; {
+<span class="c">  // EN: ANSWER 5a — ordinary JavaScript goes above the return (Movie Night Step 15).</span>
+<span class="z">  // 中文:补全点 5a —— 普通 JavaScript 写在 return 之前(Movie Night 第 15 步)。</span>
+  const today = new Date().toDateString();
+
+  return (
+    &lt;footer&gt;
+<span class="c">      {/* EN: ANSWER 5b — counts from props, date from the Date object. */}</span>
+<span class="z">      {/* 中文:补全点 5b —— 数量来自 props,日期来自 Date 对象。 */}</span>
+      &lt;p&gt;{ props.doneCount } of { props.total } done · Generated today: { today }&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+};</code></pre>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="check">
+  <div class="sec-head"><span class="no">☐</span><h2>Self-check · 自查清单</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <ul class="check">
+        <li>Opens with Live Server; blue header shows “9 tasks · 3 done”.</li>
+        <li>Three CDN scripts first; <code>tasks.js</code> as a plain script; components and <code>app.js</code> with <code>type="text/babel"</code>.</li>
+        <li>The array is <code>tasks</code> (top-level), and the data is not copied into the React code.</li>
+        <li><code>root.render(&lt;App tasks={ tasks } /&gt;)</code>; App only uses <code>props.tasks</code>.</li>
+        <li><code>doneCount</code> comes from <code>props.tasks.filter(task =&gt; task.done).length</code>, computed before the <code>return</code>.</li>
+        <li>Nine cards from <code>map()</code>, each with <code>key={ task.id }</code>; no key warning.</li>
+        <li>Six separate props per <code>&lt;TaskCard /&gt;</code>; spaced <code>{ props.… }</code> expressions.</li>
+        <li>Exactly 3 DONE badges (<code>&amp;&amp;</code>), 4 HIGH + 5 NORMAL badges (<code>? :</code>).</li>
+        <li>Footer shows “3 of 9 done · Generated today:” + today's real date.</li>
+        <li>No red Console errors (only the expected Babel notice); every file has EN + 中文 comments.</li>
+      </ul>
+      <p><b>Want more practice?</b> Show only the unfinished tasks with <code>.filter(task =&gt; !task.done)</code>, or only the HIGH-priority ones — both need only Module 4 JavaScript before the <code>return</code>.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <ul class="check">
+        <li>能用 Live Server 打开;蓝色标题栏显示 “9 tasks · 3 done”。</li>
+        <li>三个 CDN 脚本在最前;<code>tasks.js</code> 是普通 script;组件与 <code>app.js</code> 用 <code>type="text/babel"</code>。</li>
+        <li>数组是顶层 <code>tasks</code>;数据没有拷进 React 代码。</li>
+        <li>使用 <code>root.render(&lt;App tasks={ tasks } /&gt;)</code>;App 只用 <code>props.tasks</code>。</li>
+        <li><code>doneCount</code> 来自 <code>props.tasks.filter(task =&gt; task.done).length</code>,写在 <code>return</code> 之前。</li>
+        <li>九张卡片来自 <code>map()</code>,每张有 <code>key={ task.id }</code>;无 key 警告。</li>
+        <li>每个 <code>&lt;TaskCard /&gt;</code> 收到六个单独 prop;表达式写成 <code>{ props.… }</code> 带空格。</li>
+        <li>恰好 3 个 DONE(<code>&amp;&amp;</code>)、4 个 HIGH + 5 个 NORMAL(<code>? :</code>)。</li>
+        <li>页脚显示 “3 of 9 done · Generated today:” + 今天的真实日期。</li>
+        <li>Console 无红色报错(只有预期的 Babel 提示);每个文件都有中英双语注释。</li>
+      </ul>
+      <p><b>想加练？</b>用 <code>.filter(task =&gt; !task.done)</code> 只显示未完成项,或只显示 HIGH 优先级 —— 都只需在 <code>return</code> 之前写 Module 4 范围内的普通 JavaScript。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="page">
+  <p>Sources · 教材依据：<code>Mock-Midterm-Riddle-Board.pdf</code>(Step 1–7、报错表、加练题)、<code>csis-3380-react-code-lab-zh-CN/js/activities.js</code>(活动 1–4 的 Proper code)、<code>Module 4/code/README.md</code> 与 <code>checkpoints/</code>(Movie Night:组件、props、条件表达式、map/key、filter、Date)、以及教授提供的四份 Proper code。全部限定在 Module 4,无 state / hooks。</p>
+</footer>
+
+</body>
+</html>

@@ -103,6 +103,9 @@
   .fab.third{background:linear-gradient(135deg,#7c2d12,#c2571a);box-shadow:0 10px 26px rgba(124,45,18,.4)}
   .fab.third:hover{box-shadow:0 14px 30px rgba(124,45,18,.5)}
   .fab.third .dot{background:#ffd8a8}
+  .fab.challenge{background:linear-gradient(135deg,#134e4a,#0f766e);box-shadow:0 10px 26px rgba(19,78,74,.4)}
+  .fab.challenge:hover{box-shadow:0 14px 30px rgba(19,78,74,.5)}
+  .fab.challenge .dot{background:#8fd6a5}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,209,102,.25)}50%{box-shadow:0 0 0 8px rgba(255,209,102,.08)}}
   @media print{.fabs{display:none}}
 
@@ -144,6 +147,7 @@
     <a href="#s9">9 Note 笔记</a>
     <a href="#s10">10 Quiz Board 模拟考 2</a>
     <a href="#s11">11 Fact Board 模拟考 3</a>
+    <a href="#s12">12 Challenge Board 挑战题</a>
   </nav>
 </header>
 
@@ -1218,10 +1222,67 @@ const quizArray = questions.questions;
 
 <span class="c">// EN: Variations 2, 4, 5 — map() all 12 items, pass four props, badge with &amp;&amp;.</span>
 <span class="z">// 中文:变体 2、4、5 —— map() 生成 12 张卡、传四个 prop、用 &amp;&amp; 显示徽章。</span>
-{facts.items.map((item) =&gt; (
-  &lt;Fact key={item.id} id={item.id} question={item.question}
-        answer={item.answer} starred={item.starred} /&gt;
-))}</code></pre>
+{ facts.items.map(item =&gt;
+  &lt;Fact
+    key={ item.id }
+    id={ item.id }
+    question={ item.question }
+    answer={ item.answer }
+    starred={ item.starred }
+  /&gt;
+) }</code></pre>
+  </div>
+</section>
+
+<!-- ============ SECTION 12 ============ -->
+<section id="s12">
+  <div class="sec-head"><span class="no">12</span><h2>Challenge Board · 第四套：综合挑战题(成品项目)</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>What is the hardest mock the professor could still set <b>inside Module 4</b>? The three earlier projects all read a global nested array. The Professor's <b>Activity 4 Proper code</b> goes one step further — so this project does too.</p>
+      <table>
+        <tr><th>Guessed challenge</th><th>Evidence</th></tr>
+        <tr><td>Data enters via <code>root.render(&lt;App tasks={ tasks } /&gt;)</code>; App uses only <code>props.tasks</code></td><td>Professor's Activity 4: <code>root.render(&lt;App movies={ movies } /&gt;)</code></td></tr>
+        <tr><td>Top-level array file, not <code>{riddles:[…]}</code></td><td>All four Proper codes: <code>const movies = [ … ]</code></td></tr>
+        <tr><td><code>filter().length</code> before the <code>return</code>; counts reused in Header and Footer</td><td>Activity 4's <code>watchedCount</code> + <code>&lt;Footer watchedCount={ … } /&gt;</code></td></tr>
+        <tr><td><code>&amp;&amp;</code> badge + <code>? :</code> two-version badge in one card</td><td>Activity 4's Movie badges; Activity 2's conditionals</td></tr>
+        <tr><td>Footer: counts from props + today's real date</td><td>Exam Step 6 hint + Activity 4's Footer</td></tr>
+        <tr><td>Professor style: arrow components, spaced <code>{ }</code>, <code>key={ … }</code>, one prop per field</td><td>The four Proper codes</td></tr>
+      </table>
+      <p><b>Three ways in:</b> <a class="src" href="Challenge-Board-Tutorial.html">Challenge-Board-Tutorial.html</a>(full teaching page: guesses, upgrade table, all six code files, self-check) · <a class="src" href="challenge-board/index.html">challenge-board/index.html</a>(<b>finished, runnable app</b>) · <a class="src" href="challenge-board/tasks.js">challenge-board/tasks.js</a>(the data).</p>
+      <div class="note">Every JS/JSX file carries <code>// EN:</code> task questions and their <code>// 中文:</code> translations; <code>index.html</code> uses the equivalent <code>&lt;!-- EN: --&gt;</code> / <code>&lt;!-- 中文: --&gt;</code> form because HTML has no <code>//</code> comments. Every code-completion point is commented in both languages. The tutorial page injects the six files verbatim, so the two can never drift apart. <b>Verified in a real browser:</b> 9 cards, 3 DONE / 4 HIGH / 5 NORMAL badges, “9 tasks · 3 done”, “3 of 9 done · Generated today: …”, zero JavaScript errors.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>在 <b>Module 4 范围内</b>,教授还能出的最难模拟题是什么？前三套都从全局嵌套数组读数据,而 <b>Professor 活动 4 的 Proper code</b> 又往前走了一步 —— 本项目就按这一步设计。</p>
+      <table>
+        <tr><th>猜测的难度</th><th>依据</th></tr>
+        <tr><td>数据通过 <code>root.render(&lt;App tasks={ tasks } /&gt;)</code> 进入;App 只用 <code>props.tasks</code></td><td>Professor 活动 4：<code>root.render(&lt;App movies={ movies } /&gt;)</code></td></tr>
+        <tr><td>数据文件是顶层数组,不再是 <code>{riddles:[…]}</code></td><td>四份 Proper code 都是 <code>const movies = [ … ]</code></td></tr>
+        <tr><td><code>return</code> 前用 <code>filter().length</code> 统计;Header 与 Footer 复用数量</td><td>活动 4 的 <code>watchedCount</code> 与 <code>&lt;Footer watchedCount={ … } /&gt;</code></td></tr>
+        <tr><td>一张卡里同时用 <code>&amp;&amp;</code> 徽章与 <code>? :</code> 两态徽章</td><td>活动 4 的 Movie 徽章;活动 2 的条件表达式</td></tr>
+        <tr><td>Footer：来自 props 的数量 + 今天的真实日期</td><td>试卷第 6 步提示 + 活动 4 的 Footer</td></tr>
+        <tr><td>Professor 风格：箭头函数组件、<code>{ }</code> 留空格、<code>key={ … }</code>、逐字段传 prop</td><td>四份 Proper code</td></tr>
+      </table>
+      <p><b>三个入口：</b><a class="src" href="Challenge-Board-Tutorial.html">Challenge-Board-Tutorial.html</a>(完整教材页:猜题依据、升级对照、六个代码文件、自查清单) · <a class="src" href="challenge-board/index.html">challenge-board/index.html</a>(<b>已完成、可直接运行的成品</b>) · <a class="src" href="challenge-board/tasks.js">challenge-board/tasks.js</a>(数据文件)。</p>
+      <div class="note zh-note">每个 JS/JSX 文件都带 <code>// EN:</code> 英文题目与 <code>// 中文:</code> 中文翻译;<code>index.html</code> 则用等价的 <code>&lt;!-- EN: --&gt;</code> / <code>&lt;!-- 中文: --&gt;</code>(HTML 不支持 <code>//</code> 注释)。每个代码补全点也都用双语注释。教材页的六个代码块由成品文件逐字注入,永远不会不一致。<b>真实浏览器验证：</b>9 张卡片、3 个 DONE / 4 个 HIGH / 5 个 NORMAL 徽章、“9 tasks · 3 done”、“3 of 9 done · Generated today: …”、零 JavaScript 报错。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">The hardest line · 本题最关键的一行</span><span class="src">// EN: + // 中文: 双语题目注释 · Professor Activity 4 写法</span></div>
+    <pre><code><span class="c">// EN: TASK 2 — App receives the data ONLY through props (Professor's Activity 4 style).</span>
+<span class="z">// 中文:任务 2 —— App 只通过 props 接收数据(Professor 活动 4 的写法)。</span>
+const App = (props) =&gt; {
+  <span class="c">// EN: ANSWER 2a — count the finished tasks with filter().length BEFORE the return.</span>
+  <span class="z">// 中文:补全点 2a —— 在 return 之前用 filter().length 统计已完成任务数。</span>
+  const doneCount = props.tasks.filter(task =&gt; task.done).length;
+  …
+};
+
+<span class="c">// EN: ANSWER 2d — the data enters the component tree HERE, as one prop.</span>
+<span class="z">// 中文:补全点 2d —— 数据在这里作为 prop 进入组件树。</span>
+root.render(&lt;App tasks={ tasks } /&gt;);</code></pre>
   </div>
 </section>
 
@@ -1232,6 +1293,9 @@ const quizArray = questions.questions;
 </footer>
 
 <div class="fabs">
+  <a class="fab challenge" href="Challenge-Board-Tutorial.html" title="Challenge Board: predicted hard mock · 综合挑战题(教材 + 成品)">
+    <span class="dot"></span>Challenge Board 挑战题 · 教材 + 成品 →
+  </a>
   <a class="fab third" href="Fact-Board-Tutorial.html" title="Fact Board mock exam 3: exam variations · 模拟考 3:变体考法">
     <span class="dot"></span>Fact Board 模拟考 3 · 变体考法 →
   </a>

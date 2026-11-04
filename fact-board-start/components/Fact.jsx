@@ -4,12 +4,13 @@
 // 中文:TODO 1:接收 props,从各个单独的 prop 里显示 id、question 和 answer。
 // EN: TODO 2: show the STAR badge only when props.starred is true, using &&.
 // 中文:TODO 2:仅当 props.starred 为 true 时,用 && 显示 STAR 徽章。
-function Fact() {
+const Fact = (props) => {
   return (
     <div className="card">
-      <span className="card-number">Fact 1</span>
-      <p className="question">Fact question</p>
-      <p className="answer">Fact answer</p>
+      <span className="card-number">Fact { props.id }</span>
+      { props.starred && <span className="badge">STAR</span> }
+      <p className="question">{ props.question }</p>
+      <p className="answer">{ props.answer }</p>
     </div>
   );
-}
+};

@@ -8,7 +8,7 @@ function Header(props) {
   return (
     <header>
       <h1>Fact Board</h1>
-      <p>{props.count} facts. Can you guess them before you read the answer?</p>
+      <p>{ props.count } facts. Can you guess them before you read the answer?</p>
     </header>
   );
 }
