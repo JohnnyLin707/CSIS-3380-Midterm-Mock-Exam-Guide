@@ -652,7 +652,7 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
         <li><a class="src" href="../Module 4/Basic React.pdf">Module 4/Basic React.pdf</a> — the lecture notes (<code>createElement</code>, JSX, components, props, <code>map()</code>, keys).</li>
         <li><a class="src" href="../Module 4/code/checkpoints/step-15-fragments-final/index.html">Module 4/code/checkpoints/step-15-fragments-final/</a> — the finished Movie Night reference app.</li>
       </ul>
-      <div class="note">The online React Code Lab is at <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">rezaghaeli.github.io/csis-3380-react-code-lab</a>. Activity 1 = add React to a page; Activity 2 = write a component in JSX; Activity 3 = build a component with props; Activity 4 = render a list with <code>map()</code> + keys — exactly this exam's skills.</div>
+      <div class="note">The online React Code Lab is at <a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">rezaghaeli.github.io/csis-3380-react-code-lab</a>. Activity 1 = add React to a page; Activity 2 = write a component in JSX; Activity 3 = build a component with props; Activity 4 = render a list with <code>map()</code> + keys — exactly this exam's skills.</div>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
@@ -697,7 +697,7 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
         <li><a class="src" href="../Module 4/Basic React.pdf">Module 4/Basic React.pdf</a> —— 课程讲义（<code>createElement</code>、JSX、组件、props、<code>map()</code>、key）。</li>
         <li><a class="src" href="../Module 4/code/checkpoints/step-15-fragments-final/index.html">Module 4/code/checkpoints/step-15-fragments-final/</a> —— Movie Night 成品参考应用。</li>
       </ul>
-      <div class="note zh-note">线上 React Code Lab 地址：<a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">rezaghaeli.github.io/csis-3380-react-code-lab</a>。Activity 1 = 把 React 加进页面；Activity 2 = 用 JSX 写组件；Activity 3 = 用 props 构建组件；Activity 4 = 用 <code>map()</code> + key 渲染列表 —— 正是本次考试的全部技能。</div>
+      <div class="note zh-note">线上 React Code Lab 地址：<a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">rezaghaeli.github.io/csis-3380-react-code-lab</a>。Activity 1 = 把 React 加进页面；Activity 2 = 用 JSX 写组件；Activity 3 = 用 props 构建组件；Activity 4 = 用 <code>map()</code> + key 渲染列表 —— 正是本次考试的全部技能。</div>
     </div>
   </div>
 </section>
@@ -762,9 +762,9 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
         <li><b>Open with Live Server (5 min).</b> Right-click <code>index.html</code> → Open with Live Server; open DevTools and keep the <b>Console</b> open; also open <code>mockup.html</code>. <em>Why:</em> Babel loads your files over the network — <code>file://</code> pages get blocked (blank page).</li>
         <li><b>Add the scripts to index.html (10 min).</b> Order: React CDN → ReactDOM CDN → Babel CDN → <code>riddles.js</code> (plain script) → the three <code>.jsx</code> files (<code>type="text/babel"</code>) → <code>app.js</code> (babel, last). Copy the three CDN lines from <a class="src" href="../Module 4/code/movie-night/index.html">movie-night/index.html</a> (Code Lab Activity 1). <em>Check:</em> no red errors; <code>riddles.riddles.length</code> → 9.</li>
         <li><b>Render App with header and footer (10 min).</b> <code>App</code> returns <code>&lt;Header /&gt;</code>, an empty <code>&lt;div className="board"&gt;&lt;/div&gt;</code> and <code>&lt;Footer /&gt;</code> wrapped in one outer <code>&lt;div&gt;</code>; then <code>ReactDOM.createRoot(…).render(&lt;App /&gt;)</code>. Source: README Steps 08 (<a class="src" href="../Module 4/code/checkpoints/step-08-compose/app.js">step-08-compose/app.js</a>), Code Lab Activity 2. <em>Check:</em> header + “Generated today: current date” visible.</li>
-        <li><b>One card with props (15 min).</b> Give <code>Riddle</code> a <code>props</code> parameter; replace the placeholder texts with <code>{ props.riddle.question }</code> etc.; test with one card: <code>&lt;Riddle riddle={riddles.riddles[0]} /&gt;</code>. Source: README Steps 10–11 (<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">step-11-reusable/app.js</a>), Code Lab Activity 3. <em>Check:</em> one real card shows.</li>
+        <li><b>One card with props (15 min).</b> Write <code>const Riddle = (props) =&gt; {…}</code>; replace the placeholder texts with <code>{ props.question }</code> etc.; test with one card by passing each field as its own prop: <code>&lt;Riddle id={ riddles.riddles[0].id } question={ riddles.riddles[0].question } answer={ riddles.riddles[0].answer } /&gt;</code>. Source: README Steps 10–11 (<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">step-11-reusable/app.js</a>), Code Lab Activity 3. <em>Check:</em> one real card shows.</li>
         <li><b>All nine with map() and key (15 min).</b> Replace the test card with <code>{riddles.riddles.map(r =&gt; &lt;Riddle key={r.id} riddle={r} /&gt;)}</code>. The data already has an <code>id</code> — use it. Source: README Steps 12–13 (<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">step-13-keys/app.js</a>), Code Lab Activity 4. <em>Check:</em> nine cards, 3×3 grid, no key warning.</li>
-        <li><b>Today's date (5 min).</b> In <code>Footer.jsx</code>: <code>const today = new Date().toDateString();</code> before the <code>return</code>, then render <code>{today}</code>. A Date object cannot go into JSX directly — turn it into text. <em>Check:</em> real date shows, and shows tomorrow's date tomorrow.</li>
+        <li><b>Today's date (5 min).</b> In <code>Footer.jsx</code>: <code>const today = new Date().toDateString();</code> before the <code>return</code>, then render <code>{ today }</code>. A Date object cannot go into JSX directly — turn it into text. <em>Check:</em> real date shows, and shows tomorrow's date tomorrow.</li>
         <li><b>Clean up (5 min).</b> Delete test code and <code>console.log</code>s; add one short comment above each component; save all files; final Console check.</li>
       </ol>
     </div>
@@ -785,9 +785,9 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
         <li><b>用 Live Server 打开（5 分钟）。</b>右键 <code>index.html</code> → Open with Live Server；打开 DevTools 并全程保持 <b>Console</b>；同时打开 <code>mockup.html</code> 看目标效果。<em>原因：</em>Babel 要通过网络加载你的文件 —— <code>file://</code> 打开会被浏览器拦截（白屏）。</li>
         <li><b>给 index.html 加脚本（10 分钟）。</b>顺序：React CDN → ReactDOM CDN → Babel CDN → <code>riddles.js</code>（普通 script）→ 三个 <code>.jsx</code> 组件文件（<code>type="text/babel"</code>）→ <code>app.js</code>（babel，放最后）。三行 CDN 直接照抄 <a class="src" href="../Module 4/code/movie-night/index.html">movie-night/index.html</a>（Code Lab Activity 1）。<em>检查：</em>无红色报错；<code>riddles.riddles.length</code> → 9。</li>
         <li><b>渲染 App（10 分钟）。</b><code>App</code> 返回 <code>&lt;Header /&gt;</code>、空的 <code>&lt;div className="board"&gt;&lt;/div&gt;</code> 和 <code>&lt;Footer /&gt;</code>，三者包在唯一的外层 <code>&lt;div&gt;</code> 里；再用 <code>ReactDOM.createRoot(…).render(&lt;App /&gt;)</code>。出处：README 第 08 步（<a class="src" href="../Module 4/code/checkpoints/step-08-compose/app.js">step-08-compose/app.js</a>）、Code Lab Activity 2。<em>检查：</em>标题栏 + “Generated today: current date” 出现。</li>
-        <li><b>用 props 显示一张卡片（15 分钟）。</b>给 <code>Riddle</code> 加 <code>props</code> 参数；把占位文字换成 <code>{ props.riddle.question }</code> 等；先用一张卡测试：<code>&lt;Riddle riddle={riddles.riddles[0]} /&gt;</code>。出处：README 第 10–11 步（<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">step-11-reusable/app.js</a>）、Code Lab Activity 3。<em>检查：</em>出现一张真实数据的卡片。</li>
+        <li><b>用 props 显示一张卡片（15 分钟）。</b>写 <code>const Riddle = (props) =&gt; {…}</code>;把占位文字换成 <code>{ props.question }</code> 等;先用一张卡测试,每个字段单独传 prop：<code>&lt;Riddle id={ riddles.riddles[0].id } question={ riddles.riddles[0].question } answer={ riddles.riddles[0].answer } /&gt;</code>。出处：README 第 10–11 步（<a class="src" href="../Module 4/code/checkpoints/step-11-reusable/app.js">step-11-reusable/app.js</a>）、Code Lab Activity 3。<em>检查：</em>出现一张真实数据的卡片。</li>
         <li><b>用 map() 和 key 显示九张（15 分钟）。</b>把测试卡换成 <code>{riddles.riddles.map(r =&gt; &lt;Riddle key={r.id} riddle={r} /&gt;)}</code>。数据里自带 <code>id</code> 字段 —— 直接用它当 key。出处：README 第 12–13 步（<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">step-13-keys/app.js</a>）、Code Lab Activity 4。<em>检查：</em>九张卡片、宽屏 3×3 网格、无 key 警告。</li>
-        <li><b>今天的日期（5 分钟）。</b>在 <code>Footer.jsx</code> 里，<code>return</code> 之前写 <code>const today = new Date().toDateString();</code>，然后在 JSX 里渲染 <code>{today}</code>。Date 对象不能直接放进 JSX —— 必须先转成文本。<em>检查：</em>显示真实日期，明天会显示明天的日期。</li>
+        <li><b>今天的日期（5 分钟）。</b>在 <code>Footer.jsx</code> 里，<code>return</code> 之前写 <code>const today = new Date().toDateString();</code>，然后在 JSX 里渲染 <code>{ today }</code>。Date 对象不能直接放进 JSX —— 必须先转成文本。<em>检查：</em>显示真实日期，明天会显示明天的日期。</li>
         <li><b>收尾清理（5 分钟）。</b>删除测试代码和 <code>console.log</code>；每个组件上方加一句简短注释；保存全部文件；最后再检查一次 Console。</li>
       </ol>
     </div>
@@ -903,7 +903,7 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
     <div class="cell en">
       <h3>English</h3>
       <p><b>Phase A — Rebuild the foundations (60–90 min).</b> Work through <a class="src" href="../Module 4/code/README.md">Module 4/code/README.md</a> (bilingual Movie Night tutorial) — at minimum Steps 01, 03, 04, 06, 07, 08, 10, 11, 12, 13, 15. After each step, compare with the matching folder in <a class="src" href="../Module 4/code/checkpoints/step-15-fragments-final/">Module 4/code/checkpoints/</a>. Prefer the original handout? Read <a class="src" href="../Module 4/Movie-Night-React-Tutorial.pdf">Movie-Night-React-Tutorial.pdf</a>; the underlying lecture notes are <a class="src" href="../Module 4/Basic React.pdf">Basic React.pdf</a>.</p>
-      <p><b>Phase B — Redo the Code Lab (45 min).</b> Do Activities 1–4 at <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">rezaghaeli.github.io/csis-3380-react-code-lab</a> (each shows the proper code after you submit). Local reference code lives in <a class="src" href="../Module 4/React Tutorial Codes/1 - First-steps-in-react/">React Tutorial Codes/1 - First-steps-in-react/</a>, <a class="src" href="../Module 4/React Tutorial Codes/2 - Thinking in Components/">…/2 - Thinking in Components/</a> and <a class="src" href="../Module 4/React Tutorial Codes/3 - Introducing Props/">…/3 - Introducing Props/</a>.</p>
+      <p><b>Phase B — Redo the Code Lab (45 min).</b> Do Activities 1–4 at <a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">rezaghaeli.github.io/csis-3380-react-code-lab</a> (each shows the proper code after you submit). Local reference code lives in <a class="src" href="../Module 4/React Tutorial Codes/1 - First-steps-in-react/">React Tutorial Codes/1 - First-steps-in-react/</a>, <a class="src" href="../Module 4/React Tutorial Codes/2 - Thinking in Components/">…/2 - Thinking in Components/</a> and <a class="src" href="../Module 4/React Tutorial Codes/3 - Introducing Props/">…/3 - Introducing Props/</a>.</p>
       <p><b>Phase C — Blind rebuild (60 min).</b> Close all references. From an empty folder, rebuild Movie Night's skeleton from memory: CDN scripts → root div → one component → props → <code>map()</code> + key. Peek at the checkpoints only when truly stuck.</p>
       <p><b>Phase D — Sit the mock (90 min).</b> Timer on, notes closed, use only the exam PDF. Follow the 7 steps of Section 4.</p>
       <p><b>Phase E — Mark yourself &amp; patch.</b> Score with the Section 6 checklist; whatever failed, go straight back to the matching checkpoint folder above.</p>
@@ -920,7 +920,7 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
     <div class="cell zh">
       <h3>中文</h3>
       <p><b>阶段 A —— 重建基础（60–90 分钟）。</b>通读 <a class="src" href="../Module 4/code/README.md">Module 4/code/README.md</a>（中英对照版 Movie Night 教程）—— 至少完成第 01、03、04、06、07、08、10、11、12、13、15 步。每做完一步，与 <a class="src" href="../Module 4/code/checkpoints/step-15-fragments-final/">Module 4/code/checkpoints/</a> 里对应文件夹的代码对照。想看原版讲义就读 <a class="src" href="../Module 4/Movie-Night-React-Tutorial.pdf">Movie-Night-React-Tutorial.pdf</a>；底层课程讲义是 <a class="src" href="../Module 4/Basic React.pdf">Basic React.pdf</a>。</p>
-      <p><b>阶段 B —— 重做 Code Lab（45 分钟）。</b>在 <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">rezaghaeli.github.io/csis-3380-react-code-lab</a> 完成 Activity 1–4（每次提交后会显示正确代码）。本地参考代码在 <a class="src" href="../Module 4/React Tutorial Codes/1 - First-steps-in-react/">React Tutorial Codes/1 - First-steps-in-react/</a>、<a class="src" href="../Module 4/React Tutorial Codes/2 - Thinking in Components/">…/2 - Thinking in Components/</a> 和 <a class="src" href="../Module 4/React Tutorial Codes/3 - Introducing Props/">…/3 - Introducing Props/</a>。</p>
+      <p><b>阶段 B —— 重做 Code Lab（45 分钟）。</b>在 <a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">rezaghaeli.github.io/csis-3380-react-code-lab</a> 完成 Activity 1–4（每次提交后会显示正确代码）。本地参考代码在 <a class="src" href="../Module 4/React Tutorial Codes/1 - First-steps-in-react/">React Tutorial Codes/1 - First-steps-in-react/</a>、<a class="src" href="../Module 4/React Tutorial Codes/2 - Thinking in Components/">…/2 - Thinking in Components/</a> 和 <a class="src" href="../Module 4/React Tutorial Codes/3 - Introducing Props/">…/3 - Introducing Props/</a>。</p>
       <p><b>阶段 C —— 盲做重建（60 分钟）。</b>关掉所有资料。从空文件夹开始，凭记忆重搭 Movie Night 骨架：CDN 脚本 → root div → 一个组件 → props → <code>map()</code> + key。实在卡住才偷看 checkpoint。</p>
       <p><b>阶段 D —— 限时模拟（90 分钟）。</b>开计时器、合上资料，只允许看试卷 PDF。按第 4 节的七步执行。</p>
       <p><b>阶段 E —— 自评与补漏。</b>用第 6 节清单打分；哪项不过关，就直接回到上面对应的 checkpoint 文件夹重学。</p>
@@ -954,7 +954,7 @@ root.render(&lt;App movies={ movies } /&gt;);</code></pre>
 &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Footer.jsx"</span>&gt;&lt;/script&gt;
 &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./app.js"</span>&gt;&lt;/script&gt;                 <span class="c">// last — uses all above</span></pre>
       <p><b>② Mount the app</b> — from README Step 02/06 (<a class="src" href="../Module 4/code/checkpoints/step-06-first-component/app.js">checkpoints/step-06-first-component/app.js</a>):</p>
-      <pre>const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+      <pre>const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</pre>
       <p><b>③ One child, one outer element</b> — from README Step 08 (<a class="src" href="../Module 4/code/checkpoints/step-08-compose/app.js">step-08-compose/app.js</a>):</p>
       <pre>const App = () =&gt; {
@@ -966,35 +966,40 @@ root.render(&lt;App /&gt;);</pre>
     &lt;/div&gt;
   );
 };</pre>
-      <p><b>④ Props</b> — parent passes an object, child reads its fields (README Steps 10–11; the exam's “fruit” example uses the same shape):</p>
-      <pre><span class="c">// components/Riddle.jsx</span>
-function Riddle(props) {
+      <p><b>④ Props</b> — pass each field as its own prop, child reads <code>{ props.question }</code> (Professor's Proper code; README Steps 10–11):</p>
+      <pre><span class="c">// components/Riddle.jsx — Professor style: one prop per field.</span>
+const Riddle = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle {props.riddle.id}&lt;/span&gt;
-      &lt;p className=<span class="s">"question"</span>&gt;{props.riddle.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.riddle.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle { props.id }&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}
+};
 
-<span class="c">// in App, to test one card:</span>  &lt;Riddle riddle={riddles.riddles[0]} /&gt;</pre>
+<span class="c">// in App, to test one card:</span>  &lt;Riddle id={ riddles.riddles[0].id } question={ riddles.riddles[0].question } answer={ riddles.riddles[0].answer } /&gt;</pre>
       <p><b>⑤ map() + key</b> — README Steps 12–13 (<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">step-13-keys/app.js</a>); the data's own <code>id</code> is the key:</p>
       <pre>&lt;div className=<span class="s">"board"</span>&gt;
-  {riddles.riddles.map((riddle) =&gt; (
-    &lt;Riddle key={riddle.id} riddle={riddle} /&gt;
-  ))}
+  { riddles.riddles.map(riddle =&gt;
+    &lt;Riddle
+      key={ riddle.id }
+      id={ riddle.id }
+      question={ riddle.question }
+      answer={ riddle.answer }
+    /&gt;
+  ) }
 &lt;/div&gt;</pre>
       <p><b>⑥ Today's date</b> — a Date cannot enter JSX directly; convert it to text first (MDN <em>Date.prototype.toDateString</em>):</p>
       <pre><span class="c">// components/Footer.jsx</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toDateString();   <span class="c">// "Wed Oct 28 2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+      &lt;p&gt;Generated today: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</pre>
+};</pre>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
@@ -1009,38 +1014,43 @@ function Footer() {
 &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./components/Footer.jsx"</span>&gt;&lt;/script&gt;
 &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./app.js"</span>&gt;&lt;/script&gt;                 <span class="c">// 最后 —— 它用到上面所有文件</span></pre>
       <p><b>② 挂载应用</b> —— 出自 README 第 02/06 步（<a class="src" href="../Module 4/code/checkpoints/step-06-first-component/app.js">checkpoints/step-06-first-component/app.js</a>）：</p>
-      <pre>const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+      <pre>const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</pre>
       <p><b>③ 唯一外层元素</b> —— 出自 README 第 08 步（<a class="src" href="../Module 4/code/checkpoints/step-08-compose/app.js">step-08-compose/app.js</a>）：组件必须返回一个外层元素。</p>
-      <p><b>④ props</b> —— 父组件传整个对象，子组件读取它的字段（README 第 10–11 步；试卷里的“水果”示例是同样的结构）：</p>
-      <pre><span class="c">// components/Riddle.jsx</span>
-function Riddle(props) {
+      <p><b>④ props</b> —— 每个字段单独作为一个 prop 传入,子组件读取 <code>{ props.question }</code>(Professor 的 Proper code 风格；README 第 10–11 步)：</p>
+      <pre><span class="c">// components/Riddle.jsx —— Professor 风格:每个字段一个 prop。</span>
+const Riddle = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle {props.riddle.id}&lt;/span&gt;
-      &lt;p className=<span class="s">"question"</span>&gt;{props.riddle.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.riddle.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Riddle { props.id }&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}
+};
 
-<span class="c">// 在 App 里先测一张卡：</span>  &lt;Riddle riddle={riddles.riddles[0]} /&gt;</pre>
+<span class="c">// 在 App 里先测一张卡：</span>  &lt;Riddle id={ riddles.riddles[0].id } question={ riddles.riddles[0].question } answer={ riddles.riddles[0].answer } /&gt;</pre>
       <p><b>⑤ map() + key</b> —— README 第 12–13 步（<a class="src" href="../Module 4/code/checkpoints/step-13-keys/app.js">step-13-keys/app.js</a>）；key 直接用数据自带的 <code>id</code>：</p>
       <pre>&lt;div className=<span class="s">"board"</span>&gt;
-  {riddles.riddles.map((riddle) =&gt; (
-    &lt;Riddle key={riddle.id} riddle={riddle} /&gt;
-  ))}
+  { riddles.riddles.map(riddle =&gt;
+    &lt;Riddle
+      key={ riddle.id }
+      id={ riddle.id }
+      question={ riddle.question }
+      answer={ riddle.answer }
+    /&gt;
+  ) }
 &lt;/div&gt;</pre>
       <p><b>⑥ 今天的日期</b> —— Date 对象不能直接放进 JSX，必须先转成文本（MDN <em>Date.prototype.toDateString</em>；也可用 <code>toLocaleDateString()</code> 得到 "10/28/2026" 风格）：</p>
       <pre><span class="c">// components/Footer.jsx</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toDateString();   <span class="c">// "Wed Oct 28 2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+      &lt;p&gt;Generated today: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</pre>
+};</pre>
       <p><b>记忆口诀：</b>顺序（库→数据→组件→App）、大写（组件名首字母大写）、一层（返回唯一外层元素）、className（不用 class）、key（写在 map 返回的标签上）、文本（对象和日期都要先变成文本再进 JSX）。</p>
     </div>
   </div>
@@ -1218,7 +1228,7 @@ const quizArray = questions.questions;
 </main>
 
 <footer class="page">
-  <p>Source of this guide · 本指南依据：<code>CSIS-3380-Midterm-Mock-Midterm-Exam/Mock-Midterm-Riddle-Board.pdf</code>（exam rules, steps, errors, marking — 试卷原文）、<code>riddle-board-start/</code>（starter files — 起始文件实测）、<code>Module 4/code/README.md</code> 与 <code>Module 4/code/checkpoints/</code>（Movie Night 教程及分步代码）、<code>Module 4/React Tutorial Codes/</code>（React Code Lab 本地参考）、线上 <a class="ext" href="https://rezaghaeli.github.io/csis-3380-react-code-lab/">csis-3380-react-code-lab</a>（Activity 1–4）。</p>
+  <p>Source of this guide · 本指南依据：<code>CSIS-3380-Midterm-Mock-Midterm-Exam/Mock-Midterm-Riddle-Board.pdf</code>（exam rules, steps, errors, marking — 试卷原文）、<code>riddle-board-start/</code>（starter files — 起始文件实测）、<code>Module 4/code/README.md</code> 与 <code>Module 4/code/checkpoints/</code>（Movie Night 教程及分步代码）、<code>Module 4/React Tutorial Codes/</code>（React Code Lab 本地参考）、线上 <a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">csis-3380-react-code-lab</a>（Activity 1–4）。</p>
 </footer>
 
 <div class="fabs">

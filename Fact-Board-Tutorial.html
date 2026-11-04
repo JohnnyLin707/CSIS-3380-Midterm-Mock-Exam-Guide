@@ -124,7 +124,7 @@
         <tr><td>1</td><td><b>Rename the data variable and its inner array</b> — here <code>facts.items</code> instead of <code>riddles.riddles</code></td><td>Exam p.3 “READ THIS CAREFULLY” makes a whole box out of the double name. A trap the examiner designed is the most likely thing to be renamed.</td></tr>
         <tr><td>2</td><td><b>Change the number of cards</b> (9 → 12)</td><td>Exam checklist: “The cards come from a <code>map()</code>, not nine hand-written tags”. A different count is the cheapest way to catch hard-coded cards.</td></tr>
         <tr><td>3</td><td><b>Show a count computed from the data</b> in the header</td><td>Exam “Want more practice?”: “a second line under the header that says how many riddles there are, worked out from the data”; Movie Night Step 12 uses <code>props.initialMovies.length</code>.</td></tr>
-        <tr><td>4</td><td><b>Pass props as separate fields</b> instead of one whole object</td><td>The exam's Step 4 hint passes one object (<code>&lt;Fruit fruit={…} /&gt;</code>), while Movie Night Step 11 passes separate props (<code>title={movie.title}</code>). Both forms are taught; the examiner can switch.</td></tr>
+        <tr><td>4</td><td><b>Pass props as separate fields</b> instead of one whole object</td><td>The exam's Step 4 hint passes one object (<code>&lt;Fruit fruit={…} /&gt;</code>), while Movie Night Step 11 passes separate props (<code>title={ movie.title }</code>). Both forms are taught; the examiner can switch.</td></tr>
         <tr><td>5</td><td><b>Conditional rendering with <code>&amp;&amp;</code></b> (a STAR badge on some cards)</td><td>Movie Night Steps 05 and 14 teach <code>&amp;&amp;</code> badges inside Module 4. The mock says “no state”, but never excludes conditionals — the easiest Module 4 topic to add back.</td></tr>
         <tr><td>6</td><td><b>Date format and wording change</b> — <code>toLocaleDateString()</code> + “Last updated:”</td><td>Exam Step 6 hint offers both <code>toDateString()</code> and <code>toLocaleDateString()</code> and says “pick the one you like”, so format is not fixed.</td></tr>
         <tr><td>7</td><td><b>Filter the data</b> before rendering (bonus)</td><td>Exam “Want more practice?”: “show only the riddles whose answer starts with A”; Movie Night Step 15 already uses <code>.filter(movie =&gt; movie.watched)</code>.</td></tr>
@@ -139,7 +139,7 @@
         <tr><td>1</td><td><b>改数据变量名和内层数组名</b> —— 这里是 <code>facts.items</code>,不是 <code>riddles.riddles</code></td><td>试卷第 3 页专门用 “READ THIS CAREFULLY” 一整个框强调双层同名。出题人精心设计的陷阱，最可能被改名复用。</td></tr>
         <tr><td>2</td><td><b>改卡片数量</b>(9 → 12)</td><td>试卷自查清单：“卡片来自 <code>map()</code>,不是九个手写标签”。改数量是抓“手写死卡片”最省事的办法。</td></tr>
         <tr><td>3</td><td><b>用数据算出数量显示在标题栏</b></td><td>试卷 “Want more practice?”：“在标题栏下加一行说明有多少条谜语，由数据算出”；Movie Night 第 12 步用 <code>props.initialMovies.length</code>。</td></tr>
-        <tr><td>4</td><td><b>props 改成逐个字段传</b>，不再传整个对象</td><td>试卷第 4 步提示传整个对象(<code>&lt;Fruit fruit={…} /&gt;</code>),而 Movie Night 第 11 步是逐个字段(<code>title={movie.title}</code>)。两种写法教材都教过，老师可以切换。</td></tr>
+        <tr><td>4</td><td><b>props 改成逐个字段传</b>，不再传整个对象</td><td>试卷第 4 步提示传整个对象(<code>&lt;Fruit fruit={…} /&gt;</code>),而 Movie Night 第 11 步是逐个字段(<code>title={ movie.title }</code>)。两种写法教材都教过，老师可以切换。</td></tr>
         <tr><td>5</td><td><b>用 <code>&amp;&amp;</code> 做条件渲染</b>(部分卡片显示 STAR 徽章)</td><td>Movie Night 第 05、14 步在 Module 4 内教过 <code>&amp;&amp;</code> 徽章。模拟卷只说 “no state”,从没排除条件渲染 —— 这是同一模块里最容易加回来的考点。</td></tr>
         <tr><td>6</td><td><b>日期格式与文案变化</b> —— <code>toLocaleDateString()</code> + “Last updated:”</td><td>试卷第 6 步提示同时给出 <code>toDateString()</code> 和 <code>toLocaleDateString()</code>,并说 “pick the one you like”,说明格式并不固定。</td></tr>
         <tr><td>7</td><td><b>渲染前先过滤数据</b>(加练)</td><td>试卷 “Want more practice?”：“只显示答案以 A 开头的谜语”；Movie Night 第 15 步已经用过 <code>.filter(movie =&gt; movie.watched)</code>。</td></tr>
@@ -286,7 +286,7 @@ const factArray = facts.items;   <span class="c">// EN: 12 items</span>  <span c
     <div class="cell en">
       <h3>English</h3>
       <ul>
-        <li><code>Header</code> is finished but reads <code>{props.count}</code> — so App must pass <code>count={facts.items.length}</code>. That is variation 3: the count is <b>worked out from the data</b>, never typed in (exam extra practice; Movie Night Step 12).</li>
+        <li><code>Header</code> is finished but reads <code>{ props.count }</code> — so App must pass <code>count={ facts.items.length }</code>. That is variation 3: the count is <b>worked out from the data</b>, never typed in (exam extra practice; Movie Night Step 12).</li>
         <li><code>App</code> still returns <b>one outer <code>&lt;div&gt;</code></b> wrapping Header, an empty <code>&lt;div className="board"&gt;</code> and Footer (exam Step 3 hint).</li>
         <li>React 18: <code>createRoot</code> then <code>render</code> (Movie Night Steps 01–02).</li>
       </ul>
@@ -295,7 +295,7 @@ const factArray = facts.items;   <span class="c">// EN: 12 items</span>  <span c
     <div class="cell zh">
       <h3>中文</h3>
       <ul>
-        <li><code>Header</code> 已完成，但它读取 <code>{props.count}</code> —— 所以 App 必须传 <code>count={facts.items.length}</code>。这就是变体 3：数量<b>由数据算出</b>,绝不手写死(试卷加练题；Movie Night 第 12 步)。</li>
+        <li><code>Header</code> 已完成，但它读取 <code>{ props.count }</code> —— 所以 App 必须传 <code>count={ facts.items.length }</code>。这就是变体 3：数量<b>由数据算出</b>,绝不手写死(试卷加练题；Movie Night 第 12 步)。</li>
         <li><code>App</code> 仍然只返回<b>一个外层 <code>&lt;div&gt;</code></b>,包住 Header、空的 <code>&lt;div className="board"&gt;</code> 和 Footer(试卷第 3 步提示)。</li>
         <li>React 18：<code>createRoot</code> 再 <code>render</code>(Movie Night 第 01–02 步)。</li>
       </ul>
@@ -309,21 +309,21 @@ const factArray = facts.items;   <span class="c">// EN: 12 items</span>  <span c
 
 <span class="c">// EN: App shows the header, an empty board and the footer, wrapped in ONE outer div.</span>
 <span class="z">// 中文:App 显示标题栏、空看板和页脚,包在唯一一个外层 div 里。</span>
-<span class="c">// EN: count={facts.items.length} is computed from the data — variation 3.</span>
-<span class="z">// 中文:count={facts.items.length} 由数据算出 —— 变体 3。</span>
-function App() {
+<span class="c">// EN: count={ facts.items.length } is computed from the data — variation 3.</span>
+<span class="z">// 中文:count={ facts.items.length } 由数据算出 —— 变体 3。</span>
+const App = () =&gt; {
   return (
     &lt;div&gt;
-      &lt;Header count={facts.items.length} /&gt;
+      &lt;Header count={ facts.items.length } /&gt;
       &lt;div className=<span class="s">"board"</span>&gt;&lt;/div&gt;
       &lt;Footer /&gt;
     &lt;/div&gt;
   );
-}
+};
 
 <span class="c">// EN: React 18: create the root, then render &lt;App /&gt; into it.</span>
 <span class="z">// 中文:React 18:先创建 root,再把 &lt;App /&gt; 渲染进去。</span>
-const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</code></pre>
   </div>
 </section>
@@ -336,7 +336,7 @@ root.render(&lt;App /&gt;);</code></pre>
       <h3>English</h3>
       <ul>
         <li>Variation 4: pass <b>four separate props</b> (<code>id</code>, <code>question</code>, <code>answer</code>, <code>starred</code>) instead of one whole object. The child reads <code>props.question</code>, <code>props.answer</code>, … (Movie Night Steps 10–11).</li>
-        <li>Variation 5: <code>{props.starred &amp;&amp; &lt;span className="badge"&gt;STAR&lt;/span&gt;}</code> shows the badge only for starred items. <code>&amp;&amp;</code> is the Module 4 conditional pattern (Steps 05/14): if the left side is false, React renders nothing.</li>
+        <li>Variation 5: <code>{ props.starred &amp;&amp; &lt;span className="badge"&gt;STAR&lt;/span&gt; }</code> shows the badge only for starred items. <code>&amp;&amp;</code> is the Module 4 conditional pattern (Steps 05/14): if the left side is false, React renders nothing.</li>
         <li>Test one card first: store <code>const first = facts.items[0];</code> above the return, then pass its four fields.</li>
       </ul>
       <div class="checkline"><b>Check:</b> one card shows “Fact 1”, a STAR badge, the JSX question and its answer.</div>
@@ -345,7 +345,7 @@ root.render(&lt;App /&gt;);</code></pre>
       <h3>中文</h3>
       <ul>
         <li>变体 4：传<b>四个单独的 prop</b>(<code>id</code>、<code>question</code>、<code>answer</code>、<code>starred</code>),不再传整个对象。子组件读取 <code>props.question</code>、<code>props.answer</code> 等(Movie Night 第 10–11 步)。</li>
-        <li>变体 5：<code>{props.starred &amp;&amp; &lt;span className="badge"&gt;STAR&lt;/span&gt;}</code> 只在带星标的项上显示徽章。<code>&amp;&amp;</code> 是 Module 4 的条件渲染写法(第 05/14 步)：左边为假时 React 什么都不渲染。</li>
+        <li>变体 5：<code>{ props.starred &amp;&amp; &lt;span className="badge"&gt;STAR&lt;/span&gt; }</code> 只在带星标的项上显示徽章。<code>&amp;&amp;</code> 是 Module 4 的条件渲染写法(第 05/14 步)：左边为假时 React 什么都不渲染。</li>
         <li>先测一张卡：在 <code>return</code> 之前写 <code>const first = facts.items[0];</code>,再把四个字段传进去。</li>
       </ul>
       <div class="checkline"><b>检查：</b>出现一张卡片,显示 “Fact 1”、STAR 徽章、JSX 那道题及答案。</div>
@@ -357,16 +357,16 @@ root.render(&lt;App /&gt;);</code></pre>
 <span class="z">// 中文:Fact.jsx:一张知识卡片。App 传入四个单独的 prop。</span>
 <span class="c">// EN: &amp;&amp; shows the STAR badge only when props.starred is true (no if in JSX).</span>
 <span class="z">// 中文:&amp;&amp; 仅在 props.starred 为 true 时显示 STAR 徽章(JSX 里不能用 if)。</span>
-function Fact(props) {
+const Fact = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Fact {props.id}&lt;/span&gt;
-      {props.starred &amp;&amp; &lt;span className=<span class="s">"badge"</span>&gt;STAR&lt;/span&gt;}
-      &lt;p className=<span class="s">"question"</span>&gt;{props.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Fact { props.id }&lt;/span&gt;
+      { props.starred &amp;&amp; &lt;span className=<span class="s">"badge"</span>&gt;STAR&lt;/span&gt; }
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">app.js — 先测一张卡 · test with one card</span><span class="src">与试卷 Step 4 "先测一张卡" 的做法相同</span></div>
@@ -378,9 +378,14 @@ function Fact(props) {
 
   return (
     &lt;div&gt;
-      &lt;Header count={facts.items.length} /&gt;
+      &lt;Header count={ facts.items.length } /&gt;
       &lt;div className=<span class="s">"board"</span>&gt;
-        &lt;Fact id={first.id} question={first.question} answer={first.answer} starred={first.starred} /&gt;
+        &lt;Fact
+          id={ first.id }
+          question={ first.question }
+          answer={ first.answer }
+          starred={ first.starred }
+        /&gt;
       &lt;/div&gt;
       &lt;Footer /&gt;
     &lt;/div&gt;
@@ -396,7 +401,7 @@ function Fact(props) {
       <h3>English</h3>
       <ul>
         <li>Replace the test card with <code>facts.items.map(...)</code>. Because there are <b>12</b> items now, hand-writing cards would be obviously wrong (variation 2).</li>
-        <li>Each <code>&lt;Fact /&gt;</code> gets <code>key={item.id}</code> on the element returned by <code>map()</code> (Movie Night Steps 12–13), plus the four separate props.</li>
+        <li>Each <code>&lt;Fact /&gt;</code> gets <code>key={ item.id }</code> on the element returned by <code>map()</code> (Movie Night Steps 12–13), plus the four separate props.</li>
       </ul>
       <div class="checkline"><b>Check:</b> 12 cards numbered 1–12, STAR badges on exactly 4 of them, no key warning.</div>
     </div>
@@ -404,7 +409,7 @@ function Fact(props) {
       <h3>中文</h3>
       <ul>
         <li>把测试卡换成 <code>facts.items.map(...)</code>。现在有 <b>12</b> 项,手写卡片会一眼被看出来(变体 2)。</li>
-        <li>每个 <code>&lt;Fact /&gt;</code> 都要在 <code>map()</code> 返回的元素上写 <code>key={item.id}</code>(Movie Night 第 12–13 步),再传四个单独的 prop。</li>
+        <li>每个 <code>&lt;Fact /&gt;</code> 都要在 <code>map()</code> 返回的元素上写 <code>key={ item.id }</code>(Movie Night 第 12–13 步),再传四个单独的 prop。</li>
       </ul>
       <div class="checkline"><b>检查：</b>12 张卡片编号 1–12,恰好 4 张带 STAR 徽章,无 key 警告。</div>
     </div>
@@ -416,15 +421,15 @@ function Fact(props) {
 <span class="c">// EN: key goes on the element returned by map(); pass each field as its own prop.</span>
 <span class="z">// 中文:key 写在 map() 返回的元素上;每个字段作为单独的 prop 传入。</span>
       &lt;div className=<span class="s">"board"</span>&gt;
-        {facts.items.map((item) =&gt; (
+        { facts.items.map(item =&gt;
           &lt;Fact
-            key={item.id}
-            id={item.id}
-            question={item.question}
-            answer={item.answer}
-            starred={item.starred}
+            key={ item.id }
+            id={ item.id }
+            question={ item.question }
+            answer={ item.answer }
+            starred={ item.starred }
           /&gt;
-        ))}
+        ) }
       &lt;/div&gt;</code></pre>
   </div>
 </section>
@@ -456,14 +461,14 @@ function Fact(props) {
 <span class="z">// 中文:Footer.jsx:底部栏。用本地格式显示今天的真实日期。</span>
 <span class="c">// EN: Ordinary JavaScript goes before the return; a Date must become text for JSX.</span>
 <span class="z">// 中文:普通 JavaScript 写在 return 之前;Date 必须转成文本才能进 JSX。</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toLocaleDateString();   <span class="c">// EN: e.g. "10/28/2026"</span>  <span class="z">// 中文:例如 "10/28/2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Last updated: {today}&lt;/p&gt;
+      &lt;p&gt;Last updated: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 </section>
 
@@ -499,11 +504,13 @@ function Footer() {
     <div class="cell en">
       <h3>English</h3>
       <p>Compare your files with these versions. <code>index.html</code> is the one in Step 2; <code>facts.js</code> and the two CSS files are given. Every code block here has <b>English and Chinese comments together</b>.</p>
+      <p><b>Style:</b> arrow-function components, spaces inside <code>{ }</code> and <code>key={ … }</code>, one prop per data field — the Professor's Proper code style. The given <code>Header.jsx</code> keeps its starter-file declaration because the starter says not to change it.</p>
       <p>Most problems are a name typed differently in two places, or scripts in the wrong order. If the count line or a STAR badge is missing, check that App passes <code>count</code> and <code>starred</code>.</p>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
       <p>把你的文件与下面的版本对照。<code>index.html</code> 见第 2 步；<code>facts.js</code> 和两个 CSS 文件是给定的。本页所有代码块都带<b>中英文双语注释</b>。</p>
+      <p><b>风格：</b>组件用箭头函数、<code>{ }</code> 与 <code>key={ … }</code> 内留空格、每个数据字段单独传 prop —— 即 Professor 的 Proper code 风格。起始文件给定的 <code>Header.jsx</code> 保持原来的函数声明不变,因为文件里明确要求不要改它。</p>
       <p>大多数问题是“同一个名字在两处写法不同”或“脚本顺序不对”。如果数量行或 STAR 徽章没出现，检查 App 有没有传 <code>count</code> 和 <code>starred</code>。</p>
     </div>
   </div>
@@ -517,31 +524,31 @@ function Footer() {
 <span class="z">// 中文:App 显示标题栏(数量由数据算出)、12 张卡片和页脚。</span>
 <span class="c">// EN: ONE outer div — a component must return one element.</span>
 <span class="z">// 中文:唯一的外层 div —— 组件只能返回一个元素。</span>
-function App() {
+const App = () =&gt; {
   return (
     &lt;div&gt;
-      &lt;Header count={facts.items.length} /&gt;
+      &lt;Header count={ facts.items.length } /&gt;
       &lt;div className=<span class="s">"board"</span>&gt;
         <span class="c">{/* EN: one &lt;Fact /&gt; per data item, with a stable key and four props. */}</span>
         <span class="z">{/* 中文:每个数据项一个 &lt;Fact /&gt;,带稳定 key 和四个 prop。 */}</span>
-        {facts.items.map((item) =&gt; (
+        { facts.items.map(item =&gt;
           &lt;Fact
-            key={item.id}
-            id={item.id}
-            question={item.question}
-            answer={item.answer}
-            starred={item.starred}
+            key={ item.id }
+            id={ item.id }
+            question={ item.question }
+            answer={ item.answer }
+            starred={ item.starred }
           /&gt;
-        ))}
+        ) }
       &lt;/div&gt;
       &lt;Footer /&gt;
     &lt;/div&gt;
   );
-}
+};
 
 <span class="c">// EN: Render &lt;App /&gt; into the &lt;div id="root"&gt; in index.html.</span>
 <span class="z">// 中文:把 &lt;App /&gt; 渲染进 index.html 里的 &lt;div id="root"&gt;。</span>
-const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</code></pre>
   </div>
 
@@ -549,13 +556,13 @@ root.render(&lt;App /&gt;);</code></pre>
     <div class="cc-head"><span class="file">components/Header.jsx — 已给出 · given, do not change</span><span class="src">起始文件原样 · 注意它读取 props.count</span></div>
     <pre><code><span class="c">// EN: Header.jsx: the blue bar. Already finished — do not change it.</span>
 <span class="z">// 中文:Header.jsx:蓝色标题栏。已完成 —— 不用改。</span>
-<span class="c">// EN: It reads props.count, so App must pass count={facts.items.length}.</span>
-<span class="z">// 中文:它读取 props.count,所以 App 必须传 count={facts.items.length}。</span>
+<span class="c">// EN: It reads props.count, so App must pass count={ facts.items.length }.</span>
+<span class="z">// 中文:它读取 props.count,所以 App 必须传 count={ facts.items.length }。</span>
 function Header(props) {
   return (
     &lt;header&gt;
       &lt;h1&gt;Fact Board&lt;/h1&gt;
-      &lt;p&gt;{props.count} facts. Can you guess them before you read the answer?&lt;/p&gt;
+      &lt;p&gt;{ props.count } facts. Can you guess them before you read the answer?&lt;/p&gt;
     &lt;/header&gt;
   );
 }</code></pre>
@@ -567,16 +574,16 @@ function Header(props) {
 <span class="z">// 中文:Fact.jsx:一张知识卡片。App 传入四个单独的 prop。</span>
 <span class="c">// EN: &amp;&amp; shows the STAR badge only when props.starred is true.</span>
 <span class="z">// 中文:&amp;&amp; 仅在 props.starred 为 true 时显示 STAR 徽章。</span>
-function Fact(props) {
+const Fact = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Fact {props.id}&lt;/span&gt;
-      {props.starred &amp;&amp; &lt;span className=<span class="s">"badge"</span>&gt;STAR&lt;/span&gt;}
-      &lt;p className=<span class="s">"question"</span>&gt;{props.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Fact { props.id }&lt;/span&gt;
+      { props.starred &amp;&amp; &lt;span className=<span class="s">"badge"</span>&gt;STAR&lt;/span&gt; }
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 
   <div class="codecard">
@@ -585,14 +592,14 @@ function Fact(props) {
 <span class="z">// 中文:Footer.jsx:底部栏。用本地格式显示今天的真实日期。</span>
 <span class="c">// EN: A Date object must become text before it can go inside { } in JSX.</span>
 <span class="z">// 中文:Date 对象必须先转成文本,才能放进 JSX 的 { } 里。</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toLocaleDateString();   <span class="c">// EN: e.g. "10/28/2026"</span>  <span class="z">// 中文:例如 "10/28/2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Last updated: {today}&lt;/p&gt;
+      &lt;p&gt;Last updated: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 </section>
 
@@ -617,15 +624,15 @@ function Footer() {
 <span class="z">// 中文:加练 —— 先 filter() 再 map()。key 和四个 prop 写法不变。</span>
 <span class="c">// EN: Only the 4 starred items will render; the header count still uses the full array.</span>
 <span class="z">// 中文:只会渲染 4 张带星标的卡片;标题栏数量仍用完整数组计算。</span>
-        {facts.items.filter((item) =&gt; item.starred).map((item) =&gt; (
+        { facts.items.filter(item =&gt; item.starred).map(item =&gt;
           &lt;Fact
-            key={item.id}
-            id={item.id}
-            question={item.question}
-            answer={item.answer}
-            starred={item.starred}
+            key={ item.id }
+            id={ item.id }
+            question={ item.question }
+            answer={ item.answer }
+            starred={ item.starred }
           /&gt;
-        ))}</code></pre>
+        ) }</code></pre>
   </div>
 </section>
 

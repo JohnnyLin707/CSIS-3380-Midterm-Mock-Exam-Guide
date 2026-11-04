@@ -351,7 +351,7 @@ const questions = {
 <span class="z">// 中文:App 目前显示整个页面:标题栏、空的看板、页脚。</span>
 <span class="c">// EN: One component returns ONE outer element, so the three parts are wrapped in a &lt;div&gt;.</span>
 <span class="z">// 中文:一个组件只返回一个外层元素,所以三部分包在同一个 &lt;div&gt; 里。</span>
-function App() {
+const App = () =&gt; {
   return (
     &lt;div&gt;
       &lt;Header /&gt;
@@ -359,11 +359,11 @@ function App() {
       &lt;Footer /&gt;
     &lt;/div&gt;
   );
-}
+};
 
 <span class="c">// EN: React 18: create the root, then render &lt;App /&gt; into it.</span>
 <span class="z">// 中文:React 18:先创建 root,再把 &lt;App /&gt; 渲染进去。</span>
-const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</code></pre>
   </div>
 </section>
@@ -376,8 +376,8 @@ root.render(&lt;App /&gt;);</code></pre>
       <h3>English</h3>
       <ul>
         <li>props are how data gets into a component: the parent writes them like HTML attributes, the child receives one object named <code>props</code> (Movie Night, Step 10).</li>
-        <li>Replace the placeholder texts with <code>{ }</code> expressions reading from <code>props.card</code>: <code>Question {props.card.id}</code>, <code>{props.card.question}</code>, <code>{props.card.answer}</code>. Anything between <code>{</code> and <code>}</code> is evaluated as JavaScript (Step 04).</li>
-        <li>Test one card in App: <code>&lt;QuizCard card={questions.questions[0]} /&gt;</code> — pass the whole object as one prop, exactly like <code>Movie</code> in Movie Night.</li>
+        <li>Replace the placeholder texts with <code>{ }</code> expressions, one prop per field: <code>Question { props.id }</code>, <code>{ props.question }</code>, <code>{ props.answer }</code>. Anything between <code>{</code> and <code>}</code> is evaluated as JavaScript (Step 04).</li>
+        <li>Test one card in App: pass each field of <code>questions.questions[0]</code> as its own prop — <code>&lt;QuizCard id={ questions.questions[0].id } question={ questions.questions[0].question } answer={ questions.questions[0].answer } /&gt;</code> — exactly like <code>&lt;Movie title={ movies[0].title } … /&gt;</code> in the Professor's code.</li>
       </ul>
       <div class="checkline"><b>Check:</b> one card shows “Question 1”, the <code>createElement()</code> question and its answer.</div>
     </div>
@@ -385,8 +385,8 @@ root.render(&lt;App /&gt;);</code></pre>
       <h3>中文</h3>
       <ul>
         <li>props 是数据进入组件的途径：父组件像写 HTML 属性一样传入，子组件把它们作为一个对象 <code>props</code> 接收(Movie Night,第 10 步)。</li>
-        <li>把占位文字换成从 <code>props.card</code> 取值的 <code>{ }</code> 表达式：<code>Question {props.card.id}</code>、<code>{props.card.question}</code>、<code>{props.card.answer}</code>。花括号之间的任何内容都会作为 JavaScript 求值(第 04 步)。</li>
-        <li>在 App 里先测一张卡：<code>&lt;QuizCard card={questions.questions[0]} /&gt;</code> —— 把整个对象作为一个 prop 传入，与 Movie Night 的 <code>Movie</code> 组件完全一样。</li>
+        <li>把占位文字换成 <code>{ }</code> 表达式,每个字段对应一个 prop：<code>Question { props.id }</code>、<code>{ props.question }</code>、<code>{ props.answer }</code>。花括号之间的任何内容都会作为 JavaScript 求值(第 04 步)。</li>
+        <li>在 App 里先测一张卡：把 <code>questions.questions[0]</code> 的每个字段单独作为 prop 传入 —— <code>&lt;QuizCard id={ questions.questions[0].id } question={ questions.questions[0].question } answer={ questions.questions[0].answer } /&gt;</code> —— 与 Professor 的 <code>&lt;Movie title={ movies[0].title } … /&gt;</code> 写法一致。</li>
       </ul>
       <div class="checkline"><b>检查：</b>出现一张卡片,显示 “Question 1”、<code>createElement()</code> 那道题及其答案。</div>
     </div>
@@ -395,24 +395,28 @@ root.render(&lt;App /&gt;);</code></pre>
     <div class="cc-head"><span class="file">components/QuizCard.jsx — 完成 · final</span><span class="src">props:Movie Night Steps 10–11 · { } 表达式:Step 04</span></div>
     <pre><code><span class="c">// EN: QuizCard.jsx: ONE question card. It shows the question it is given, via props.</span>
 <span class="z">// 中文:QuizCard.jsx:一张题目卡片。通过 props 显示传给它的那道题。</span>
-<span class="c">// EN: The parent passes the whole question object as one prop named "card".</span>
-<span class="z">// 中文:父组件把整道题对象作为一个名为 "card" 的 prop 传进来。</span>
-function QuizCard(props) {
+<span class="c">// EN: App passes each field as its own prop: id, question, answer.</span>
+<span class="z">// 中文:App 把每个字段单独作为 prop 传入:id、question、answer。</span>
+const QuizCard = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Question {props.card.id}&lt;/span&gt;
-      &lt;p className=<span class="s">"question"</span>&gt;{props.card.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.card.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Question { props.id }&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">app.js — 先测一张卡 · test with one card (只改 board 那两行)</span><span class="src">与试卷 Step 4 用 riddles.riddles[0] 测一张卡的做法相同</span></div>
     <pre><code><span class="c">// EN: TEMPORARY test card — replace it with map() in Step 5.</span>
 <span class="z">// 中文:临时测试卡 —— 第 5 步会用 map() 把它替换掉。</span>
       &lt;div className=<span class="s">"board"</span>&gt;
-        &lt;QuizCard card={questions.questions[<span class="k">0</span>]} /&gt;
+        &lt;QuizCard
+          id={ questions.questions[<span class="k">0</span>].id }
+          question={ questions.questions[<span class="k">0</span>].question }
+          answer={ questions.questions[<span class="k">0</span>].answer }
+        /&gt;
       &lt;/div&gt;</code></pre>
   </div>
 </section>
@@ -445,9 +449,14 @@ function QuizCard(props) {
 <span class="c">// EN: key belongs on the element returned by map(); use the stable id from the data.</span>
 <span class="z">// 中文:key 要写在 map() 返回的元素上,并使用数据里稳定的 id。</span>
       &lt;div className=<span class="s">"board"</span>&gt;
-        {questions.questions.map((card) =&gt; (
-          &lt;QuizCard key={card.id} card={card} /&gt;
-        ))}
+        { questions.questions.map(card =&gt;
+          &lt;QuizCard
+            key={ card.id }
+            id={ card.id }
+            question={ card.question }
+            answer={ card.answer }
+          /&gt;
+        ) }
       &lt;/div&gt;</code></pre>
   </div>
 </section>
@@ -479,14 +488,14 @@ function QuizCard(props) {
 <span class="z">// 中文:Footer.jsx:底部栏。显示今天的真实日期,不是手写死的文字。</span>
 <span class="c">// EN: Ordinary JavaScript can go above the return; a Date must become text for JSX.</span>
 <span class="z">// 中文:return 之前可以写普通 JavaScript;Date 必须先转成文本才能进 JSX。</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toDateString();   <span class="c">// EN: e.g. "Wed Oct 28 2026"</span>  <span class="z">// 中文:例如 "Wed Oct 28 2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+      &lt;p&gt;Generated today: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 </section>
 
@@ -522,11 +531,13 @@ function Footer() {
     <div class="cell en">
       <h3>English</h3>
       <p>Compare your files with these finished versions. <code>index.html</code> is the one in Step 2 (unchanged since); <code>questions.js</code> and the two CSS files are given and must not be changed. Every code block on this page has <b>English and Chinese comments</b> so you can read it in either language.</p>
+      <p><b>Style:</b> arrow-function components, spaces inside <code>{ }</code> and <code>key={ … }</code>, one prop per data field — the Professor's Proper code style. The given <code>Header.jsx</code> keeps its starter-file declaration because the starter says not to change it.</p>
       <p>Most problems are a name typed differently in two places, or scripts in the wrong order (exam paper, Section 6). If a card is missing, compare line by line.</p>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
       <p>把你的文件与下面的完成版对照。<code>index.html</code> 见第 2 步(此后不再改动)；<code>questions.js</code> 和两个 CSS 文件是给定的，不许改动。本页所有代码块都带<b>中英文双语注释</b>,用哪种语言都能看懂。</p>
+      <p><b>风格：</b>组件用箭头函数、<code>{ }</code> 与 <code>key={ … }</code> 内留空格、每个数据字段单独传 prop —— 即 Professor 的 Proper code 风格。起始文件给定的 <code>Header.jsx</code> 保持原来的函数声明不变,因为文件里明确要求不要改它。</p>
       <p>大多数问题是“同一个名字在两处写法不同”或“脚本顺序不对”(试卷第 6 节)。如果卡片缺失，请逐行对照。</p>
     </div>
   </div>
@@ -540,25 +551,30 @@ function Footer() {
 <span class="z">// 中文:App 显示整个页面:标题栏、九张题目卡片、页脚。</span>
 <span class="c">// EN: One outer &lt;div&gt; — a component must return one element.</span>
 <span class="z">// 中文:唯一的外层 &lt;div&gt; —— 组件只能返回一个元素。</span>
-function App() {
+const App = () =&gt; {
   return (
     &lt;div&gt;
       &lt;Header /&gt;
       &lt;div className=<span class="s">"board"</span>&gt;
         <span class="c">{/* EN: one &lt;QuizCard /&gt; per question, with a stable key. */}</span>
         <span class="z">{/* 中文:每道题一个 &lt;QuizCard /&gt;,并带稳定的 key。 */}</span>
-        {questions.questions.map((card) =&gt; (
-          &lt;QuizCard key={card.id} card={card} /&gt;
-        ))}
+        { questions.questions.map(card =&gt;
+          &lt;QuizCard
+            key={ card.id }
+            id={ card.id }
+            question={ card.question }
+            answer={ card.answer }
+          /&gt;
+        ) }
       &lt;/div&gt;
       &lt;Footer /&gt;
     &lt;/div&gt;
   );
-}
+};
 
 <span class="c">// EN: Render &lt;App /&gt; into the &lt;div id="root"&gt; in index.html.</span>
 <span class="z">// 中文:把 &lt;App /&gt; 渲染进 index.html 里的 &lt;div id="root"&gt;。</span>
-const root = ReactDOM.createRoot(document.getElementById(<span class="s">"root"</span>));
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
 root.render(&lt;App /&gt;);</code></pre>
   </div>
 
@@ -582,17 +598,17 @@ function Header() {
     <div class="cc-head"><span class="file">components/QuizCard.jsx — 最终版 · final</span><span class="src">= Step 4 · props 从父组件传入,只读</span></div>
     <pre><code><span class="c">// EN: QuizCard.jsx: ONE question card, driven by props.</span>
 <span class="z">// 中文:QuizCard.jsx:一张由 props 驱动的题目卡片。</span>
-<span class="c">// EN: &lt;QuizCard card={...} /&gt; passes the whole object; read its fields here.</span>
-<span class="z">// 中文:&lt;QuizCard card={...} /&gt; 传入整个对象;在这里读取它的字段。</span>
-function QuizCard(props) {
+<span class="c">// EN: &lt;QuizCard id={ ... } question={ ... } /&gt; — one prop per field.</span>
+<span class="z">// 中文:&lt;QuizCard id={ ... } question={ ... } /&gt; —— 每个字段一个 prop。</span>
+const QuizCard = (props) =&gt; {
   return (
     &lt;div className=<span class="s">"card"</span>&gt;
-      &lt;span className=<span class="s">"card-number"</span>&gt;Question {props.card.id}&lt;/span&gt;
-      &lt;p className=<span class="s">"question"</span>&gt;{props.card.question}&lt;/p&gt;
-      &lt;p className=<span class="s">"answer"</span>&gt;{props.card.answer}&lt;/p&gt;
+      &lt;span className=<span class="s">"card-number"</span>&gt;Question { props.id }&lt;/span&gt;
+      &lt;p className=<span class="s">"question"</span>&gt;{ props.question }&lt;/p&gt;
+      &lt;p className=<span class="s">"answer"</span>&gt;{ props.answer }&lt;/p&gt;
     &lt;/div&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 
   <div class="codecard">
@@ -601,14 +617,14 @@ function QuizCard(props) {
 <span class="z">// 中文:Footer.jsx:底部栏。显示今天的真实日期。</span>
 <span class="c">// EN: Ordinary JavaScript goes before the return; a Date must become text for JSX.</span>
 <span class="z">// 中文:普通 JavaScript 写在 return 之前;Date 必须转成文本才能进 JSX。</span>
-function Footer() {
+const Footer = () =&gt; {
   const today = new Date().toDateString();   <span class="c">// EN: e.g. "Wed Oct 28 2026"</span>  <span class="z">// 中文:例如 "Wed Oct 28 2026"</span>
   return (
     &lt;footer&gt;
-      &lt;p&gt;Generated today: {today}&lt;/p&gt;
+      &lt;p&gt;Generated today: { today }&lt;/p&gt;
     &lt;/footer&gt;
   );
-}</code></pre>
+};</code></pre>
   </div>
 </section>
 
