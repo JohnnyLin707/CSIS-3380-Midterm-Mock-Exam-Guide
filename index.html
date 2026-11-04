@@ -106,6 +106,17 @@
   @keyframes pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,209,102,.25)}50%{box-shadow:0 0 0 8px rgba(255,209,102,.08)}}
   @media print{.fabs{display:none}}
 
+  /* ---------- priority: Code Lab activities ---------- */
+  .priority{border:2px solid #e2b84d;border-radius:18px;padding:18px 18px 10px;background:#fffdf5;box-shadow:0 6px 22px rgba(226,184,77,.18)}
+  .priority > .sec-head h2{color:#7c2d12}
+  .startbadge{background:#ffd166;color:#3b2a00;font-weight:800;font-size:12px;padding:3px 10px;border-radius:99px;border:1px solid #e2b84d}
+  .act-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 8px;flex-wrap:wrap}
+  .act-head .no{background:#0f766e;color:#fff;border-radius:8px;padding:2px 10px;font-size:13px;font-weight:700}
+  .act-head .tag{background:#eef2f7;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 10px;font-size:12px}
+  .act-head h3{margin:0;font-size:17px}
+  .skills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .skills span{background:#e6f4f2;color:var(--accent);border:1px solid #bfe3de;border-radius:99px;padding:2px 10px;font-size:12px;font-family:"SF Mono",Menlo,Consolas,monospace}
+
   /* ---------- print ---------- */
   @media print{
     header.top{position:static;background:#101826}
@@ -121,6 +132,7 @@
 <header class="top">
   <div class="brand">CSIS 3380 · Mock Midterm — Riddle Board <small>模拟期中考 · 复习指南 / Study Guide</small></div>
   <nav class="chips">
+    <a href="#activities">★ Activities 四大活动</a>
     <a href="#s1">1 Exam 考试概览</a>
     <a href="#s2">2 Sources 教材出处</a>
     <a href="#s3">3 Starter 起始文件</a>
@@ -152,6 +164,394 @@
 </div>
 
 <main>
+
+<!-- ============ PRIORITY: CODE LAB ACTIVITIES 1–4 ============ -->
+<section id="activities" class="priority">
+  <div class="sec-head"><span class="no">★</span><span class="startbadge">START HERE · 从这里开始</span><h2>The activities · Module 4 · React Code Lab 1–4</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p><b>Priority reading.</b> These are the four official Module 4 activities of the React Code Lab — the exact activities the mock exam paper points to (Section 9). All content below is taken from the local bilingual copy in this folder: <a class="src" href="csis-3380-react-code-lab-zh-CN/js/activities.js">csis-3380-react-code-lab-zh-CN/js/activities.js</a> (English activity data), <a class="src" href="csis-3380-react-code-lab-zh-CN/js/lang-zh.js">js/lang-zh.js</a> (official Simplified Chinese), and <a class="src" href="csis-3380-react-code-lab-zh-CN/guide/React-Code-Lab-Student-Guide.pdf">guide/React-Code-Lab-Student-Guide.pdf</a>. Lab online: <a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">johnnylin707.github.io/csis-3380-react-code-lab-zh-CN</a>.</p>
+      <table>
+        <tr><th>#</th><th>Module · you write</th><th>Activity</th><th>Topic</th><th>Status</th></tr>
+        <tr><td>1</td><td>Module 4 · HTML</td><td>Add React to the Movie Night Page</td><td>Adding React to a page</td><td>Open</td></tr>
+        <tr><td>2</td><td>Module 4 · JSX</td><td>Write the Header in JSX</td><td>JSX, expressions, conditionals</td><td>Open</td></tr>
+        <tr><td>3</td><td>Module 4 · JSX</td><td>Build the Movie Component</td><td>Components and props</td><td>Open</td></tr>
+        <tr><td>4</td><td>Module 4 · JSX</td><td>Render the Whole Watchlist with map()</td><td>Lists with map() and keys</td><td>Open</td></tr>
+      </table>
+      <ul>
+        <li>The lab unlocks in order: submit Activity 1 to unlock 2, and so on. Each Module 4 activity takes about <b>10 min</b> (Student Guide §1).</li>
+        <li><b>Write the code yourself</b>; look at the proper code only after you submit (§2). Each report explains every mistake, why it happened, and the correct code.</li>
+        <li>The lab's README says code is deliberately <b>not translated</b> so it stays runnable. The code blocks below are the official English code, with one English + one Chinese annotation comment on top of each.</li>
+      </ul>
+      <p>Exam link: the exam paper's Section 9 maps these four activities to CDN scripts / JSX &amp; components / props / <code>map()</code> + <code>key</code> — see Section 2 of this guide.</p>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p><b>优先阅读。</b>以下是 React Code Lab 四个官方 Module 4 活动 —— 正是模拟试卷第 9 节指向的活动。内容全部取自本文件夹里的中英双语副本：<a class="src" href="csis-3380-react-code-lab-zh-CN/js/activities.js">csis-3380-react-code-lab-zh-CN/js/activities.js</a>(英文活动数据)、<a class="src" href="csis-3380-react-code-lab-zh-CN/js/lang-zh.js">js/lang-zh.js</a>(官方简体中文)、<a class="src" href="csis-3380-react-code-lab-zh-CN/guide/React-Code-Lab-Student-Guide.pdf">guide/React-Code-Lab-Student-Guide.pdf</a>。线上实验室：<a class="ext" href="https://johnnylin707.github.io/csis-3380-react-code-lab-zh-CN/">johnnylin707.github.io/csis-3380-react-code-lab-zh-CN</a>。</p>
+      <table>
+        <tr><th>#</th><th>模块 · 你编写</th><th>活动</th><th>主题</th><th>状态</th></tr>
+        <tr><td>1</td><td>模块 4 · HTML</td><td>为「电影之夜」页面加入 React</td><td>在页面中加入 React</td><td>Open 开放</td></tr>
+        <tr><td>2</td><td>模块 4 · JSX</td><td>用 JSX 编写页头</td><td>JSX、表达式与条件判断</td><td>Open 开放</td></tr>
+        <tr><td>3</td><td>模块 4 · JSX</td><td>构建 Movie 组件</td><td>组件与 props</td><td>Open 开放</td></tr>
+        <tr><td>4</td><td>模块 4 · JSX</td><td>用 map() 渲染整个片单</td><td>用 map() 渲染列表与 key</td><td>Open 开放</td></tr>
+      </table>
+      <ul>
+        <li>活动按顺序解锁：提交活动 1 才解锁 2,依此类推。Module 4 每个活动约 <b>10 分钟</b>(学生指南 §1)。</li>
+        <li><b>自己敲代码</b>;提交后才看标准代码(§2)。每份报告都会解释每处错误、原因和正确代码。</li>
+        <li>实验室 README 明确说明代码<b>故意不翻译</b>,以保证可直接运行。下面的代码块是官方英文代码,每段顶部附一行英文 + 一行中文注释。</li>
+      </ul>
+      <p>与考试的对应：试卷第 9 节把这四个活动分别对应到 CDN 脚本 / JSX 与组件 / props / <code>map()</code>+<code>key</code> —— 见本指南第 2 节。</p>
+    </div>
+  </div>
+
+  <!-- ---------------- Activity 1 ---------------- -->
+  <div class="act-head"><span class="no">1</span><h3>Add React to the Movie Night Page · 为「电影之夜」页面加入 React</h3><span class="tag">Module 4 · HTML · ~10 min</span></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>The Movie Night <code>app.js</code> is written, but <code>index.html</code> loads nothing, so the page is empty. A React page needs four things: an empty element for React to fill, the React library, a translator for JSX (Babel), and your code. Nothing is installed: the libraries come from <b>unpkg</b>, a free CDN, just as in class.</p>
+      <p><b>Steps</b></p>
+      <ol>
+        <li>Replace comment 1 with the <b>root element</b>: <code>&lt;div id="root"&gt;&lt;/div&gt;</code>. It starts empty; React draws the whole app inside it.</li>
+        <li>Replace comment 2 with <b>two script tags, in this order</b>: React (builds components), then ReactDOM (draws them). ReactDOM needs React, so React must come first: <code>&lt;script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"&gt;&lt;/script&gt;</code> and <code>react-dom@18.3.1/umd/react-dom.development.js</code>.</li>
+        <li>Replace comment 3 with <b>Babel</b> (<code>https://unpkg.com/@babel/standalone@7/babel.min.js</code>): browsers cannot read JSX.</li>
+        <li>Replace comment 4 with your <b>app</b>: <code>&lt;script type="text/babel" src="./app.js"&gt;&lt;/script&gt;</code>.</li>
+        <li>Look at the preview: the Movie Night header and four movies appear. If empty, read the red message in the <b>Console</b> strip.</li>
+      </ol>
+      <div class="skills"><span>script order</span><span>the root element</span><span>type="text/babel"</span></div>
+      <table>
+        <tr><th>Check (what the lab grades)</th><th>Why</th><th>The correct code</th></tr>
+        <tr><td>The page has <code>&lt;div id="root"&gt;</code></td><td><code>createRoot(document.getElementById("root"))</code> needs an element with that id.</td><td><code>&lt;div id="root"&gt;&lt;/div&gt;</code></td></tr>
+        <tr><td>React loads before ReactDOM</td><td>ReactDOM looks for the global <code>React</code> when its script runs.</td><td>React tag, then ReactDOM tag</td></tr>
+        <tr><td>Babel standalone is loaded</td><td>Babel translates <code>&lt;h1&gt;…&lt;/h1&gt;</code> into <code>React.createElement(…)</code>.</td><td><code>@babel/standalone@7</code></td></tr>
+        <tr><td><code>app.js</code> has <code>type="text/babel"</code></td><td>Without it the browser runs JSX as plain JS and stops at the first <code>&lt;</code>.</td><td><code>&lt;script type="text/babel" …&gt;</code></td></tr>
+        <tr><td>Scripts come after <code>#root</code></td><td>Scripts run as soon as they load, so <code>#root</code> must already exist.</td><td>root first, scripts last</td></tr>
+        <tr><td>Movie Night renders in the preview</td><td>With all four in place, <code>root.render(&lt;App /&gt;)</code> draws the app.</td><td>preview shows 4 movies</td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>「电影之夜」的 <code>app.js</code> 已经写好，但 <code>index.html</code> 什么都没有加载，所以页面是空的。一个 React 页面需要四样东西：一个供 React 填充的空元素、React 库、JSX 的翻译器(Babel)，以及你自己的代码。这里不需要安装任何东西：库文件来自 <b>unpkg</b>,一个免费的 CDN,和课堂上一样。</p>
+      <p><b>步骤</b></p>
+      <ol>
+        <li>把注释 1 替换为<b>根元素</b>：<code>&lt;div id="root"&gt;&lt;/div&gt;</code>。它一开始是空的；React 会把整个应用画在里面。</li>
+        <li>把注释 2 替换为下面<b>两个 script 标签</b>,顺序不能变：第一个加载 <b>React</b>(负责构建组件)；第二个加载 <b>ReactDOM</b>(负责画到页面)。ReactDOM 依赖 React,所以 React 必须在前面。</li>
+        <li>把注释 3 替换为 <b>Babel</b>(<code>https://unpkg.com/@babel/standalone@7/babel.min.js</code>)：浏览器看不懂 JSX。</li>
+        <li>把注释 4 替换为你的<b>应用代码</b>：<code>&lt;script type="text/babel" src="./app.js"&gt;&lt;/script&gt;</code>。<code>type="text/babel"</code> 会告诉 Babel 在运行前先翻译这个文件。</li>
+        <li>看一下预览：「电影之夜」的标题栏和四部电影会出现。如果页面一直是空的，请阅读预览下方<b>控制台</b>栏里的红色提示。</li>
+      </ol>
+      <div class="skills"><span>script 顺序</span><span>根元素</span><span>type="text/babel"</span></div>
+      <table>
+        <tr><th>检查点(实验室评分项)</th><th>原因</th><th>正确代码</th></tr>
+        <tr><td>页面中有 <code>&lt;div id="root"&gt;</code></td><td><code>createRoot(document.getElementById("root"))</code> 需要一个带该 id 的元素。</td><td><code>&lt;div id="root"&gt;&lt;/div&gt;</code></td></tr>
+        <tr><td>React 在 ReactDOM 之前加载</td><td>ReactDOM 的 script 运行时会去找全局的 <code>React</code>。</td><td>React 标签 → ReactDOM 标签</td></tr>
+        <tr><td>已加载 Babel standalone</td><td>Babel 会在浏览器里把 <code>&lt;h1&gt;…&lt;/h1&gt;</code> 翻译成 <code>React.createElement(…)</code>。</td><td><code>@babel/standalone@7</code></td></tr>
+        <tr><td><code>app.js</code> 使用了 <code>type="text/babel"</code></td><td>没有它，浏览器会把 JSX 当作普通 JavaScript 执行，并在第一个 <code>&lt;</code> 处报错停止。</td><td><code>&lt;script type="text/babel" …&gt;</code></td></tr>
+        <tr><td>script 标签放在 <code>#root</code> 之后</td><td>script 一加载就会执行，所以 <code>#root</code> 必须已经存在。</td><td>先 root,后脚本</td></tr>
+        <tr><td>「电影之夜」在预览中成功渲染</td><td>四样东西都就位后，<code>root.render(&lt;App /&gt;)</code> 就会把应用画出来。</td><td>预览显示 4 部电影</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">Activity 1 — the proper index.html · 官方标准答案</span><span class="src">activities.js: PAGE() template + REACT_TAGS</span></div>
+    <pre><code><span class="c">&lt;!-- EN: Official proper code from csis-3380-react-code-lab-zh-CN/js/activities.js, Activity 1. --&gt;</span>
+<span class="z">&lt;!-- 中文:官方标准代码,来自 csis-3380-react-code-lab-zh-CN/js/activities.js 活动 1。 --&gt;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="s">"en"</span>&gt;
+  &lt;head&gt;
+    &lt;meta charset=<span class="s">"utf-8"</span> /&gt;
+    &lt;title&gt;Movie Night&lt;/title&gt;
+    &lt;link rel=<span class="s">"stylesheet"</span> href=<span class="s">"./app.css"</span> /&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;div id=<span class="s">"root"</span>&gt;&lt;/div&gt;
+
+    &lt;script crossorigin src=<span class="s">"https://unpkg.com/react@18.3.1/umd/react.development.js"</span>&gt;&lt;/script&gt;
+    &lt;script crossorigin src=<span class="s">"https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="s">"https://unpkg.com/@babel/standalone@7/babel.min.js"</span>&gt;&lt;/script&gt;
+    &lt;script type=<span class="s">"text/babel"</span> src=<span class="s">"./app.js"</span>&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </div>
+
+  <!-- ---------------- Activity 2 ---------------- -->
+  <div class="act-head"><span class="no">2</span><h3>Write the Header in JSX · 用 JSX 编写页头</h3><span class="tag">Module 4 · JSX · expressions, conditionals</span></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Build the Movie Night header and footer <b>from data, not typed-in text</b>: if a movie is added, the numbers must update on their own.</p>
+      <ol>
+        <li>In <code>App</code>, render <code>&lt;h1&gt;{ title }&lt;/h1&gt;</code> inside <code>&lt;header&gt;</code> — use the <code>title</code> variable, do not type the text.</li>
+        <li>After the <code>&lt;h1&gt;</code>, render <code>&lt;span className="stats"&gt;Movies: { movies.length }&lt;/span&gt;</code>, but <b>only when</b> <code>showStats</code> is true (use <code>&amp;&amp;</code>).</li>
+        <li>In <code>&lt;footer&gt;</code>, use a <b>ternary</b> (<code>? :</code>): when <code>watchedCount === movies.length</code> show <code>All watched!</code>, otherwise <code>Watched 2 of 4</code> built from <code>watchedCount</code> and <code>movies.length</code>.</li>
+        <li>Remember: JSX uses <code>className</code>, not <code>class</code>.</li>
+      </ol>
+      <div class="skills"><span>{ } expressions</span><span>&amp;&amp;</span><span>? :</span><span>className</span></div>
+      <table>
+        <tr><th>Check</th><th>Why</th><th>The correct code</th></tr>
+        <tr><td>The <code>&lt;h1&gt;</code> shows the <code>title</code> variable</td><td>Curly braces put a JS expression into JSX; changing data changes the page.</td><td><code>&lt;h1&gt;{ title }&lt;/h1&gt;</code></td></tr>
+        <tr><td>Stats badge shows “Movies: 4” from <code>movies.length</code></td><td>Counting the array keeps the badge right when a movie is added.</td><td><code>Movies: { movies.length }</code></td></tr>
+        <tr><td>Badge shown with <code>showStats &amp;&amp;</code></td><td><code>condition &amp;&amp; &lt;element&gt;</code> renders nothing when false.</td><td><code>{ showStats &amp;&amp; &lt;span …&gt;…&lt;/span&gt; }</code></td></tr>
+        <tr><td>Footer says “Watched 2 of 4” using a ternary</td><td><code>condition ? A : B</code> is an expression; <code>if</code> is not.</td><td><code>{ watchedCount === movies.length ? "All watched!" : "Watched " + watchedCount + " of " + movies.length }</code></td></tr>
+        <tr><td>The numbers are not typed in</td><td>Typed numbers go out of date; build them from the array.</td><td><code>"Watched " + watchedCount + " of " + movies.length</code></td></tr>
+        <tr><td>JSX uses <code>className</code>, not <code>class</code></td><td><code>class</code> is a JavaScript reserved word; React warns in the console.</td><td><code>&lt;span className="stats"&gt;</code></td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>请用<b>数据</b>(而不是写死的文字)来构建「电影之夜」的页头和页脚：如果新增一部电影，数字必须自动更新。</p>
+      <ol>
+        <li>在 <code>App</code> 中，于 <code>&lt;header&gt;</code> 内渲染 <code>&lt;h1&gt;{ title }&lt;/h1&gt;</code>：使用 <code>title</code> 变量，不要直接写文字。</li>
+        <li>在 <code>&lt;h1&gt;</code> 之后渲染 <code>&lt;span className="stats"&gt;Movies: { movies.length }&lt;/span&gt;</code>,但<b>仅当</b> <code>showStats</code> 为 true 时才显示(使用 <code>&amp;&amp;</code>)。</li>
+        <li>在 <code>&lt;footer&gt;</code> 中使用<b>三元运算符</b>(<code>? :</code>)：当 <code>watchedCount === movies.length</code> 时显示 <code>All watched!</code>,否则显示由 <code>watchedCount</code> 和 <code>movies.length</code> 拼出的 <code>Watched 2 of 4</code>。</li>
+        <li>请记住：JSX 使用 <code>className</code>,而不是 <code>class</code>。</li>
+      </ol>
+      <div class="skills"><span>{ } 表达式</span><span>&amp;&amp;</span><span>? :</span><span>className</span></div>
+      <table>
+        <tr><th>检查点</th><th>原因</th><th>正确代码</th></tr>
+        <tr><td><code>&lt;h1&gt;</code> 显示的是 <code>title</code> 变量</td><td>花括号把 JavaScript 表达式放进 JSX;数据一变，页面就跟着变。</td><td><code>&lt;h1&gt;{ title }&lt;/h1&gt;</code></td></tr>
+        <tr><td>徽章通过 <code>movies.length</code> 显示「Movies: 4」</td><td>统计数组长度，新增电影时徽章依然正确；直接写 4 就会过时。</td><td><code>Movies: { movies.length }</code></td></tr>
+        <tr><td>徽章使用 <code>showStats &amp;&amp;</code> 控制显示</td><td><code>condition &amp;&amp; &lt;element&gt;</code> 为 false 时 React 什么也不渲染。</td><td><code>{ showStats &amp;&amp; &lt;span …&gt;…&lt;/span&gt; }</code></td></tr>
+        <tr><td>页脚用三元运算符显示「Watched 2 of 4」</td><td><code>condition ? A : B</code> 是表达式，可以放进 <code>{ }</code>;<code>if</code> 语句不行。</td><td><code>{ watchedCount === movies.length ? "All watched!" : … }</code></td></tr>
+        <tr><td>数字不是写死的</td><td>写死的数字不会随数据变化，请始终从数组里计算。</td><td><code>"Watched " + watchedCount + " of " + movies.length</code></td></tr>
+        <tr><td>JSX 使用 <code>className</code>,而不是 <code>class</code></td><td><code>class</code> 是 JavaScript 保留字；React 看到会在控制台给出警告。</td><td><code>&lt;span className="stats"&gt;</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">Activity 2 — the proper app.js · 官方标准答案</span><span class="src">activities.js lines 231–259 · the lab's solution.js</span></div>
+    <pre><code><span class="c">// EN: Official proper code from csis-3380-react-code-lab-zh-CN/js/activities.js, Activity 2.</span>
+<span class="z">// 中文:官方标准代码,来自 csis-3380-react-code-lab-zh-CN/js/activities.js 活动 2。</span>
+const movies = [
+  { id: 1, title: <span class="s">"Spirited Away"</span>, year: 2001, genre: <span class="s">"Animation"</span>, rating: 5, watched: true, staffPick: true },
+  { id: 2, title: <span class="s">"Inception"</span>, year: 2010, genre: <span class="s">"Sci-Fi"</span>, rating: 4, watched: true, staffPick: false },
+  { id: 3, title: <span class="s">"The Grand Budapest Hotel"</span>, year: 2014, genre: <span class="s">"Comedy"</span>, rating: 4, watched: false, staffPick: true },
+  { id: 4, title: <span class="s">"Coco"</span>, year: 2017, genre: <span class="s">"Animation"</span>, rating: 5, watched: false, staffPick: false }
+];
+const title = <span class="s">"Movie Night"</span>;
+const showStats = true;
+const watchedCount = movies.filter(movie =&gt; movie.watched).length;
+
+const App = () =&gt; {
+  return (
+    &lt;div className=<span class="s">"watchlist"</span>&gt;
+      &lt;header&gt;
+        {<span class="c">/* 1. the h1 from title */</span>}
+        &lt;h1&gt;{ title }&lt;/h1&gt;
+
+        {<span class="c">/* 2. the stats badge, only when showStats is true */</span>}
+        { showStats &amp;&amp; &lt;span className=<span class="s">"stats"</span>&gt;Movies: { movies.length }&lt;/span&gt; }
+      &lt;/header&gt;
+
+      &lt;footer&gt;
+        {<span class="c">/* 3. All watched! or Watched 2 of 4 */</span>}
+        { watchedCount === movies.length
+            ? <span class="s">"All watched!"</span>
+            : <span class="s">"Watched "</span> + watchedCount + <span class="s">" of "</span> + movies.length }
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+
+  <!-- ---------------- Activity 3 ---------------- -->
+  <div class="act-head"><span class="no">3</span><h3>Build the Movie Component · 构建 Movie 组件</h3><span class="tag">Module 4 · JSX · components and props</span></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Each movie row looks the same; only the data changes. Make a reusable <code>Movie</code> component and pass each movie's details in as props.</p>
+      <ol>
+        <li>Write <code>Movie</code> taking <code>props</code>, returning <code>&lt;div className="movie"&gt;</code> containing <code>&lt;div className="movie-info"&gt;</code>.</li>
+        <li>Inside it show <code>&lt;span className="movie-title"&gt;{ props.title }&lt;/span&gt;</code> and <code>&lt;span className="movie-meta"&gt;{ props.year } · { props.genre }&lt;/span&gt;</code>.</li>
+        <li>In <code>App</code>, render <code>&lt;Header title="Movie Night" totalMovies={ movies.length } /&gt;</code> (Header is given).</li>
+        <li>Below it render <b>two</b> <code>&lt;Movie /&gt;</code> elements for <code>movies[0]</code> and <code>movies[1]</code>, passing <code>title</code>, <code>year</code>, <code>genre</code>.</li>
+      </ol>
+      <div class="skills"><span>function components</span><span>props</span><span>composing components</span></div>
+      <table>
+        <tr><th>Check</th><th>Why</th><th>The correct code</th></tr>
+        <tr><td>A <code>Movie</code> component is defined and used</td><td>A component is a function returning JSX; its name must start with a capital letter.</td><td><code>const Movie = (props) =&gt; { return ( … ); };</code></td></tr>
+        <tr><td>Header shows “Movie Night” / “Movies: 4” through props</td><td>Props are the attributes on a component; <code>Header</code> reads <code>props.title</code>, <code>props.totalMovies</code>.</td><td><code>&lt;Header title="Movie Night" totalMovies={ movies.length } /&gt;</code></td></tr>
+        <tr><td>Two rows: Spirited Away and Inception</td><td>The same component renders different data — each <code>&lt;Movie /&gt;</code> gets its own props.</td><td><code>&lt;Movie title={ movies[0].title } … /&gt;</code></td></tr>
+        <tr><td>Each row shows “2001 · Animation”</td><td>Several expressions can sit in one element.</td><td><code>{ props.year } · { props.genre }</code></td></tr>
+        <tr><td>Data comes from the array, not typed into JSX</td><td>Pass <code>movies[0].title</code> so the component works for any movie.</td><td><code>title={ movies[0].title }</code></td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>每一行电影的外观都一样，只有数据不同。请创建一个可复用的 <code>Movie</code> 组件，并通过 props 把每部电影的信息传进去。</p>
+      <ol>
+        <li>编写组件 <code>Movie</code>,接收 <code>props</code>,返回一个 <code>&lt;div className="movie"&gt;</code>,其中包含 <code>&lt;div className="movie-info"&gt;</code>。</li>
+        <li>在其中显示 <code>&lt;span className="movie-title"&gt;{ props.title }&lt;/span&gt;</code> 和 <code>&lt;span className="movie-meta"&gt;{ props.year } · { props.genre }&lt;/span&gt;</code>。</li>
+        <li>在 <code>App</code> 中渲染 <code>&lt;Header title="Movie Night" totalMovies={ movies.length } /&gt;</code>(Header 已给出)。</li>
+        <li>在它下面为 <code>movies[0]</code> 和 <code>movies[1]</code> 渲染<b>两个</b> <code>&lt;Movie /&gt;</code> 元素，并把数组中的 <code>title</code>、<code>year</code>、<code>genre</code> 传进去。</li>
+      </ol>
+      <div class="skills"><span>函数组件</span><span>props</span><span>组合组件</span></div>
+      <table>
+        <tr><th>检查点</th><th>原因</th><th>正确代码</th></tr>
+        <tr><td>定义并使用了 <code>Movie</code> 组件</td><td>组件就是一个返回 JSX 的函数；名字必须以大写字母开头，JSX 才会把 <code>&lt;Movie /&gt;</code> 当作组件。</td><td><code>const Movie = (props) =&gt; { return ( … ); };</code></td></tr>
+        <tr><td>页头通过 props 显示「Movie Night」「Movies: 4」</td><td>props 就是写在组件上的属性；<code>Header</code> 通过 <code>props.title</code> 和 <code>props.totalMovies</code> 读取。</td><td><code>&lt;Header title="Movie Night" totalMovies={ movies.length } /&gt;</code></td></tr>
+        <tr><td>两行电影：《千与千寻》和《盗梦空间》</td><td>同一个组件可以渲染不同的数据：每个 <code>&lt;Movie /&gt;</code> 都会收到属于自己的 props。</td><td><code>&lt;Movie title={ movies[0].title } … /&gt;</code></td></tr>
+        <tr><td>每行显示「2001 · Animation」</td><td>一个元素里可以放多个表达式。</td><td><code>{ props.year } · { props.genre }</code></td></tr>
+        <tr><td>数据来自数组，而不是写死在 JSX 里</td><td>把 <code>movies[0].title</code> 作为 prop 传入，组件对任何电影都适用。</td><td><code>title={ movies[0].title }</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">Activity 3 — the proper app.js · 官方标准答案</span><span class="src">activities.js lines 332–370 · the lab's solution.js</span></div>
+    <pre><code><span class="c">// EN: Official proper code from csis-3380-react-code-lab-zh-CN/js/activities.js, Activity 3.</span>
+<span class="z">// 中文:官方标准代码,来自 csis-3380-react-code-lab-zh-CN/js/activities.js 活动 3。</span>
+const movies = [ <span class="c">/* …the same four movies as Activity 2… */</span> ];
+
+<span class="c">// Given: the header reads its text from props</span>
+const Header = (props) =&gt; {
+  return (
+    &lt;header&gt;
+      &lt;h1&gt;{ props.title }&lt;/h1&gt;
+      &lt;span className=<span class="s">"stats"</span>&gt;Movies: { props.totalMovies }&lt;/span&gt;
+    &lt;/header&gt;
+  );
+};
+
+<span class="c">// 1. and 2. the Movie component</span>
+const Movie = (props) =&gt; {
+  return (
+    &lt;div className=<span class="s">"movie"</span>&gt;
+      &lt;div className=<span class="s">"movie-info"</span>&gt;
+        &lt;span className=<span class="s">"movie-title"</span>&gt;{ props.title }&lt;/span&gt;
+        &lt;span className=<span class="s">"movie-meta"</span>&gt;{ props.year } · { props.genre }&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+const App = () =&gt; {
+  return (
+    &lt;div className=<span class="s">"watchlist"</span>&gt;
+      {<span class="c">/* 3. the Header, with title and totalMovies props */</span>}
+      &lt;Header title=<span class="s">"Movie Night"</span> totalMovies={ movies.length } /&gt;
+
+      {<span class="c">/* 4. two Movie elements: movies[0] and movies[1] */</span>}
+      &lt;Movie title={ movies[0].title } year={ movies[0].year } genre={ movies[0].genre } /&gt;
+      &lt;Movie title={ movies[1].title } year={ movies[1].year } genre={ movies[1].genre } /&gt;
+    &lt;/div&gt;
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
+root.render(&lt;App /&gt;);</code></pre>
+  </div>
+
+  <!-- ---------------- Activity 4 ---------------- -->
+  <div class="act-head"><span class="no">4</span><h3>Render the Whole Watchlist with map() · 用 map() 渲染整个片单</h3><span class="tag">Module 4 · JSX · lists with map() and keys</span></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>Typing one <code>&lt;Movie /&gt;</code> per film does not scale. Turn the array into a list of components with <code>map()</code>, and give React the keys it needs.</p>
+      <ol>
+        <li>In <code>App</code>, replace the comment with <code>{ props.movies.map(movie =&gt; &lt;Movie … /&gt;) }</code>.</li>
+        <li>Pass <code>title</code>, <code>year</code>, <code>genre</code>, <code>watched</code> and <code>staffPick</code> from each <code>movie</code>.</li>
+        <li>Give each <code>&lt;Movie /&gt;</code> a <code>key</code> from the movie's <code>id</code>: <code>key={ movie.id }</code>.</li>
+        <li>Set <code>watchedCount</code> to the number of movies with <code>watched: true</code> (use <code>filter</code>) so the footer is right.</li>
+      </ol>
+      <div class="skills"><span>map()</span><span>key</span><span>filter()</span><span>conditional badges</span></div>
+      <table>
+        <tr><th>Check</th><th>Why</th><th>The correct code</th></tr>
+        <tr><td>All four movies are rendered</td><td><code>map()</code> runs once per item and returns an array of <code>&lt;Movie /&gt;</code> elements.</td><td><code>{ props.movies.map(movie =&gt; &lt;Movie key={ movie.id } … /&gt;) }</code></td></tr>
+        <tr><td>The list is built with <code>map()</code>, not typed four times</td><td>One line of JSX handles any number of movies.</td><td>one <code>&lt;Movie … /&gt;</code> in the code</td></tr>
+        <tr><td>Every movie has a <code>key</code> from its <code>id</code> (no warning)</td><td>Keys tell React which item is which; indexes break when items are added, removed or sorted.</td><td><code>&lt;Movie key={ movie.id } … /&gt;</code></td></tr>
+        <tr><td>Badges: STAFF PICK / WATCHED / NOT YET</td><td>They only work if <code>watched</code> and <code>staffPick</code> are passed down.</td><td><code>watched={ movie.watched } staffPick={ movie.staffPick }</code></td></tr>
+        <tr><td>Footer says “Watched 2 of 4”, counted with <code>filter</code></td><td><code>filter()</code> keeps items that pass a test; <code>.length</code> counts them.</td><td><code>props.movies.filter(movie =&gt; movie.watched).length</code></td></tr>
+      </table>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>一部电影写一个 <code>&lt;Movie /&gt;</code> 是无法扩展的。请用 <code>map()</code> 把数组转成组件列表，并给 React 提供它需要的 key。</p>
+      <ol>
+        <li>在 <code>App</code> 中，把注释替换为 <code>{ props.movies.map(movie =&gt; &lt;Movie … /&gt;) }</code>。</li>
+        <li>把每部 <code>movie</code> 的 <code>title</code>、<code>year</code>、<code>genre</code>、<code>watched</code> 和 <code>staffPick</code> 传进去。</li>
+        <li>给每个 <code>&lt;Movie /&gt;</code> 一个来自电影 <code>id</code> 的 <code>key</code>：<code>key={ movie.id }</code>。</li>
+        <li>把 <code>watchedCount</code> 设为 <code>watched: true</code> 的电影数量(使用 <code>filter</code>),这样页脚才正确。</li>
+      </ol>
+      <div class="skills"><span>map()</span><span>key</span><span>filter()</span><span>条件徽章</span></div>
+      <table>
+        <tr><th>检查点</th><th>原因</th><th>正确代码</th></tr>
+        <tr><td>四部电影全部渲染出来</td><td><code>map()</code> 对每个元素调用一次函数，返回由 <code>&lt;Movie /&gt;</code> 组成的新数组，React 按顺序渲染。</td><td><code>{ props.movies.map(movie =&gt; &lt;Movie key={ movie.id } … /&gt;) }</code></td></tr>
+        <tr><td>列表用 <code>map()</code> 生成，而不是写了四遍</td><td>一行 JSX 就能处理任意数量的电影，包括以后新增的。</td><td>代码里只有一个 <code>&lt;Movie … /&gt;</code></td></tr>
+        <tr><td>每部电影都有来自 <code>id</code> 的 <code>key</code>(无警告)</td><td>key 告诉 React 哪个元素对应哪个数据；数组下标在增删或排序时会出问题。</td><td><code>&lt;Movie key={ movie.id } … /&gt;</code></td></tr>
+        <tr><td>徽章显示 STAFF PICK / WATCHED / NOT YET</td><td>只有把 <code>watched</code> 和 <code>staffPick</code> 作为 props 传下去，徽章才会正常显示。</td><td><code>watched={ movie.watched } staffPick={ movie.staffPick }</code></td></tr>
+        <tr><td>页脚用 <code>filter</code> 统计并显示「Watched 2 of 4」</td><td><code>filter()</code> 保留通过测试的项，<code>.length</code> 统计数量。</td><td><code>props.movies.filter(movie =&gt; movie.watched).length</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head"><span class="file">Activity 4 — the proper app.js · 官方标准答案</span><span class="src">activities.js lines 409–456 (starter) + 1318–1335 (generated solution)</span></div>
+    <pre><code><span class="c">// EN: Official proper code from csis-3380-react-code-lab-zh-CN/js/activities.js, Activity 4.</span>
+<span class="z">// 中文:官方标准代码,来自 csis-3380-react-code-lab-zh-CN/js/activities.js 活动 4。</span>
+const movies = [ <span class="c">/* …the same four movies… */</span> ];
+
+const Header = (props) =&gt; (
+  &lt;header&gt;
+    &lt;h1&gt;{ props.title }&lt;/h1&gt;
+    &lt;span className=<span class="s">"stats"</span>&gt;Movies: { props.totalMovies }&lt;/span&gt;
+  &lt;/header&gt;
+);
+
+<span class="c">// Given: one row. The badges use &amp;&amp; and ? :</span>
+const Movie = (props) =&gt; (
+  &lt;div className=<span class="s">"movie"</span>&gt;
+    &lt;div className=<span class="s">"movie-info"</span>&gt;
+      &lt;span className=<span class="s">"movie-title"</span>&gt;
+        { props.title }
+        { props.staffPick &amp;&amp; &lt;span className=<span class="s">"badge badge-pick"</span>&gt;STAFF PICK&lt;/span&gt; }
+      &lt;/span&gt;
+      &lt;span className=<span class="s">"movie-meta"</span>&gt;
+        { props.year } · { props.genre }
+        { props.watched
+            ? &lt;span className=<span class="s">"badge badge-watched"</span>&gt;WATCHED&lt;/span&gt;
+            : &lt;span className=<span class="s">"badge badge-unwatched"</span>&gt;NOT YET&lt;/span&gt; }
+      &lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+);
+
+const Footer = (props) =&gt; (
+  &lt;footer&gt;Watched { props.watchedCount } of { props.totalMovies } · Made with React&lt;/footer&gt;
+);
+
+const App = (props) =&gt; {
+  <span class="c">// 4. how many movies are watched?</span>
+  const watchedCount = props.movies.filter(movie =&gt; movie.watched).length;
+
+  return (
+    &lt;div className=<span class="s">"watchlist"</span>&gt;
+      &lt;Header title=<span class="s">"Movie Night"</span> totalMovies={ props.movies.length } /&gt;
+
+      {<span class="c">/* 1. to 3. one Movie per item, with a key */</span>}
+      { props.movies.map(movie =&gt;
+        &lt;Movie
+          key={ movie.id }
+          title={ movie.title }
+          year={ movie.year }
+          genre={ movie.genre }
+          watched={ movie.watched }
+          staffPick={ movie.staffPick }
+        /&gt;
+      ) }
+
+      &lt;Footer watchedCount={ watchedCount } totalMovies={ props.movies.length } /&gt;
+    &lt;/div&gt;
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById(<span class="s">'root'</span>));
+root.render(&lt;App movies={ movies } /&gt;);</code></pre>
+  </div>
+</section>
 
 <!-- ============ SECTION 1 ============ -->
 <section id="s1">

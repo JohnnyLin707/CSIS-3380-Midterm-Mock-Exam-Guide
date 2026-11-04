@@ -87,12 +87,14 @@
   <div class="brand">Riddle Board · 全流程教学 <small>Step-by-step Tutorial — riddle-board-start</small></div>
   <a class="home" href="index.html">← 复习指南 / Study Guide</a>
   <nav class="chips">
+    <a href="#codeLab">★ Code Lab 1–4 对照</a>
     <a href="#intro">Start 开始</a>
     <a href="#step1">1 Live Server</a>
     <a href="#step2">2 Scripts</a>
     <a href="#step3">3 App</a>
     <a href="#step4">4 Props</a>
     <a href="#step5">5 map + key</a>
+    <a href="#extras">2/4 Extras 补全</a>
     <a href="#step6">6 Date</a>
     <a href="#step7">7 Clean 收尾</a>
     <a href="#final">Final Code 完整代码</a>
@@ -112,6 +114,37 @@
 
 <main>
 
+<!-- ============ CODE LAB ALIGNMENT ============ -->
+<section id="codeLab">
+  <div class="sec-head"><span class="no">★</span><h2>Code Lab Activities 1–4 → this tutorial · 四大活动对照审计</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>This tutorial was checked against the <b>official Module 4 activities</b> in <a class="src" href="index.html#activities">index.html → The activities</a> (source: <code>csis-3380-react-code-lab-zh-CN/js/activities.js</code> and <code>js/lang-zh.js</code>). The audit found that Activities 1, 3 and the core of 4 were covered, but <b>Activity 2's conditionals and Activity 4's <code>filter()</code> / conditional badges were missing</b>. They are now taught in the <a class="src" href="#extras">Extras section</a> below, using the lab's own code.</p>
+      <table>
+        <tr><th>Official activity</th><th>What it teaches</th><th>Covered in this tutorial</th></tr>
+        <tr><td><b>1</b> Add React to the Movie Night Page<br><small>Module 4 · HTML</small></td><td>root element, React before ReactDOM, Babel standalone, <code>type="text/babel"</code>, scripts after <code>#root</code>, preview renders</td><td><b>Step 1</b>(Live Server) + <b>Step 2</b>(all eight scripts in order) + <b>Step 3</b>(<code>createRoot</code>/<code>render</code>)</td></tr>
+        <tr><td><b>2</b> Write the Header in JSX<br><small>Module 4 · JSX</small></td><td><code>{ }</code> expressions, <code>&amp;&amp;</code>, <code>? :</code>, <code>className</code>, numbers from the data</td><td><b>Step 4</b>(<code>{ }</code> from props) + <b>Extras</b>(<code>&amp;&amp;</code>, <code>? :</code>, <code>className</code>) — the exam does not require conditionals, so they are taught as activity knowledge, not added to the app</td></tr>
+        <tr><td><b>3</b> Build the Movie Component<br><small>Module 4 · JSX</small></td><td>function components, capital-letter names, props, composing components, data from an array</td><td><b>Step 3</b>(App, one outer element, capital name) + <b>Step 4</b>(<code>Riddle(props)</code>, whole object as one prop, first item <code>riddles.riddles[0]</code>)</td></tr>
+        <tr><td><b>4</b> Render the Whole Watchlist with map()<br><small>Module 4 · JSX</small></td><td><code>map()</code>, <code>key={…id}</code>, <code>filter()</code>, conditional badges</td><td><b>Step 5</b>(<code>map()</code> + stable key) + <b>Extras</b>(<code>filter()</code>, badges with <code>&amp;&amp;</code> / <code>? :</code>)</td></tr>
+      </table>
+      <div class="note"><b>Everything in this tutorial still stays inside Module 4.</b> The exam application itself is unchanged: no buttons, no state, no hooks, no conditionals in the submitted files. The Extras section is labelled knowledge practice, exactly as the lab's own “Want more practice?” ideas are.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>本教程已按 <a class="src" href="index.html#activities">index.html → 四大活动</a> 里的<b>官方 Module 4 活动</b>逐项核对(来源：<code>csis-3380-react-code-lab-zh-CN/js/activities.js</code> 与 <code>js/lang-zh.js</code>)。审计发现：活动 1、3 以及活动 4 的核心内容原本已覆盖，但<b>活动 2 的条件表达式、活动 4 的 <code>filter()</code> 与条件徽章缺失</b>。现已用实验室官方代码在下方的 <a class="src" href="#extras">补全章节</a> 补齐。</p>
+      <table>
+        <tr><th>官方活动</th><th>教授内容</th><th>本教程对应位置</th></tr>
+        <tr><td><b>1</b> 为「电影之夜」页面加入 React<br><small>模块 4 · HTML</small></td><td>根元素、React 先于 ReactDOM、Babel standalone、<code>type="text/babel"</code>、脚本放在 <code>#root</code> 之后、预览渲染</td><td><b>第 1 步</b>(Live Server) + <b>第 2 步</b>(八个脚本按顺序) + <b>第 3 步</b>(<code>createRoot</code>/<code>render</code>)</td></tr>
+        <tr><td><b>2</b> 用 JSX 编写页头<br><small>模块 4 · JSX</small></td><td><code>{ }</code> 表达式、<code>&amp;&amp;</code>、<code>? :</code>、<code>className</code>、数字由数据算出</td><td><b>第 4 步</b>(从 props 取值的 <code>{ }</code>) + <b>补全章节</b>(<code>&amp;&amp;</code>、<code>? :</code>、<code>className</code>) —— 考试不要求条件渲染，因此作为活动知识讲解，不加进提交的应用</td></tr>
+        <tr><td><b>3</b> 构建 Movie 组件<br><small>模块 4 · JSX</small></td><td>函数组件、大写字母开头、props、组合组件、数据来自数组</td><td><b>第 3 步</b>(App、唯一外层元素、大写命名) + <b>第 4 步</b>(<code>Riddle(props)</code>、整个对象作为一个 prop、<code>riddles.riddles[0]</code>)</td></tr>
+        <tr><td><b>4</b> 用 map() 渲染整个片单<br><small>模块 4 · JSX</small></td><td><code>map()</code>、<code>key={…id}</code>、<code>filter()</code>、条件徽章</td><td><b>第 5 步</b>(<code>map()</code> + 稳定 key) + <b>补全章节</b>(<code>filter()</code>、用 <code>&amp;&amp;</code> / <code>? :</code> 的徽章)</td></tr>
+      </table>
+      <div class="note zh-note"><b>本教程所有内容仍然限定在 Module 4 范围内。</b>考试应用本身不变：没有按钮、没有 state、没有 hooks,提交的文件里也不加条件渲染。补全章节明确标注为知识练习,与实验室和试卷的 “Want more practice?” 性质相同。</div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ INTRO ============ -->
 <section id="intro">
   <div class="sec-head"><span class="no">0</span><h2>How to use this tutorial · 如何使用本教程</h2></div>
@@ -126,7 +159,7 @@
         <li>Layout: English on the left, Chinese on the right. The code blocks below each step are shared by both languages — code needs no translation.</li>
       </ul>
       <p>You need VS Code with the <b>Live Server</b> extension (by Ritwick Dey) — the same setup as Movie Night Step 00.</p>
-      <p>Not sure what each starter file is for? See the Study Guide (<a class="src" href="index.html">index.html</a>), Section 3.</p>
+      <p>Not sure what each starter file is for? See the Study Guide (<a class="src" href="index.html">index.html</a>), Section 3. For the official Code Lab activities behind every step — with their full code and Chinese translations — see <a class="src" href="index.html#activities">The activities</a> at the top of the Study Guide and the <a class="src" href="#codeLab">alignment audit</a> below.</p>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
@@ -138,7 +171,7 @@
         <li>版式：左边英文，右边中文。每步下方的代码块两种语言共用 —— 代码本身不需要翻译。</li>
       </ul>
       <p>需要 VS Code 和 <b>Live Server</b> 扩展(作者 Ritwick Dey)—— 与 Movie Night 第 00 步相同的配置。</p>
-      <p>不清楚起始文件各是干什么的？看复习指南(<a class="src" href="index.html">index.html</a>)第 3 节。</p>
+      <p>不清楚起始文件各是干什么的？看复习指南(<a class="src" href="index.html">index.html</a>)第 3 节。每一步背后的官方 Code Lab 活动(含完整代码与中文翻译)见指南顶部的<a class="src" href="index.html#activities">四大活动</a>，以及本页的<a class="src" href="#codeLab">对照审计</a>。</p>
     </div>
   </div>
 </section>
@@ -188,6 +221,7 @@
       </ol>
       <div class="note"><b>Order matters.</b> The starter's own TODO says it: <i>“a file can only use what was loaded before it.”</i> Libraries come first, then the data, then the components — and <code>app.js</code> goes last, because it uses all the others.</div>
       <div class="checkline"><b>Check:</b> refresh. The page is still empty, the Console shows no red errors, and typing <code>riddles.riddles.length</code> in the Console prints <code>9</code>. (The yellow “in-browser Babel transformer” notice is expected and fine.)</div>
+      <div class="note"><b>Code Lab Activity 1</b> grades exactly this: a root <code>&lt;div id="root"&gt;</code>, React before ReactDOM, Babel standalone loaded, <code>type="text/babel"</code> on the JSX files, scripts placed after <code>#root</code>, and the app rendering in the preview. See the <a class="src" href="index.html#activities">official Activity 1</a> for its story, six checks and proper <code>index.html</code>.</div>
       <div class="note"><b>Careful:</b> the variable is called <code>riddles</code> and the array inside it is also called <code>riddles</code>, so the array of nine riddles is <code>riddles.riddles</code>. <i>(exam paper, “Read this carefully”)</i></div>
     </div>
     <div class="cell zh">
@@ -359,6 +393,7 @@ function Riddle(props) {
         <li>Each item needs a <b>key that is unique and stable — and the data already has one for you</b>: the <code>id</code> field (exam paper, Step 5 hint; Movie Night, Step 13). Write <code>key</code> on the element that <code>map()</code> returns, <b>not</b> inside the child component. React keeps <code>key</code> for itself: <code>props.key</code> inside <code>Riddle</code> is <code>undefined</code> (Movie Night, Step 13 table).</li>
       </ul>
       <div class="checkline"><b>Check:</b> nine cards, numbered 1 to 9, in a three-by-three grid on a wide screen, and the Console has no “unique key prop” warning.</div>
+      <div class="note"><b>Code Lab Activity 4</b> also practises <code>filter()</code> and conditional badges on top of <code>map()</code> + <code>key</code>. They are not required by this exam, so they are taught in the <a class="src" href="#extras">Extras section</a> with the lab's own code rather than added to your app.</div>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
@@ -381,6 +416,59 @@ function Riddle(props) {
           &lt;Riddle key={riddle.id} riddle={riddle} /&gt;
         ))}
       &lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ============ EXTRAS: ACTIVITY 2 & 4 IN FULL ============ -->
+<section id="extras">
+  <div class="sec-head"><span class="no">2 + 4</span><span class="time">knowledge only · 知识练习</span><h2>Activity 2 &amp; 4 in full: &amp;&amp;, ? :, className, filter() · 活动 2/4 完整知识点</h2></div>
+  <div class="duo">
+    <div class="cell en">
+      <h3>English</h3>
+      <p>These four ideas are part of the official Code Lab activities, so they are included here for completeness. They come from <a class="src" href="index.html#activities">index.html → The activities</a> (Activities 2 and 4) and from <code>activities.js</code> / <code>lang-zh.js</code>.</p>
+      <ul>
+        <li><b><code>{ }</code> expressions</b> — curly braces put a JavaScript expression into JSX; <code>{ title }</code> shows whatever the variable holds, so changing data changes the page.</li>
+        <li><b><code>&amp;&amp;</code></b> — <code>condition &amp;&amp; &lt;element&gt;</code> renders the element only when the condition is true; when it is false React renders nothing.</li>
+        <li><b><code>? :</code></b> — <code>condition ? A : B</code> is an expression, so it can go inside <code>{ }</code>; an <code>if</code> statement cannot.</li>
+        <li><b><code>className</code></b> — <code>class</code> is a JavaScript reserved word, so JSX uses <code>className</code>; React warns in the console when it sees <code>class</code>.</li>
+        <li><b><code>filter()</code></b> — keeps the items that pass a test; <code>.length</code> counts them. Conditional badges (STAFF PICK / WATCHED / NOT YET) only work when <code>watched</code> and <code>staffPick</code> are passed down as props.</li>
+      </ul>
+      <div class="note"><b>Not exam requirements.</b> The Riddle Board exam has no conditionals and no filtering — its marking scheme asks for four components, <code>map()</code>, a real date and clean code. Read this section to complete the four activities' knowledge, but <b>do not add these lines to the files you submit</b>. Practise them in the Code Lab instead.</div>
+    </div>
+    <div class="cell zh">
+      <h3>中文</h3>
+      <p>以下四点是官方 Code Lab 活动的组成部分，因此在这里补全。内容来自 <a class="src" href="index.html#activities">index.html → 四大活动</a>(活动 2 与 4)以及 <code>activities.js</code> / <code>lang-zh.js</code>。</p>
+      <ul>
+        <li><b><code>{ }</code> 表达式</b> —— 花括号把 JavaScript 表达式放进 JSX;<code>{ title }</code> 显示变量当前的值，数据一变页面就跟着变。</li>
+        <li><b><code>&amp;&amp;</code></b> —— <code>condition &amp;&amp; &lt;element&gt;</code> 只在条件为 true 时渲染该元素；为 false 时 React 什么也不渲染。</li>
+        <li><b><code>? :</code></b> —— <code>condition ? A : B</code> 是表达式，可以放进 <code>{ }</code>;而 <code>if</code> 语句不行。</li>
+        <li><b><code>className</code></b> —— <code>class</code> 是 JavaScript 保留字，所以 JSX 使用 <code>className</code>;React 看到 <code>class</code> 会在控制台给出警告。</li>
+        <li><b><code>filter()</code></b> —— 保留通过测试的项，<code>.length</code> 统计数量。条件徽章(STAFF PICK / WATCHED / NOT YET)只有把 <code>watched</code> 和 <code>staffPick</code> 作为 props 传下去才会正常显示。</li>
+      </ul>
+      <div class="note zh-note"><b>不属于考试要求。</b>Riddle Board 考试没有条件渲染、也没有过滤 —— 评分标准要求的是四个组件、<code>map()</code>、真实日期和整洁代码。本节用于补齐四个活动的知识，但<b>不要把这些代码加进你要提交的文件</b>；请到 Code Lab 里练习。</div>
+    </div>
+  </div>
+  <div class="codecard">
+    <div class="cc-head">
+      <span class="file">Official Code Lab patterns · 实验室官方写法(片段,非完整文件)</span>
+      <span class="src">activities.js: Activity 2 solution (lines 241–251) + Activity 4 starter/solution (lines 417–479)</span>
+    </div>
+    <pre><code><span class="c">// EN: Activity 2 — { } expressions, &amp;&amp; and ? : (official lab code).</span>
+<span class="z">// 中文:活动 2 —— { } 表达式、&amp;&amp; 与 ? :(实验室官方代码)。</span>
+&lt;h1&gt;{ title }&lt;/h1&gt;
+{ showStats &amp;&amp; &lt;span className=<span class="s">"stats"</span>&gt;Movies: { movies.length }&lt;/span&gt; }
+{ watchedCount === movies.length
+    ? <span class="s">"All watched!"</span>
+    : <span class="s">"Watched "</span> + watchedCount + <span class="s">" of "</span> + movies.length }
+
+<span class="c">// EN: Activity 4 — filter() and conditional badges (official lab code).</span>
+<span class="z">// 中文:活动 4 —— filter() 与条件徽章(实验室官方代码)。</span>
+const watchedCount = props.movies.filter(movie =&gt; movie.watched).length;
+
+{ props.staffPick &amp;&amp; &lt;span className=<span class="s">"badge badge-pick"</span>&gt;STAFF PICK&lt;/span&gt; }
+{ props.watched
+    ? &lt;span className=<span class="s">"badge badge-watched"</span>&gt;WATCHED&lt;/span&gt;
+    : &lt;span className=<span class="s">"badge badge-unwatched"</span>&gt;NOT YET&lt;/span&gt; }</code></pre>
   </div>
 </section>
 
