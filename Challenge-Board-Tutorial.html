@@ -48,7 +48,13 @@
   th{background:#eef2f7;font-weight:700}
   code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:#eef1f5;border:1px solid #e0e5ec;border-radius:5px;padding:1px 5px;word-break:break-all}
   pre{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:12.3px;background:#101826;color:#dbe7ff;padding:14px 16px;overflow-x:auto;line-height:1.55;margin:0}
-  pre .c{color:#7fa3d8} pre .z{color:#f0a9d0} pre .s{color:#8fd6a5}
+  pre code{background:none;border:none;color:inherit;padding:0;border-radius:0;font-size:inherit;word-break:normal}
+  /* VS Code Dark+ inspired: green comments, blue keywords/tags, yellow names/strings */
+  pre .cm{color:#6a9955}
+  pre .kw{color:#569cd6}
+  pre .at{color:#9cdcfe}
+  pre .fn{color:#dcdcaa}
+  pre .st{color:#e5c07b}
   .codecard{margin-top:14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 3px 14px rgba(23,32,44,.08)}
   .codecard .cc-head{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#101826;color:#cdd9ec;padding:8px 16px;font-size:12.5px;border-bottom:1px solid #24324a}
   .codecard .cc-head .file{font-family:"SF Mono",Menlo,Consolas,monospace;color:#8fd6a5;font-weight:700}
@@ -206,208 +212,208 @@
   <div class="duo">
     <div class="cell en">
       <h3>English</h3>
-      <p>The blocks below are the <b>exact contents</b> of the finished project files (inserted automatically, so this page can never drift out of sync with the app). Blue lines are <code>// EN:</code> task/answer comments; pink lines are their <code>// 中文:</code> counterparts.</p>
+      <p>The blocks below are the <b>exact contents</b> of the finished project files (inserted automatically, so this page can never drift out of sync with the app). <b>All comment lines</b> (<code>// EN:</code> and <code>// 中文:</code>) are <b style="color:#6a9955">green</b>, as in VS Code; the real code uses VS Code's <b style="color:#569cd6">blue</b> keywords/tags and <b style="color:#dcdcaa">yellow</b> function names and strings.</p>
     </div>
     <div class="cell zh">
       <h3>中文</h3>
-      <p>下面每个代码块都是成品项目文件的<b>逐字内容</b>(由脚本自动注入,教材页与项目永远不会不一致)。蓝色行是 <code>// EN:</code> 题目/补全注释,粉色行是对应的 <code>// 中文:</code> 翻译。</p>
+      <p>下面每个代码块都是成品项目文件的<b>逐字内容</b>(由脚本自动注入,教材页与项目永远不会不一致)。<b>所有注释行</b>(<code>// EN:</code> 与 <code>// 中文:</code>)统一为<b style="color:#6a9955">绿色</b>(VS Code 注释色);正式代码采用 VS Code 风格：<b style="color:#569cd6">蓝色</b>关键字/标签、<b style="color:#dcdcaa">黄色</b>函数名与字符串。</p>
     </div>
   </div>
 
   <div class="codecard">
     <div class="cc-head"><span class="file">index.html</span><span class="src">CDN 顺序:Movie Night / 活动 1 · 8 个 script 标签</span></div>
-    <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
+    <pre><code>&lt;!<span class="fn">DOCTYPE</span> html&gt;
+&lt;<span class="kw">html</span> <span class="at">lang</span>=<span class="st">"en"</span>&gt;
 
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Revision Board&lt;/title&gt;
-  &lt;link rel="stylesheet" href="normalize.css"&gt;
-  &lt;link rel="stylesheet" href="styles.css"&gt;
-&lt;/head&gt;
+&lt;<span class="kw">head</span>&gt;
+  &lt;<span class="kw">meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span>&gt;
+  &lt;<span class="kw">meta</span> <span class="at">name</span>=<span class="st">"viewport"</span> <span class="at">content</span>=<span class="st">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="kw">title</span>&gt;<span class="fn">Revision</span> <span class="fn">Board</span>&lt;/<span class="kw">title</span>&gt;
+  &lt;<span class="kw">link</span> <span class="at">rel</span>=<span class="st">"stylesheet"</span> <span class="at">href</span>=<span class="st">"normalize.css"</span>&gt;
+  &lt;<span class="kw">link</span> <span class="at">rel</span>=<span class="st">"stylesheet"</span> <span class="at">href</span>=<span class="st">"styles.css"</span>&gt;
+&lt;/<span class="kw">head</span>&gt;
 
-&lt;body&gt;
-<span class="c">  &lt;!-- EN: TASK 0 — a React page needs an empty root element before the scripts. --&gt;</span>
-<span class="z">  &lt;!-- 中文:任务 0 —— React 页面在脚本之前需要一个空的 root 元素。 --&gt;</span>
-  &lt;div id="root"&gt;&lt;/div&gt;
+&lt;<span class="kw">body</span>&gt;
+<span class="cm">  &lt;!-- EN: TASK 0 — a React page needs an empty root element before the scripts. --&gt;</span>
+<span class="cm">  &lt;!-- 中文:任务 0 —— React 页面在脚本之前需要一个空的 root 元素。 --&gt;</span>
+  &lt;<span class="kw">div</span> <span class="at">id</span>=<span class="st">"root"</span>&gt;&lt;/<span class="kw">div</span>&gt;
 
-<span class="c">  &lt;!-- EN: ANSWER 0a — React, then ReactDOM, then Babel, all from unpkg (Movie Night). --&gt;</span>
-<span class="z">  &lt;!-- 中文:补全点 0a —— 依次加载 React、ReactDOM、Babel,均来自 unpkg(Movie Night)。 --&gt;</span>
-  &lt;script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"&gt;&lt;/script&gt;
-  &lt;script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"&gt;&lt;/script&gt;
-  &lt;script src="https://unpkg.com/@babel/standalone@7/babel.min.js"&gt;&lt;/script&gt;
+<span class="cm">  &lt;!-- EN: ANSWER 0a — React, then ReactDOM, then Babel, all from unpkg (Movie Night). --&gt;</span>
+<span class="cm">  &lt;!-- 中文:补全点 0a —— 依次加载 React、ReactDOM、Babel,均来自 unpkg(Movie Night)。 --&gt;</span>
+  &lt;<span class="kw">script</span> crossorigin <span class="at">src</span>=<span class="st">"https://unpkg.com/react@18.3.1/umd/react.development.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+  &lt;<span class="kw">script</span> crossorigin <span class="at">src</span>=<span class="st">"https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+  &lt;<span class="kw">script</span> <span class="at">src</span>=<span class="st">"https://unpkg.com/@babel/standalone@7/babel.min.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
 
-<span class="c">  &lt;!-- EN: ANSWER 0b — the data file is plain JavaScript, so NO type attribute. --&gt;</span>
-<span class="z">  &lt;!-- 中文:补全点 0b —— 数据文件是纯 JavaScript,所以不加 type。 --&gt;</span>
-  &lt;script src="./tasks.js"&gt;&lt;/script&gt;
+<span class="cm">  &lt;!-- EN: ANSWER 0b — the data file is plain JavaScript, so NO type attribute. --&gt;</span>
+<span class="cm">  &lt;!-- 中文:补全点 0b —— 数据文件是纯 JavaScript,所以不加 type。 --&gt;</span>
+  &lt;<span class="kw">script</span> <span class="at">src</span>=<span class="st">"./tasks.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
 
-<span class="c">  &lt;!-- EN: ANSWER 0c — JSX files need type="text/babel" so Babel compiles them. --&gt;</span>
-<span class="z">  &lt;!-- 中文:补全点 0c —— 含 JSX 的文件需要 type="text/babel",由 Babel 编译。 --&gt;</span>
-  &lt;script type="text/babel" src="./components/Header.jsx"&gt;&lt;/script&gt;
-  &lt;script type="text/babel" src="./components/TaskCard.jsx"&gt;&lt;/script&gt;
-  &lt;script type="text/babel" src="./components/Footer.jsx"&gt;&lt;/script&gt;
+<span class="cm">  &lt;!-- EN: ANSWER 0c — JSX files need type="text/babel" so Babel compiles them. --&gt;</span>
+<span class="cm">  &lt;!-- 中文:补全点 0c —— 含 JSX 的文件需要 type="text/babel",由 Babel 编译。 --&gt;</span>
+  &lt;<span class="kw">script</span> <span class="at">type</span>=<span class="st">"text/babel"</span> <span class="at">src</span>=<span class="st">"./components/Header.jsx"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+  &lt;<span class="kw">script</span> <span class="at">type</span>=<span class="st">"text/babel"</span> <span class="at">src</span>=<span class="st">"./components/TaskCard.jsx"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+  &lt;<span class="kw">script</span> <span class="at">type</span>=<span class="st">"text/babel"</span> <span class="at">src</span>=<span class="st">"./components/Footer.jsx"</span>&gt;&lt;/<span class="kw">script</span>&gt;
 
-<span class="c">  &lt;!-- EN: ANSWER 0d — app.js comes last, because it uses everything above. --&gt;</span>
-<span class="z">  &lt;!-- 中文:补全点 0d —— app.js 放最后,因为它用到上面所有文件。 --&gt;</span>
-  &lt;script type="text/babel" src="./app.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
+<span class="cm">  &lt;!-- EN: ANSWER 0d — app.js comes last, because it uses everything above. --&gt;</span>
+<span class="cm">  &lt;!-- 中文:补全点 0d —— app.js 放最后,因为它用到上面所有文件。 --&gt;</span>
+  &lt;<span class="kw">script</span> <span class="at">type</span>=<span class="st">"text/babel"</span> <span class="at">src</span>=<span class="st">"./app.js"</span>&gt;&lt;/<span class="kw">script</span>&gt;
+&lt;/<span class="kw">body</span>&gt;
 
-&lt;/html&gt;</code></pre>
+&lt;/<span class="kw">html</span>&gt;</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">tasks.js</span><span class="src">顶层数组,9 个对象 · 与 Professor 的 const movies = [ … ] 同构</span></div>
-    <pre><code><span class="c">// EN: TASK 1 — the data is a TOP-LEVEL ARRAY, not a nested object.</span>
-<span class="z">// 中文:任务 1 —— 数据是顶层数组,不是嵌套对象。</span>
-<span class="c">// EN: Read it carefully: the array is `tasks` (NOT tasks.tasks, NOT tasks.items).</span>
-<span class="z">// 中文:仔细看:数组就是 `tasks`(不是 tasks.tasks,也不是 tasks.items)。</span>
-<span class="c">// EN: ANSWER 1 — do NOT copy this data into your React code; this file is loaded</span>
-//     by a &lt;script&gt; tag and passed into App at the bottom of app.js.
-<span class="z">// 中文:补全点 1 —— 不要把数据拷进 React 代码;本文件由 &lt;script&gt; 标签加载,</span>
-//     并在 app.js 末尾传给 App。
+    <pre><code><span class="cm">// EN: TASK 1 — the data is a TOP-LEVEL ARRAY, not a nested object.</span>
+<span class="cm">// 中文:任务 1 —— 数据是顶层数组,不是嵌套对象。</span>
+<span class="cm">// EN: Read it carefully: the array is `tasks` (NOT tasks.tasks, NOT tasks.items).</span>
+<span class="cm">// 中文:仔细看:数组就是 `tasks`(不是 tasks.tasks,也不是 tasks.items)。</span>
+<span class="cm">// EN: ANSWER 1 — do NOT copy this data into your React code; this file is loaded</span>
+<span class="cm">//     by a &lt;script&gt; tag and passed into App at the bottom of app.js.</span>
+<span class="cm">// 中文:补全点 1 —— 不要把数据拷进 React 代码;本文件由 &lt;script&gt; 标签加载,</span>
+<span class="cm">//     并在 app.js 末尾传给 App。</span>
 
-const tasks = [
-  { id: 1, title: "Add React CDN scripts", topic: "HTML setup", minutes: 10, done: true, priority: "high" },
-  { id: 2, title: "Create the root element", topic: "HTML setup", minutes: 5, done: true, priority: "normal" },
-  { id: 3, title: "Write JSX with Babel", topic: "JSX", minutes: 15, done: false, priority: "high" },
-  { id: 4, title: "Use { } expressions", topic: "JSX", minutes: 10, done: true, priority: "normal" },
-  { id: 5, title: "Build a function component", topic: "Components", minutes: 15, done: false, priority: "high" },
-  { id: 6, title: "Pass props to a child", topic: "Props", minutes: 10, done: false, priority: "normal" },
-  { id: 7, title: "Render a list with map()", topic: "Lists", minutes: 15, done: false, priority: "high" },
-  { id: 8, title: "Give each item a key", topic: "Lists", minutes: 5, done: false, priority: "normal" },
-  { id: 9, title: "Show today's real date", topic: "Footer", minutes: 5, done: false, priority: "normal" }
+<span class="kw">const</span> tasks = [
+  { id: <span class="st">1</span>, title: <span class="st">"Add React CDN scripts"</span>, topic: <span class="st">"HTML setup"</span>, minutes: <span class="st">10</span>, done: <span class="kw">true</span>, priority: <span class="st">"high"</span> },
+  { id: <span class="st">2</span>, title: <span class="st">"Create the root element"</span>, topic: <span class="st">"HTML setup"</span>, minutes: <span class="st">5</span>, done: <span class="kw">true</span>, priority: <span class="st">"normal"</span> },
+  { id: <span class="st">3</span>, title: <span class="st">"Write JSX with Babel"</span>, topic: <span class="st">"JSX"</span>, minutes: <span class="st">15</span>, done: <span class="kw">false</span>, priority: <span class="st">"high"</span> },
+  { id: <span class="st">4</span>, title: <span class="st">"Use { } expressions"</span>, topic: <span class="st">"JSX"</span>, minutes: <span class="st">10</span>, done: <span class="kw">true</span>, priority: <span class="st">"normal"</span> },
+  { id: <span class="st">5</span>, title: <span class="st">"Build a function component"</span>, topic: <span class="st">"Components"</span>, minutes: <span class="st">15</span>, done: <span class="kw">false</span>, priority: <span class="st">"high"</span> },
+  { id: <span class="st">6</span>, title: <span class="st">"Pass props to a child"</span>, topic: <span class="st">"Props"</span>, minutes: <span class="st">10</span>, done: <span class="kw">false</span>, priority: <span class="st">"normal"</span> },
+  { id: <span class="st">7</span>, title: <span class="st">"Render a list with map()"</span>, topic: <span class="st">"Lists"</span>, minutes: <span class="st">15</span>, done: <span class="kw">false</span>, priority: <span class="st">"high"</span> },
+  { id: <span class="st">8</span>, title: <span class="st">"Give each item a key"</span>, topic: <span class="st">"Lists"</span>, minutes: <span class="st">5</span>, done: <span class="kw">false</span>, priority: <span class="st">"normal"</span> },
+  { id: <span class="st">9</span>, title: <span class="st">"Show today's real date"</span>, topic: <span class="st">"Footer"</span>, minutes: <span class="st">5</span>, done: <span class="kw">false</span>, priority: <span class="st">"normal"</span> }
 ];</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">app.js</span><span class="src">props.tasks · filter().length · map() + key · root.render(&lt;App tasks={ tasks } /&gt;)</span></div>
-    <pre><code><span class="c">// EN: TASK 2 — App receives the data ONLY through props (Professor's Activity 4 style).</span>
-<span class="z">// 中文:任务 2 —— App 只通过 props 接收数据(Professor 活动 4 的写法)。</span>
-<span class="c">// EN: Do NOT read the global `tasks` variable inside App; use `props.tasks`.</span>
-<span class="z">// 中文:不要在 App 里读全局 `tasks` 变量;要用 `props.tasks`。</span>
+    <pre><code><span class="cm">// EN: TASK 2 — App receives the data ONLY through props (Professor's Activity 4 style).</span>
+<span class="cm">// 中文:任务 2 —— App 只通过 props 接收数据(Professor 活动 4 的写法)。</span>
+<span class="cm">// EN: Do NOT read the global `tasks` variable inside App; use `props.tasks`.</span>
+<span class="cm">// 中文:不要在 App 里读全局 `tasks` 变量;要用 `props.tasks`。</span>
 
-<span class="c">// EN: App shows the header, the nine task cards and the footer, in ONE outer div.</span>
-<span class="z">// 中文:App 显示标题栏、九张任务卡片和页脚,包在唯一一个外层 div 里。</span>
-const App = (props) =&gt; {
-<span class="c">  // EN: ANSWER 2a — count the finished tasks with filter().length BEFORE the return.</span>
-<span class="z">  // 中文:补全点 2a —— 在 return 之前用 filter().length 统计已完成任务数。</span>
-<span class="c">  // EN: filter() keeps the items that pass a test; .length counts them (Movie Night Step 15).</span>
-<span class="z">  // 中文:filter() 保留通过测试的项,.length 统计数量(Movie Night 第 15 步)。</span>
-  const doneCount = props.tasks.filter(task =&gt; task.done).length;
+<span class="cm">// EN: App shows the header, the nine task cards and the footer, in ONE outer div.</span>
+<span class="cm">// 中文:App 显示标题栏、九张任务卡片和页脚,包在唯一一个外层 div 里。</span>
+<span class="kw">const</span> <span class="fn">App</span> = (props) =&gt; {
+<span class="cm">  // EN: ANSWER 2a — count the finished tasks with filter().length BEFORE the return.</span>
+<span class="cm">  // 中文:补全点 2a —— 在 return 之前用 filter().length 统计已完成任务数。</span>
+<span class="cm">  // EN: filter() keeps the items that pass a test; .length counts them (Movie Night Step 15).</span>
+<span class="cm">  // 中文:filter() 保留通过测试的项,.length 统计数量(Movie Night 第 15 步)。</span>
+  <span class="kw">const</span> doneCount = props.tasks.<span class="fn">filter</span>(task =&gt; task.done).length;
 
-  return (
-    &lt;div&gt;
-<span class="c">      {/* EN: ANSWER 2b — both numbers come from the data, never typed in. */}</span>
-<span class="z">      {/* 中文:补全点 2b —— 两个数字都由数据算出,绝不手写死。 */}</span>
-      &lt;Header total={ props.tasks.length } doneCount={ doneCount } /&gt;
+  <span class="kw">return</span> (
+    &lt;<span class="kw">div</span>&gt;
+<span class="cm">      {/* EN: ANSWER 2b — both numbers come from the data, never typed in. */}</span>
+<span class="cm">      {/* 中文:补全点 2b —— 两个数字都由数据算出,绝不手写死。 */}</span>
+      &lt;<span class="kw">Header</span> <span class="at">total</span>={ props.tasks.length } <span class="at">doneCount</span>={ doneCount } /&gt;
 
-      &lt;div className="board"&gt;
-<span class="c">        {/* EN: ANSWER 2c — map() builds the list; key uses the stable id from the data. */}</span>
-<span class="z">        {/* 中文:补全点 2c —— 用 map() 生成列表;key 用数据里稳定的 id。 */}</span>
-<span class="c">        {/* EN: Pass every field as its OWN prop, with spaces inside the braces. */}</span>
-<span class="z">        {/* 中文:每个字段单独作为一个 prop 传入,花括号内留空格。 */}</span>
-        { props.tasks.map(task =&gt;
-          &lt;TaskCard
-            key={ task.id }
-            id={ task.id }
-            title={ task.title }
-            topic={ task.topic }
-            minutes={ task.minutes }
-            done={ task.done }
-            priority={ task.priority }
+      &lt;<span class="kw">div</span> <span class="at">className</span>=<span class="st">"board"</span>&gt;
+<span class="cm">        {/* EN: ANSWER 2c — map() builds the list; key uses the stable id from the data. */}</span>
+<span class="cm">        {/* 中文:补全点 2c —— 用 map() 生成列表;key 用数据里稳定的 id。 */}</span>
+<span class="cm">        {/* EN: Pass every field as its OWN prop, with spaces inside the braces. */}</span>
+<span class="cm">        {/* 中文:每个字段单独作为一个 prop 传入,花括号内留空格。 */}</span>
+        { props.tasks.<span class="fn">map</span>(task =&gt;
+          &lt;<span class="kw">TaskCard</span>
+            <span class="at">key</span>={ task.id }
+            <span class="at">id</span>={ task.id }
+            <span class="at">title</span>={ task.title }
+            <span class="at">topic</span>={ task.topic }
+            <span class="at">minutes</span>={ task.minutes }
+            <span class="at">done</span>={ task.done }
+            <span class="at">priority</span>={ task.priority }
           /&gt;
         ) }
-      &lt;/div&gt;
+      &lt;/<span class="kw">div</span>&gt;
 
-      &lt;Footer total={ props.tasks.length } doneCount={ doneCount } /&gt;
-    &lt;/div&gt;
+      &lt;<span class="kw">Footer</span> <span class="at">total</span>={ props.tasks.length } <span class="at">doneCount</span>={ doneCount } /&gt;
+    &lt;/<span class="kw">div</span>&gt;
   );
 };
 
-<span class="c">// EN: ANSWER 2d — the data enters the component tree HERE, as one prop.</span>
-<span class="z">// 中文:补全点 2d —— 数据在这里作为 prop 进入组件树。</span>
-<span class="c">// EN: This is the line that makes this challenge harder than the three earlier mocks.</span>
-<span class="z">// 中文:正是这一行让本题比前三套模拟考更难。</span>
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(&lt;App tasks={ tasks } /&gt;);</code></pre>
+<span class="cm">// EN: ANSWER 2d — the data enters the component tree HERE, as one prop.</span>
+<span class="cm">// 中文:补全点 2d —— 数据在这里作为 prop 进入组件树。</span>
+<span class="cm">// EN: This is the line that makes this challenge harder than the three earlier mocks.</span>
+<span class="cm">// 中文:正是这一行让本题比前三套模拟考更难。</span>
+<span class="kw">const</span> root = <span class="fn">ReactDOM</span>.<span class="fn">createRoot</span>(document.<span class="fn">getElementById</span>(<span class="st">'root'</span>));
+root.<span class="fn">render</span>(&lt;<span class="kw">App</span> <span class="at">tasks</span>={ tasks } /&gt;);</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">components/Header.jsx</span><span class="src">两个数字均来自 props(活动 3/4 写法)</span></div>
-    <pre><code><span class="c">// EN: TASK 3 — Header reads BOTH numbers from props (Professor's Activity 3/4 style).</span>
-<span class="z">// 中文:任务 3 —— Header 的两个数字都从 props 读取(Professor 活动 3/4 的写法)。</span>
-<span class="c">// EN: The title is typed in, but the counts must come from the parent.</span>
-<span class="z">// 中文:标题可以写死,但数量必须由父组件传入。</span>
+    <pre><code><span class="cm">// EN: TASK 3 — Header reads BOTH numbers from props (Professor's Activity 3/4 style).</span>
+<span class="cm">// 中文:任务 3 —— Header 的两个数字都从 props 读取(Professor 活动 3/4 的写法)。</span>
+<span class="cm">// EN: The title is typed in, but the counts must come from the parent.</span>
+<span class="cm">// 中文:标题可以写死,但数量必须由父组件传入。</span>
 
-<span class="c">// EN: Header.jsx: the blue bar at the top of the page.</span>
-<span class="z">// 中文:Header.jsx:页面顶部的蓝色标题栏。</span>
-const Header = (props) =&gt; {
-  return (
-    &lt;header&gt;
-      &lt;h1&gt;Revision Board&lt;/h1&gt;
-<span class="c">      {/* EN: ANSWER 3a — build the count line from props.total and props.doneCount. */}</span>
-<span class="z">      {/* 中文:补全点 3a —— 用 props.total 和 props.doneCount 拼出数量行。 */}</span>
-      &lt;p&gt;{ props.total } tasks · { props.doneCount } done&lt;/p&gt;
-    &lt;/header&gt;
+<span class="cm">// EN: Header.jsx: the blue bar at the top of the page.</span>
+<span class="cm">// 中文:Header.jsx:页面顶部的蓝色标题栏。</span>
+<span class="kw">const</span> <span class="fn">Header</span> = (props) =&gt; {
+  <span class="kw">return</span> (
+    &lt;<span class="kw">header</span>&gt;
+      &lt;<span class="kw">h1</span>&gt;<span class="fn">Revision</span> <span class="fn">Board</span>&lt;/<span class="kw">h1</span>&gt;
+<span class="cm">      {/* EN: ANSWER 3a — build the count line from props.total and props.doneCount. */}</span>
+<span class="cm">      {/* 中文:补全点 3a —— 用 props.total 和 props.doneCount 拼出数量行。 */}</span>
+      &lt;<span class="kw">p</span>&gt;{ props.total } tasks · { props.doneCount } done&lt;/<span class="kw">p</span>&gt;
+    &lt;/<span class="kw">header</span>&gt;
   );
 };</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">components/TaskCard.jsx</span><span class="src">&amp;&amp; 徽章 + ? : 两态徽章 + 三元答案行(活动 2/4)</span></div>
-    <pre><code><span class="c">// EN: TASK 4 — ONE card, with two kinds of conditional rendering.</span>
-<span class="z">// 中文:任务 4 —— 一张卡片,含两种条件渲染。</span>
-<span class="c">// EN: Use &amp;&amp; for the badge that is either there or not, and ? : for the badge</span>
-//     that has two versions (Movie Night Steps 05/14; Activity 4's Movie component).
-<span class="z">// 中文:"有或没有"的徽章用 &amp;&amp;,"有两个版本"的徽章用 ? :</span>
-//     (Movie Night 第 05/14 步;活动 4 的 Movie 组件)。
+    <pre><code><span class="cm">// EN: TASK 4 — ONE card, with two kinds of conditional rendering.</span>
+<span class="cm">// 中文:任务 4 —— 一张卡片,含两种条件渲染。</span>
+<span class="cm">// EN: Use &amp;&amp; for the badge that is either there or not, and ? : for the badge</span>
+<span class="cm">//     that has two versions (Movie Night Steps 05/14; Activity 4's Movie component).</span>
+<span class="cm">// 中文:"有或没有"的徽章用 &amp;&amp;,"有两个版本"的徽章用 ? :</span>
+<span class="cm">//     (Movie Night 第 05/14 步;活动 4 的 Movie 组件)。</span>
 
-<span class="c">// EN: TaskCard.jsx: ONE task card. Six separate props come from App.</span>
-<span class="z">// 中文:TaskCard.jsx:一张任务卡片。App 传入六个单独的 prop。</span>
-const TaskCard = (props) =&gt; {
-  return (
-    &lt;div className="card"&gt;
-<span class="c">      {/* EN: ANSWER 4a — the number comes from props.id, not typed in. */}</span>
-<span class="z">      {/* 中文:补全点 4a —— 编号来自 props.id,不是手写死的。 */}</span>
-      &lt;span className="card-number"&gt;Task { props.id }&lt;/span&gt;
+<span class="cm">// EN: TaskCard.jsx: ONE task card. Six separate props come from App.</span>
+<span class="cm">// 中文:TaskCard.jsx:一张任务卡片。App 传入六个单独的 prop。</span>
+<span class="kw">const</span> <span class="fn">TaskCard</span> = (props) =&gt; {
+  <span class="kw">return</span> (
+    &lt;<span class="kw">div</span> <span class="at">className</span>=<span class="st">"card"</span>&gt;
+<span class="cm">      {/* EN: ANSWER 4a — the number comes from props.id, not typed in. */}</span>
+<span class="cm">      {/* 中文:补全点 4a —— 编号来自 props.id,不是手写死的。 */}</span>
+      &lt;<span class="kw">span</span> <span class="at">className</span>=<span class="st">"card-number"</span>&gt;<span class="fn">Task</span> { props.id }&lt;/<span class="kw">span</span>&gt;
 
-<span class="c">      {/* EN: ANSWER 4b — &amp;&amp; shows DONE only when props.done is true. */}</span>
-<span class="z">      {/* 中文:补全点 4b —— &amp;&amp; 仅在 props.done 为 true 时显示 DONE 徽章。 */}</span>
-      { props.done &amp;&amp; &lt;span className="badge badge-done"&gt;DONE&lt;/span&gt; }
+<span class="cm">      {/* EN: ANSWER 4b — &amp;&amp; shows DONE only when props.done is true. */}</span>
+<span class="cm">      {/* 中文:补全点 4b —— &amp;&amp; 仅在 props.done 为 true 时显示 DONE 徽章。 */}</span>
+      { props.done &amp;&amp; &lt;<span class="kw">span</span> <span class="at">className</span>=<span class="st">"badge badge-done"</span>&gt;<span class="fn">DONE</span>&lt;/<span class="kw">span</span>&gt; }
 
-      &lt;p className="question"&gt;{ props.title }&lt;/p&gt;
-      &lt;p className="meta"&gt;{ props.topic } · { props.minutes } min&lt;/p&gt;
+      &lt;<span class="kw">p</span> <span class="at">className</span>=<span class="st">"question"</span>&gt;{ props.title }&lt;/<span class="kw">p</span>&gt;
+      &lt;<span class="kw">p</span> <span class="at">className</span>=<span class="st">"meta"</span>&gt;{ props.topic } · { props.minutes } min&lt;/<span class="kw">p</span>&gt;
 
-<span class="c">      {/* EN: ANSWER 4c — ? : picks one of two badges; an if statement cannot go here. */}</span>
-<span class="z">      {/* 中文:补全点 4c —— ? : 二选一显示徽章;这里不能用 if 语句。 */}</span>
-      { props.priority === "high"
-          ? &lt;span className="badge badge-high"&gt;HIGH&lt;/span&gt;
-          : &lt;span className="badge badge-normal"&gt;NORMAL&lt;/span&gt; }
+<span class="cm">      {/* EN: ANSWER 4c — ? : picks one of two badges; an if statement cannot go here. */}</span>
+<span class="cm">      {/* 中文:补全点 4c —— ? : 二选一显示徽章;这里不能用 if 语句。 */}</span>
+      { props.priority === <span class="st">"high"</span>
+          ? &lt;<span class="kw">span</span> <span class="at">className</span>=<span class="st">"badge badge-high"</span>&gt;<span class="fn">HIGH</span>&lt;/<span class="kw">span</span>&gt;
+          : &lt;<span class="kw">span</span> <span class="at">className</span>=<span class="st">"badge badge-normal"</span>&gt;<span class="fn">NORMAL</span>&lt;/<span class="kw">span</span>&gt; }
 
-<span class="c">      {/* EN: ANSWER 4d — the answer line stays empty on purpose: it is a study checklist. */}</span>
-<span class="z">      {/* 中文:补全点 4d —— 答案行故意留空:这是一张复习清单卡片。 */}</span>
-      &lt;p className="answer"&gt;{ props.done ? "Reviewed." : "Still to review." }&lt;/p&gt;
-    &lt;/div&gt;
+<span class="cm">      {/* EN: ANSWER 4d — the answer line stays empty on purpose: it is a study checklist. */}</span>
+<span class="cm">      {/* 中文:补全点 4d —— 答案行故意留空:这是一张复习清单卡片。 */}</span>
+      &lt;<span class="kw">p</span> <span class="at">className</span>=<span class="st">"answer"</span>&gt;{ props.done ? <span class="st">"Reviewed."</span> : <span class="st">"Still to review."</span> }&lt;/<span class="kw">p</span>&gt;
+    &lt;/<span class="kw">div</span>&gt;
   );
 };</code></pre>
   </div>
   <div class="codecard">
     <div class="cc-head"><span class="file">components/Footer.jsx</span><span class="src">props 数量 + 今天的真实日期(试卷 Step 6)</span></div>
-    <pre><code><span class="c">// EN: TASK 5 — Footer combines a count from props with TODAY'S REAL DATE.</span>
-<span class="z">// 中文:任务 5 —— Footer 要把 props 传来的数量与今天的真实日期合在一起。</span>
-<span class="c">// EN: A Date object cannot go into JSX directly; turn it into text first.</span>
-<span class="z">// 中文:Date 对象不能直接放进 JSX;必须先转成文本。</span>
+    <pre><code><span class="cm">// EN: TASK 5 — Footer combines a count from props with TODAY'S REAL DATE.</span>
+<span class="cm">// 中文:任务 5 —— Footer 要把 props 传来的数量与今天的真实日期合在一起。</span>
+<span class="cm">// EN: A Date object cannot go into JSX directly; turn it into text first.</span>
+<span class="cm">// 中文:Date 对象不能直接放进 JSX;必须先转成文本。</span>
 
-<span class="c">// EN: Footer.jsx: the bar fixed to the bottom of the page.</span>
-<span class="z">// 中文:Footer.jsx:固定在页面底部的栏。</span>
-const Footer = (props) =&gt; {
-<span class="c">  // EN: ANSWER 5a — ordinary JavaScript goes above the return (Movie Night Step 15).</span>
-<span class="z">  // 中文:补全点 5a —— 普通 JavaScript 写在 return 之前(Movie Night 第 15 步)。</span>
-  const today = new Date().toDateString();
+<span class="cm">// EN: Footer.jsx: the bar fixed to the bottom of the page.</span>
+<span class="cm">// 中文:Footer.jsx:固定在页面底部的栏。</span>
+<span class="kw">const</span> <span class="fn">Footer</span> = (props) =&gt; {
+<span class="cm">  // EN: ANSWER 5a — ordinary JavaScript goes above the return (Movie Night Step 15).</span>
+<span class="cm">  // 中文:补全点 5a —— 普通 JavaScript 写在 return 之前(Movie Night 第 15 步)。</span>
+  <span class="kw">const</span> today = <span class="kw">new</span> <span class="fn">Date</span>().<span class="fn">toDateString</span>();
 
-  return (
-    &lt;footer&gt;
-<span class="c">      {/* EN: ANSWER 5b — counts from props, date from the Date object. */}</span>
-<span class="z">      {/* 中文:补全点 5b —— 数量来自 props,日期来自 Date 对象。 */}</span>
-      &lt;p&gt;{ props.doneCount } of { props.total } done · Generated today: { today }&lt;/p&gt;
-    &lt;/footer&gt;
+  <span class="kw">return</span> (
+    &lt;<span class="kw">footer</span>&gt;
+<span class="cm">      {/* EN: ANSWER 5b — counts from props, date from the Date object. */}</span>
+<span class="cm">      {/* 中文:补全点 5b —— 数量来自 props,日期来自 Date 对象。 */}</span>
+      &lt;<span class="kw">p</span>&gt;{ props.doneCount } of { props.total } done · <span class="fn">Generated</span> today: { today }&lt;/<span class="kw">p</span>&gt;
+    &lt;/<span class="kw">footer</span>&gt;
   );
 };</code></pre>
   </div>
